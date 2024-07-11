@@ -1,0 +1,74 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Vidya;
+@inherits PanelComponent
+
+
+<root>
+
+    @if (!GameSystem.Instance.IsValid())
+    {
+        return;
+    }
+
+
+    @if (GameSystem.Instance.GameOver)
+    {
+        <div class="game-over">
+
+            <p class="big-text"> GAME OVER </p>
+            <p class="you-reached"> You reached level @GameSystem.Instance.Level. </p>
+            <p class="press-restart"> Press @(Input.GetButtonOrigin("Restart")?.ToUpper() ?? "???") to Restart. </p>
+
+        </div>
+    }
+    else
+    {
+        <div class="status">
+
+            <div class="level-counter"> 🏁 @GameSystem.Instance.Level </div>
+
+            @if (PlayerController.Instance.IsValid())
+            {
+                <div class="health-points"> ♥ @PlayerController.Instance.Health </div>
+            }
+
+        </div>
+    }
+
+    @if (GameSystem.ShowLeaderboard && GameSystem.Scores.Any())
+    {
+        <div class="scoreboard">
+
+            <p class="sb-title"> Leaderboard </p>
+
+            @foreach (var score in GameSystem.Scores)
+            {
+                <div class="sb-line">
+                    <p class="sb-rank"> @score.Rank. </p>
+                    <p class="sb-name"> @score.Name </p>
+                    <p class="sb-level"> @score.Level </p>
+                </div>
+            }
+
+        </div>
+    }
+
+</root>
+
+@code
+{
+
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() =>
+    System.HashCode.Combine(
+    GameSystem.ShowLeaderboard,
+    GameSystem.Instance?.Level ?? 0,
+    GameSystem.Instance?.GameOver ?? false,
+    PlayerController.Instance.IsValid(),
+    PlayerController.Instance?.Health ?? 0,
+    Input.UsingController);
+
+}

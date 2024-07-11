@@ -1,0 +1,455 @@
+{
+  "RootObject": {
+    "__guid": "e1a2394f-a9cd-4221-b4af-c3547f53ddf7",
+    "Flags": 0,
+    "Name": "chunk_medium1",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "ChunkComponent",
+        "__guid": "259ca861-3812-4a17-97b5-b33af3b7d471",
+        "Width": 288
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "752a728f-ca98-4d9f-9b12-c7398aff23f1",
+        "Flags": 0,
+        "Name": "Bricks",
+        "Position": "0,32,0",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Children": [
+          {
+            "__guid": "f8b044ed-55ed-49e6-b533-820851921677",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,0,-96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "20dc4c8a-9b6d-426d-96d8-cf9a5a7eecab",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,-32,-96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "e877a58c-27c6-4d4e-a36f-aa36958428ef",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,-96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "42e0ab29-fab1-43b8-a503-8b29c6f1ca90",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,64,-96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "a77adf63-868c-4287-9cbd-b985ba531e7a",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,-96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "dda30410-5b55-4f08-8768-0484e4c54cae",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,-64",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "ba9f99fd-2f93-4fab-8f4c-dabc65d6be60",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,-32",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "26318ec9-ab37-42be-bb64-616a86272abd",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,0",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "cef25de2-2eed-43c2-a3f0-28c6454b5390",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,32",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "4659123e-560f-4b4e-aed8-e22e7cbbed32",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,64",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "42eed5e8-dadf-4ae7-b420-6ba673a942f8",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "f57ce12e-34ec-4e95-bc72-c51bfd4c2ad9",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,128,96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "7bff1c08-2cf7-4e4e-8345-cd11839e5d12",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "0b5208da-d969-4bd7-8359-325e73739192",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,128",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "10c6f818-ae8c-4e12-ba7c-64af827d6ff6",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,160",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "1c12d70d-ede4-47af-8b5f-5b631eed2dc0",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,192",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "2d2f34ae-214a-47a5-a798-7d5da511ef1b",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,224",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "c884e792-75fe-4746-bc9e-06f2585eb590",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,256",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "a1b3caae-06d5-44b2-aad9-c9a4c7355a08",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,288",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "f035e208-40c1-44ab-88b8-eae70fd36675",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,320",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "602ff6bd-ccab-4320-9ba0-25901f3ba9b1",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "609099c9-b96e-4395-a2a8-76e260793be6",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,64",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "110cda1b-445a-4ca4-960c-6d585660128e",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,32",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "f91b700e-2e8f-4e4f-9136-474311826fb4",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,128,-96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "0e5425eb-d0ac-4374-858e-89180fb3510a",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,160,-96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "7dd04f22-d2fe-46bc-9d50-c45ef31bead5",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,-96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "1035b2ac-f9a5-462a-a969-5674232e2862",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,-96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "dc662a8e-4fab-445f-a083-9d0652001703",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,-64",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "3a3382e9-40dc-4513-b123-40d64bfe2074",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,-32",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "d62d5023-d63e-4ebd-a7ec-aa9ffc876167",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "6c6ea32c-8e11-4ba0-bfda-141f3cff7e01",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,0,96",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "ed264ff0-22f8-4c6a-b4a1-9e9f623b1d6e",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,0,64",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "d30d4c7f-3e66-4d55-806c-a221e5ffdcf6",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,0,32",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "41d93ae3-d00f-4e9a-bbb2-76e97862b469",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,0,0",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "fa082248-06e4-4691-afd2-f24d6376be95",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,0,-32",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "5bd364a8-2ebc-489a-8db4-a92216ea82d2",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,64,0",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          }
+        ]
+      },
+      {
+        "__guid": "2a690287-1a04-4151-b51c-7dab0986d8e3",
+        "Flags": 0,
+        "Name": "spike_ball",
+        "Position": "0,176,-96",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "__Prefab": "prefabs/hazards/spike_ball.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "4555a662-37a1-4d3e-9ed9-e2326099d52f",
+        "Flags": 0,
+        "Name": "spike_ball (1)",
+        "Position": "0,240,-96",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "__Prefab": "prefabs/hazards/spike_ball.prefab",
+        "__PrefabVariables": {}
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

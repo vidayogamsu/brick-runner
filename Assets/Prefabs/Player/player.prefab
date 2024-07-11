@@ -1,0 +1,231 @@
+{
+  "RootObject": {
+    "__guid": "a5f91ff7-ed93-40e2-8baa-dbf88d84cf5b",
+    "Flags": 0,
+    "Name": "Player",
+    "Position": "0,353.1814,272.4628",
+    "Rotation": "0,0,1,-0.00000004371139",
+    "Tags": "player",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.CharacterController",
+        "__guid": "dfe56acc-8213-44ab-91b7-096b6aa3bdd6",
+        "Acceleration": 10,
+        "Bounciness": 0.1,
+        "GroundAngle": 45,
+        "Height": 28,
+        "IgnoreLayers": "gib",
+        "Radius": 8,
+        "StepHeight": 18,
+        "UseCollisionRules": false
+      },
+      {
+        "__type": "Vidya.PlayerController",
+        "__guid": "20c0d6db-3a64-417f-a7f7-c489ffc19982",
+        "AirAccel": 7,
+        "BlinkDuration": 1.5,
+        "CAH": {
+          "_type": "component",
+          "component_id": "70a427d8-9b44-4595-b783-f1c369583308",
+          "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
+          "component_type": "CitizenAnimationHelper"
+        },
+        "CoyoteTime": 0.08,
+        "Friction": 10,
+        "GibPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/effects/gib_splosion.prefab"
+        },
+        "Gravity": 1200,
+        "GravityDirection": "0,0,-1",
+        "GravityHeld": 445,
+        "GroundAccel": 10,
+        "Height": 24,
+        "JumpSpeed": 300,
+        "Model": {
+          "_type": "component",
+          "component_id": "b65b7e79-0b16-4b84-bd0a-15032a3b3fb3",
+          "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "NoCollide": "gib",
+        "RunSpeed": 250,
+        "WalkSpeed": 150,
+        "Width": 9
+      },
+      {
+        "__type": "Sandbox.AudioListener",
+        "__guid": "6f32bc24-cf46-44dd-ac8b-45d0c28c2dc8",
+        "UseCameraDirection": true
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
+        "Flags": 0,
+        "Name": "Model",
+        "Position": "0,0,-1",
+        "Rotation": "0,0,-0.7071067,0.7071068",
+        "Scale": "0.8,0.8,0.8",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.Citizen.CitizenAnimationHelper",
+            "__guid": "70a427d8-9b44-4595-b783-f1c369583308",
+            "BodyWeight": 1,
+            "EyesWeight": 1,
+            "HeadWeight": 1,
+            "Height": 0.4,
+            "LookAtEnabled": false,
+            "Target": {
+              "_type": "component",
+              "component_id": "b65b7e79-0b16-4b84-bd0a-15032a3b3fb3",
+              "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
+              "component_type": "SkinnedModelRenderer"
+            }
+          },
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "b65b7e79-0b16-4b84-bd0a-15032a3b3fb3",
+            "BodyGroups": 65,
+            "CreateBoneObjects": false,
+            "Model": "models/citizen/citizen.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "2e8ea807-490f-48a8-a32c-6e8c0164ee90",
+            "Flags": 0,
+            "Name": "Hat",
+            "Position": "0,0,0",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.SkinnedModelRenderer",
+                "__guid": "c3c33c92-ca7e-4faf-8acd-5bc888657a41",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "b65b7e79-0b16-4b84-bd0a-15032a3b3fb3",
+                  "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/citizen_clothes/hat/baseball_cap/model/baseball_cap.vmdl",
+                "RenderType": "On",
+                "Tint": "1,0,0,1",
+                "UseAnimGraph": true
+              }
+            ]
+          },
+          {
+            "__guid": "d5e00a25-5d2e-4ead-94ac-2c9b998c6f5c",
+            "Flags": 0,
+            "Name": "Shirt",
+            "Position": "0,0,0",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.SkinnedModelRenderer",
+                "__guid": "22f256b7-81f2-4b75-94fd-0ce5363a7b73",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "b65b7e79-0b16-4b84-bd0a-15032a3b3fb3",
+                  "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/citizen_clothes/jumper/loose_jumper/models/loose_jumper.vmdl",
+                "RenderType": "On",
+                "Tint": "1,0,0,1",
+                "UseAnimGraph": true
+              }
+            ]
+          },
+          {
+            "__guid": "e9763910-d98a-4436-83dc-87cff9369dd9",
+            "Flags": 0,
+            "Name": "Pants",
+            "Position": "0,0,0",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.SkinnedModelRenderer",
+                "__guid": "8e9e5252-92cd-4e33-906e-a102887c13f6",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "b65b7e79-0b16-4b84-bd0a-15032a3b3fb3",
+                  "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/citizen_clothes/trousers/cargopants/models/cargo_pants.vmdl",
+                "RenderType": "On",
+                "Tint": "0.03721,0.32605,1,1",
+                "UseAnimGraph": true
+              }
+            ]
+          },
+          {
+            "__guid": "2d546076-3615-4a72-b645-671e569da8b1",
+            "Flags": 0,
+            "Name": "Boots",
+            "Position": "0,0,0",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.SkinnedModelRenderer",
+                "__guid": "4d99ff1b-fe9b-4900-99c7-f2994fc15f72",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "b65b7e79-0b16-4b84-bd0a-15032a3b3fb3",
+                  "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/citizen_clothes/shoes/boots/models/black_boots.vmdl",
+                "RenderType": "On",
+                "Tint": "0.47442,0.18186,0,1",
+                "UseAnimGraph": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__guid": "63f82906-22be-4028-8b86-91b6d0e94581",
+        "Flags": 0,
+        "Name": "Trigger",
+        "Position": "0,0,0",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.BoxCollider",
+            "__guid": "1c304fcf-0df9-47d3-8380-1456dc2184cd",
+            "Center": "0,0,12",
+            "IsTrigger": true,
+            "Scale": "15,15,24",
+            "Static": false
+          },
+          {
+            "__type": "Vidya.PlayerTriggerComponent",
+            "__guid": "eda761fa-e294-4fbc-aa28-0ae88ab533a5"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

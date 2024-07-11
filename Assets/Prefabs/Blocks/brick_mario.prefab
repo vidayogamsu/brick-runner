@@ -1,0 +1,60 @@
+{
+  "RootObject": {
+    "__guid": "36bd67ce-b606-4f78-822f-7e603ea8002a",
+    "Flags": 0,
+    "Name": "brick_mario",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Vidya.DestructibleComponent",
+        "__guid": "b68b10ad-1e24-48a4-9bba-254e2fb2edbe",
+        "DestroyEffect": {
+          "_type": "gameobject",
+          "prefab": "prefabs/effects/brick_particles.prefab"
+        },
+        "Invulnerable": false
+      },
+      {
+        "__type": "Vidya.BlockComponent",
+        "__guid": "428d8569-8025-48fd-87d4-5a1ef7e37ed6",
+        "AllowNudge": true
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "a813c10a-1f57-40d2-9d6d-9efa49e7a51f",
+        "Flags": 0,
+        "Name": "Cube",
+        "Position": "0,16,-32",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "8dcc4d49-c6eb-4b4e-ae26-f7fac51a9eaf",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/bomberbrick/bomberbrick.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Sandbox.BoxCollider",
+            "__guid": "f703c9d8-b1fe-4503-8f55-ba340e2d00fa",
+            "Center": "0,0,16",
+            "IsTrigger": false,
+            "Scale": "32,32,32",
+            "Static": false
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [
+    "baik.brickblock"
+  ],
+  "__version": 1
+}

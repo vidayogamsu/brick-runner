@@ -1,0 +1,79 @@
+{
+  "RootObject": {
+    "__guid": "bc47477a-7c19-4dc0-9828-8c14fa6e63af",
+    "Flags": 0,
+    "Name": "gib",
+    "Tags": "gib",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "3c98d602-7deb-4804-9377-9c58278fcf0e",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "X": true,
+          "Pitch": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": "DisableCollisionSounds",
+        "StartAsleep": false
+      },
+      {
+        "__type": "Vidya.GibComponent",
+        "__guid": "050d9921-5050-4b29-85e5-1bac3f575e57",
+        "Bounciness": 0.8,
+        "Lifetime": 8,
+        "MinSpeed": 50
+      },
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "bdc7d7a3-a0ff-4f59-b667-16180c34e7c3",
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Radius": 3.2,
+        "Static": false
+      },
+      {
+        "__type": "Helichan.TrailRenderer",
+        "__guid": "c2d1bc75-6707-4628-b969-adb7702f77bd",
+        "ColorEnd": "0.2093,0,0,1",
+        "ColorStart": "0.18605,0,0,1",
+        "FadeTime": 4,
+        "Frequency": 0.015,
+        "LineWidth": 2,
+        "MaxLines": 10
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "1390d845-f324-4740-8273-da84e46dfa66",
+        "Flags": 0,
+        "Name": "Gib",
+        "Scale": "0.1,0.1,0.1",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "f1333c72-83e9-483f-8f34-33a34193f13f",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/dev/sphere.vmdl",
+            "RenderType": "Off",
+            "Tint": "0.8186,0,0,1"
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

@@ -1,0 +1,17 @@
+{
+  "UI": false,
+  "Volume": "1.00,1.00,0",
+  "Pitch": "0.80,1.10,1",
+  "Decibels": 100,
+  "SelectionMode": "RandomExclusive",
+  "Sounds": [
+    "sounds/objects/brick.break1.vsnd"
+  ],
+  "Occlusion": false,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "__references": [],
+  "__version": 0
+}

@@ -1,0 +1,59 @@
+{
+  "RootObject": {
+    "__guid": "d9e952cc-4a65-4d7c-92bf-9a75e7716e3f",
+    "Flags": 0,
+    "Name": "balloon",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "866d0e46-5e2c-4803-abe4-d921a3695df2",
+        "Center": "0,0,0",
+        "IsTrigger": true,
+        "Radius": 12.399988,
+        "Static": false
+      },
+      {
+        "__type": "Vidya.BalloonComponent",
+        "__guid": "ff0e7047-d73b-4f12-bd44-58113725776c",
+        "Model": {
+          "_type": "component",
+          "component_id": "b137d4b5-b929-41f6-bf7e-fd577aa2c1c8",
+          "go": "6f54a096-3aa0-49ad-a572-41935090f433",
+          "component_type": "ModelRenderer"
+        }
+      },
+      {
+        "__type": "Vidya.DestructibleComponent",
+        "__guid": "0d499add-a26e-403f-9896-473c3e4bbc3a",
+        "Invulnerable": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "6f54a096-3aa0-49ad-a572-41935090f433",
+        "Flags": 0,
+        "Name": "Model",
+        "Position": "0,0,-16",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "b137d4b5-b929-41f6-bf7e-fd577aa2c1c8",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/citizen_props/balloonregular01.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

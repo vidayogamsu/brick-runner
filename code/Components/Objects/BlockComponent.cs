@@ -1,0 +1,55 @@
+using Sandbox;
+
+namespace Vidya;
+
+
+public sealed class BlockComponent : Component
+{
+    /// <summary>
+    /// Play an animation when player hits this from below?
+    /// </summary>
+    [Property] public bool AllowNudge { get; set; } = true;
+
+    public bool Nudging { get; set; } = false;
+    public TimeUntil NudgeEnd { get; set; }
+    public Vector3 StartPos { get; set; }
+
+    public ModelRenderer Model { get; set; }
+
+
+    protected override void OnStart()
+    {
+        base.OnStart();
+
+        Model = Components.Get<ModelRenderer>( FindMode.EverythingInChildren );
+    }
+
+    protected override void OnUpdate()
+    {
+        if ( Nudging && Model.IsValid() )
+        {
+            if ( NudgeEnd.Fraction < 1f )
+            {
+                var frac = 1f - NudgeEnd.Fraction;
+                Model.Transform.Position = StartPos.WithZ( StartPos.z + (16f * frac) );
+            }
+            else
+            {
+                Model.Transform.Position = StartPos;
+                Nudging = false;
+            }
+        }
+    }
+
+    public void Nudge()
+    {
+        if ( !AllowNudge || !Model.IsValid() )
+            return;
+
+        if ( !Nudging )
+            StartPos = Model.Transform.Position;
+
+        Nudging = true;
+        NudgeEnd = 0.2f;
+    }
+}

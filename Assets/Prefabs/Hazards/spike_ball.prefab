@@ -1,0 +1,56 @@
+{
+  "RootObject": {
+    "__guid": "0d4b2add-e53e-4a3e-949e-0f72c5995fb9",
+    "Flags": 0,
+    "Name": "spike_ball",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "44c222ed-032d-475c-88a0-e10fc1896379",
+        "Center": "0,0,0",
+        "IsTrigger": true,
+        "Radius": 6,
+        "Static": false
+      },
+      {
+        "__type": "Vidya.HazardComponent",
+        "__guid": "fdec1c5a-cd32-49cd-9802-5a4af8fa15bb"
+      },
+      {
+        "__type": "Vidya.DestructibleComponent",
+        "__guid": "8d467955-a9d4-4ea3-a4ed-bac457042d3b",
+        "Invulnerable": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "b2740ea8-508c-4725-96eb-917be8a2285a",
+        "Flags": 0,
+        "Name": "Model",
+        "Position": "0,0,-5.158933",
+        "Scale": "0.5,0.5,0.5",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "1d730b2b-48aa-49a1-ac83-75180351d87b",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/mysterypowerups/dnd_spikes.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [
+    "luke.dnd_spikes"
+  ],
+  "__version": 1
+}

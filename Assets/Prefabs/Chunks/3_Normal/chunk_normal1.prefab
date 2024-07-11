@@ -1,0 +1,356 @@
+{
+  "RootObject": {
+    "__guid": "efcd2ba6-1582-4a94-ba7c-d19eafc48812",
+    "Flags": 0,
+    "Name": "chunk_normal1",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ChunkComponent",
+        "__guid": "10a651f8-e7f6-483b-9369-408ac0928812",
+        "Width": 256
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "07fb74c2-5bd2-4fa9-a664-7376647654f9",
+        "Flags": 0,
+        "Name": "Bricks",
+        "Enabled": true,
+        "Children": [
+          {
+            "__guid": "c07a4ea7-b111-4fa1-9fac-403dd84d4182",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,0,-96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "1ae2b2a7-0c0b-4f17-a53e-2ee13e411a3e",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,-96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "112cf85f-2694-4817-a8e0-253be44f67dc",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,64,-96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "44db3524-783e-4d91-b6e4-d347852bb6f9",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,-96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "4af3ca76-e112-40b4-937e-51c3efc1f27d",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,-64",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "24ee992c-e278-4ce7-9fd3-1716f22ad391",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,-32",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "15328c23-e3a4-4990-b48a-f9ed29eef64d",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,-32",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "37a6a5e1-f115-4e96-87be-2f5be51e7914",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,0",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "fdb39e1b-b15b-4882-b093-f3a58a19a689",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,32",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "c39dab5a-ec0c-4ab9-aa60-cd2b431d15c2",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,64",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "b227d29d-be7b-468e-bd38-61cccab691d4",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,32",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "61bfd553-ac31-459d-af1c-030e65fc630d",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "73c7f08d-7483-4ce6-a6d9-41258028274a",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,128",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "fae592ee-98ac-4a27-a28d-e4764d8bc1f4",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,160",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "46a3739f-6009-49c5-a4e4-676346f99c9d",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,64,192",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "a0cc1842-afe9-4204-b47a-5fcee70627ae",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,96,192",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "9e54a18b-7069-4b36-b329-802f84931e1b",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,128,192",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "29c4bafa-a974-4fe4-ae3b-a16280fc3808",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,160,192",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "12c79d97-b3dd-4c17-a6fe-90ab3c5d9cf2",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,192",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "094989b6-377a-4250-ae83-0aabe7848223",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,160",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "952a07cb-70eb-4e6f-be64-0b869c751c33",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,192",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "13cef360-2842-43e7-923e-c22a83d8729e",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,192",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "9b0751f7-fa9f-4d64-bd44-40272e6a649a",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,224",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "ef17791a-b0b3-4739-bdff-b4e979ea24e7",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,32,256",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "051c8724-0bc9-4508-b70f-1a775249ca24",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,160,-64",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "d2a97e06-7baa-42b0-b769-b3c295a132cf",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,128,-96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "f5c49d29-5e9a-4e5b-86a1-fea466f8bc27",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,160,-96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "b093609e-83f5-48c6-bbed-4addeb597340",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,-96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "8decacd7-00d9-4b9e-814e-1545a5491cbc",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,224,-96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "d4dff985-4cfe-4e04-bbb2-08e12a9df554",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,-64",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "bbcd1fdc-501e-4737-afd2-981120180a79",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,-32",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "9e6cf7f7-9cea-4114-b601-083e243beb7f",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,0",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "b4aba361-c38a-4a77-bc71-a8aeefd562f0",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,32",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "915a3414-ed2d-4015-b429-ac01961cd0ad",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,64",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "686faa48-7b5e-471f-b5fd-7d0448ef1273",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,192,96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          },
+          {
+            "__guid": "82079a15-48fc-4c89-acbd-8794021a676d",
+            "Flags": 0,
+            "Name": "brick_mario (1)",
+            "Position": "0,160,96",
+            "Enabled": true,
+            "__Prefab": "prefabs/blocks/brick_mario.prefab",
+            "__PrefabVariables": {}
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

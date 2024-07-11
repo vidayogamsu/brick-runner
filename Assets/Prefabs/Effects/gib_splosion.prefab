@@ -1,0 +1,32 @@
+{
+  "RootObject": {
+    "__guid": "b7840058-6ffc-4ae1-a5b6-bf6c473fbc27",
+    "Flags": 0,
+    "Name": "gib_splosion",
+    "Tags": "gib",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Vidya.GibSplosionComponent",
+        "__guid": "899c7c1a-a02c-4c70-af24-73b5cefba48e",
+        "ForceMax": 550,
+        "ForceMin": 200,
+        "GibCount": 15,
+        "GibPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/effects/gib.prefab"
+        },
+        "ScaleMax": 1.1,
+        "ScaleMin": 0.65
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

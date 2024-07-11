@@ -1,0 +1,194 @@
+{
+  "Title": "Brick Runner (alpha)",
+  "Type": "game",
+  "Org": "vidya",
+  "Ident": "brick-runner",
+  "Schema": 1,
+  "IncludeSourceFiles": false,
+  "Resources": null,
+  "PackageReferences": [],
+  "EditorReferences": null,
+  "Metadata": {
+    "MaxPlayers": 64,
+    "MinPlayers": 1,
+    "TickRate": 50,
+    "GameNetworkType": "Multiplayer",
+    "MapSelect": "Unrestricted",
+    "MapList": [
+      "facepunch.flatgrass"
+    ],
+    "RankType": "None",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "CsProjName": "",
+    "StartupScene": "scenes/minimal.scene",
+    "ControlModes": {},
+    "InputSettings": {
+      "Actions": [
+        {
+          "Name": "Up",
+          "KeyboardCode": "W",
+          "GamepadCode": "DpadNorth",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Down",
+          "KeyboardCode": "S",
+          "GamepadCode": "DpadSouth",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Left",
+          "KeyboardCode": "A",
+          "GamepadCode": "DpadWest",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Right",
+          "KeyboardCode": "D",
+          "GamepadCode": "DpadEast",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Jump",
+          "KeyboardCode": "space",
+          "GamepadCode": "A",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Slow",
+          "KeyboardCode": "SHIFT",
+          "GamepadCode": "X",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "attack1",
+          "KeyboardCode": "mouse1",
+          "GamepadCode": "RightTrigger",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "attack2",
+          "KeyboardCode": "mouse2",
+          "GamepadCode": "LeftTrigger",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "Restart",
+          "KeyboardCode": "r",
+          "GamepadCode": "Y",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "Slot1",
+          "KeyboardCode": "1",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot2",
+          "KeyboardCode": "2",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot3",
+          "KeyboardCode": "3",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot4",
+          "KeyboardCode": "4",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot5",
+          "KeyboardCode": "5",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot6",
+          "KeyboardCode": "6",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot7",
+          "KeyboardCode": "7",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot8",
+          "KeyboardCode": "8",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot9",
+          "KeyboardCode": "9",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot0",
+          "KeyboardCode": "0",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "SlotPrev",
+          "KeyboardCode": "mouse4",
+          "GamepadCode": "SwitchLeftBumper",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "SlotNext",
+          "KeyboardCode": "mouse5",
+          "GamepadCode": "SwitchRightBumper",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "View",
+          "KeyboardCode": "C",
+          "GamepadCode": "RightJoystickButton",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Voice",
+          "KeyboardCode": "v",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Drop",
+          "KeyboardCode": "g",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Score",
+          "KeyboardCode": "tab",
+          "GamepadCode": "SwitchLeftMenu",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Menu",
+          "KeyboardCode": "Q",
+          "GamepadCode": "SwitchRightMenu",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Chat",
+          "KeyboardCode": "enter",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        }
+      ],
+      "__guid": "21978dc0-3517-474d-a7dc-1a6404572873"
+    }
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "RootObject": {
+    "__guid": "5518a48a-92c2-46a2-9bc0-897e6711d1c0",
+    "Flags": 0,
+    "Name": "death_wall",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Vidya.DeathWallComponent",
+        "__guid": "906a4cd7-3b71-40aa-87d7-4d5e0cccfbe7"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "4afb970e-1815-4515-a6c0-9328f1a08720",
+        "Flags": 0,
+        "Name": "Destroyer",
+        "Position": "0,-16,0",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.BoxCollider",
+            "__guid": "171f5b88-4334-47a2-ab94-09ce4e3b1535",
+            "Center": "0,0,0",
+            "IsTrigger": true,
+            "Scale": "32,32,1024",
+            "Static": false
+          },
+          {
+            "__type": "Vidya.DestroyerComponent",
+            "__guid": "78ae3329-b188-4021-94a5-4bc758d60ea1",
+            "SoundCooldown": 0.12,
+            "BreakSound": "sounds/objects/brick.break.sound"
+          }
+        ]
+      },
+      {
+        "__guid": "45648e86-ceba-4536-bc65-4eebbbb6c0a8",
+        "Flags": 0,
+        "Name": "spike_ball_wall",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "8b10816b-2bc4-47ef-840e-51f1afde4d4e",
+        "Flags": 0,
+        "Name": "spike_ball_wall (1)",
+        "Position": "0,0,32",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "330722da-6894-4228-b8b5-7df52a10e58b",
+        "Flags": 0,
+        "Name": "spike_ball_wall (2)",
+        "Position": "0,0,64",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "0446b8b8-649a-4c70-852f-7892560ce58b",
+        "Flags": 0,
+        "Name": "spike_ball_wall (3)",
+        "Position": "0,0,96",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "fd29c50d-3436-4270-b826-ca6ea09c83b0",
+        "Flags": 0,
+        "Name": "spike_ball_wall (4)",
+        "Position": "0,0,128",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "ae4c5fac-45f3-42ca-a85c-96584b2d0c56",
+        "Flags": 0,
+        "Name": "spike_ball_wall (5)",
+        "Position": "0,0,160",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "5d651f95-5415-42d0-b596-bf5d0523596b",
+        "Flags": 0,
+        "Name": "spike_ball_wall (6)",
+        "Position": "0,0,192",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "84421541-2e3f-4aeb-9f2a-bb0043fe7144",
+        "Flags": 0,
+        "Name": "spike_ball_wall (7)",
+        "Position": "0,0,224",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "d511d5fa-d3e0-44ac-bef3-8db4e7f7c7cf",
+        "Flags": 0,
+        "Name": "spike_ball_wall (8)",
+        "Position": "0,0,256",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "e4181e9e-80c8-4cc5-81db-b1349b447b20",
+        "Flags": 0,
+        "Name": "spike_ball_wall (9)",
+        "Position": "0,0,288",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "dd284405-bcc4-484e-9b69-4d9f0ae1e78a",
+        "Flags": 0,
+        "Name": "spike_ball_wall (10)",
+        "Position": "0,0,320",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "1359a516-6b7a-469d-aa4f-d3a341af47ec",
+        "Flags": 0,
+        "Name": "spike_ball_wall (11)",
+        "Position": "0,0,352",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "4cc9c558-6c6f-4dab-88f0-b25e5210a04a",
+        "Flags": 0,
+        "Name": "spike_ball_wall (12)",
+        "Position": "0,0,384",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "6924f4d2-4628-4966-adf7-49ed5cf4aba5",
+        "Flags": 0,
+        "Name": "spike_ball_wall (13)",
+        "Position": "0,0,416",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "a41b53c0-635f-4302-8b47-9662bfc7b18e",
+        "Flags": 0,
+        "Name": "spike_ball_wall (14)",
+        "Position": "0,0,-32",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "a7dc3762-178a-4344-be30-a470c9340595",
+        "Flags": 0,
+        "Name": "spike_ball_wall (15)",
+        "Position": "0,0,-64",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "9d923da6-2ab8-4169-bb0c-5dfb6964b911",
+        "Flags": 0,
+        "Name": "spike_ball_wall (16)",
+        "Position": "0,0,-96",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "b9565f73-420a-41fc-8751-d937271ae09a",
+        "Flags": 0,
+        "Name": "spike_ball_wall (17)",
+        "Position": "0,0,-128",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "1e2ac87e-7ed3-4373-9838-ce3940a322a3",
+        "Flags": 0,
+        "Name": "spike_ball_wall (18)",
+        "Position": "0,0,-160",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "4c24b21e-71be-481a-a4b4-626756ba4a0c",
+        "Flags": 0,
+        "Name": "spike_ball_wall (19)",
+        "Position": "0,0,-192",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "aa707dc1-f859-464b-ab18-eaf485c63d80",
+        "Flags": 0,
+        "Name": "spike_ball_wall (20)",
+        "Position": "0,0,-224",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "83686782-86be-457a-a635-4806e0e74a84",
+        "Flags": 0,
+        "Name": "spike_ball_wall (21)",
+        "Position": "0,0,-256",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "59436b95-26ec-4bcf-b6a5-acebb047de74",
+        "Flags": 0,
+        "Name": "spike_ball_wall (22)",
+        "Position": "0,0,-288",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "06bf92e6-d780-4628-b685-62ef439db0b5",
+        "Flags": 0,
+        "Name": "spike_ball_wall (23)",
+        "Position": "0,0,-320",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "48907513-9234-4b7d-b88d-7729a28a0030",
+        "Flags": 0,
+        "Name": "spike_ball_wall (24)",
+        "Position": "0,0,-352",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "55d6755f-b39d-48f1-bee8-14c43b9a2963",
+        "Flags": 0,
+        "Name": "spike_ball_wall (25)",
+        "Position": "0,0,-384",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "af94092a-a754-4152-97d3-4a97458b7abf",
+        "Flags": 0,
+        "Name": "spike_ball_wall (26)",
+        "Position": "0,0,-416",
+        "Enabled": true,
+        "__Prefab": "prefabs/hazards/spike_ball_wall.prefab",
+        "__PrefabVariables": {}
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
