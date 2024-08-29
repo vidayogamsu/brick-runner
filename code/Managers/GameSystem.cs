@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 using Sandbox;
+using Sandbox.Network;
 
 namespace Vidya;
 
@@ -165,8 +166,6 @@ public partial class GameSystem : Component
             await Task.DelayRealtimeSeconds( 1.0f );
 
             Player = PlayerPrefab.Clone( spawnPos );
-
-            CameraController.Instance.Player = PlayerController.Instance;
         }
 
         // Restore health and set position.

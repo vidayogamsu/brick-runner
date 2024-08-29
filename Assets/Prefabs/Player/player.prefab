@@ -2,9 +2,7 @@
   "RootObject": {
     "__guid": "a5f91ff7-ed93-40e2-8baa-dbf88d84cf5b",
     "Flags": 0,
-    "Name": "Player",
-    "Position": "0,353.1814,272.4628",
-    "Rotation": "0,0,1,-0.00000004371139",
+    "Name": "player",
     "Tags": "player",
     "Enabled": true,
     "Components": [
@@ -203,7 +201,6 @@
         "__guid": "63f82906-22be-4028-8b86-91b6d0e94581",
         "Flags": 0,
         "Name": "Trigger",
-        "Position": "0,0,0",
         "Enabled": true,
         "Components": [
           {
@@ -220,7 +217,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

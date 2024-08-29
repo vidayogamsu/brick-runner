@@ -25,6 +25,19 @@ public partial class PlayerController : Component
 
     [Property] public GameObject GibPrefab { get; set; }
 
+	private static PlayerController _localPlayer;
+
+	public static PlayerController Local
+	{
+		get 
+		{
+			if ( !_localPlayer.IsValid() )
+				_localPlayer = Game.ActiveScene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.IsProxy );
+
+			return _localPlayer;
+		}
+	}
+
 
     /// <summary> Gravity when not holding JUMP. </summary>
     [Property, Group( "Gravity" )] public float Gravity { get; set; } = 900f;
@@ -62,6 +75,8 @@ public partial class PlayerController : Component
     public static bool HoldingDown => Input.Down( "Down" );
     public static bool HoldingWalk => Input.Down( "Slow" );
 
+	[Sync] public Vector3 SideDirection { get; set; }
+
 
 
     protected override void OnStart()
@@ -84,8 +99,23 @@ public partial class PlayerController : Component
 
         UpdateBlink();
 
+
+		// Citizen Animation
+        CAH.IsGrounded = IsGrounded;
+
+		CAH.WithVelocity( Velocity );
+
+		if ( !SideDirection.y.AlmostEqual( 0f ) )
+        {
+            CAH.AimHeadWeight = 0f;
+            CAH.Transform.Rotation = Rotation.LookAt( SideDirection );
+        }
+
+		if ( IsProxy )
+			return;
+
         // Input
-        var sideDir = new Vector3( 0f, MathF.Sign( -Input.AnalogMove.y ), 0f );
+        SideDirection = new Vector3( 0f, MathF.Sign( -Input.AnalogMove.y ), 0f );
         var upDir = new Vector3( 0f, 0f, MathF.Sign( Input.AnalogMove.x ) );
 
         if ( HoldingUp && !HoldingDown ) upDir.z = 1f;
@@ -109,7 +139,7 @@ public partial class PlayerController : Component
                 // Less friction when walking.
                 ApplyFriction( HoldingWalk ? Friction * 0.5f : Friction );
 
-                Velocity = Velocity.WithAcceleration( sideDir * moveSpeed, GroundAccel * Time.Delta );
+                Velocity = Velocity.WithAcceleration( SideDirection * moveSpeed, GroundAccel * Time.Delta );
             }
         }
         else
@@ -126,7 +156,7 @@ public partial class PlayerController : Component
                     Jump();
             }
 
-            Velocity = Velocity.WithAcceleration( sideDir * moveSpeed, AirAccel * Time.Delta );
+            Velocity = Velocity.WithAcceleration( SideDirection * moveSpeed, AirAccel * Time.Delta );
         }
 
         // Custom Movement/Collision
@@ -159,16 +189,6 @@ public partial class PlayerController : Component
             }
         }
 
-        // Citizen Animation
-        CAH.IsGrounded = IsGrounded;
-        CAH.WithVelocity( Velocity );
-
-        if ( !sideDir.y.AlmostEqual( 0f ) )
-        {
-            CAH.AimHeadWeight = 0f;
-            CAH.Transform.Rotation = Rotation.LookAt( sideDir );
-        }
-
         // Clamp Position
         var pos = Transform.Position;
 
@@ -192,7 +212,7 @@ public partial class PlayerController : Component
         // Prevent further coyote time jumps.
         CoyoteJumped = true;
 
-        CAH.TriggerJump();
+        BroadcastJumpAnim();
 
         if ( playSound )
             Sound.Play( "player.jump" );
@@ -201,6 +221,12 @@ public partial class PlayerController : Component
         Velocity += -GravityDirection * JumpSpeed;
         IsGrounded = false;
     }
+
+	[Broadcast]
+	void BroadcastJumpAnim()
+	{
+		CAH.TriggerJump();
+	}
 
 
     /*
@@ -294,11 +320,11 @@ public partial class PlayerController : Component
     [Property, Group( "Collision" )] public float Width { get; set; } = 9f;
     [Property, Group( "Collision" )] public float Height { get; set; } = 28f;
 
-    public bool IsGrounded { get; set; } = false;
-    public bool WasGrounded { get; set; } = false;
+    [Sync] public bool IsGrounded { get; set; } = false;
+    [Sync] public bool WasGrounded { get; set; } = false;
 
-    public Vector3 Velocity { get; set; } = Vector3.Zero;
-    public Vector3 PreviousVelocity { get; set; } = Vector3.Zero;
+    [Sync] public Vector3 Velocity { get; set; } = Vector3.Zero;
+    [Sync] public Vector3 PreviousVelocity { get; set; } = Vector3.Zero;
 
 
     private Vector3 _floatPos;

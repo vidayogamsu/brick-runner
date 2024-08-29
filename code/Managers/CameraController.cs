@@ -14,23 +14,27 @@ public partial class CameraController : Component
         Instance = this;
     }
 
-
-    [RequireComponent]
     public CameraComponent Cam { get; set; }
 
-
-    public PlayerController Player { get; set; }
-
+    protected override void OnStart()
+    {
+        Cam = Scene.Camera;
+    }
 
     protected override async void OnUpdate()
     {
+		if ( PlayerController.Local.IsValid() && PlayerController.Local.IsProxy )
+			return;
+
         base.OnUpdate();
 
         await Task.FrameEnd();
 
-        if ( !Player.IsValid() )
+		var local = PlayerController.Local;
+
+        if ( !local.IsValid() )
             return;
 
-        Transform.Position = new Vector3( 256f, Player.Transform.Position.y, 0f );
+        Transform.Position = new Vector3( 256f, local.Transform.Position.y, 0f );
     }
 }
