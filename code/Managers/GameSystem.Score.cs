@@ -30,6 +30,7 @@ public partial class GameSystem : Component
     public async Task GetScores()
     {
         var board = Leaderboards.GetFromStat( LeaderboardStat );
+		board.CenterOnMe();
         board.MaxEntries = 15;
 
         await board.Refresh();
