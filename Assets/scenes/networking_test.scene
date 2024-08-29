@@ -1,33 +1,6 @@
 {
-  "__guid": "a8a64580-a14d-4722-aec1-54f189a5fb77",
+  "__guid": "e88bec28-3cff-497d-96ce-1231d37aebe7",
   "GameObjects": [
-    {
-      "__guid": "9ac6ee1a-a623-426d-a525-4c9bbafaa901",
-      "Flags": 0,
-      "Name": "Camera",
-      "Position": "-39.2551,33.8406,130.9349",
-      "Tags": "maincamera",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.CameraComponent",
-          "__guid": "091cea6c-1eb9-476c-943b-1ccc0e5a8d45",
-          "BackgroundColor": "0.33333,0.46275,0.52157,1",
-          "ClearFlags": "All",
-          "FieldOfView": 60,
-          "IsMainCamera": true,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
-          "Priority": 1,
-          "RenderExcludeTags": "",
-          "RenderTags": "",
-          "TargetEye": "None",
-          "Viewport": "0,0,1,1",
-          "ZFar": 10000,
-          "ZNear": 10
-        }
-      ]
-    },
     {
       "__guid": "5015017d-eb1c-4c7c-9066-e6f6bf91d566",
       "Flags": 0,
@@ -38,6 +11,7 @@
           "__guid": "258e9b43-5485-4520-8c05-7d9bcbb61af2",
           "Flags": 0,
           "Name": "Game Manager",
+          "Enabled": true,
           "Components": [
             {
               "__type": "Vidya.GameSystem",
@@ -176,13 +150,14 @@
               },
               "Score": 0,
               "SpawnPosition": 0,
+              "SpawnWorld": false,
               "StartChunks": [
                 {
                   "_type": "gameobject",
                   "prefab": "prefabs/chunks/1_start/chunk_start1.prefab"
                 }
               ],
-              "StartServer": false
+              "StartServer": true
             }
           ]
         },
@@ -190,7 +165,7 @@
           "__guid": "64ed4ef3-b0ab-4cea-91c3-9ad6f97eb7e0",
           "Flags": 0,
           "Name": "Camera Controller",
-          "Position": "256,0.00004476048,0",
+          "Position": "1104.384,0.00004476048,215.2109",
           "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
@@ -294,84 +269,81 @@
       ]
     },
     {
-      "__guid": "0bdd51a1-832e-4baf-8028-17be7b0984c6",
+      "__guid": "d4e2749b-e330-4cbc-8596-0ab089fa79db",
+      "Flags": 0,
+      "Name": "Spawn",
+      "Enabled": true
+    },
+    {
+      "__guid": "b2d20176-339b-4311-8050-5fc0dab84f49",
       "Flags": 0,
       "Name": "Box",
-      "Position": "132.0963,-57.34332,0",
+      "Position": "71.66986,24.52539,-28.69138",
       "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.MeshComponent",
-          "__guid": "c8fd99f1-5ac8-4cbf-b3c1-826eb5d25b06",
+          "__guid": "0af5cd73-2cad-4981-b0e4-4f641655bb9d",
           "Collision": "Mesh",
           "Color": "1,1,1,1",
           "HideInGame": false,
           "IsTrigger": false,
           "Mesh": {
-            "Topology": "H4sIAAAAAAAACl2RiQrDMAxD06bn1q277\u002Bv/f3LTAwXMAoJiPdeOMqWUPlIrcWqpkTppIQ3SRlpLJ\u002BkgPaSbVFn0xDOFevb/Uqi9XMue2/3Nvtjj9OG/2ewusKP3rPwv9l1JXx1qy7BnY3a035od7Jfdt/aZNfv\u002BtXchh739ZLa3Dw9LDz51WHpKFux\u002Bts/co3PFYy/yvdqnBsuefMPD0oMPD0sPPjPI7mmfu979XtydLHi3t3142PJG8LD04MPD0oNPRrwd9ZIPeXEn5uL9AJNLDlxQAgAA",
+            "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
             "Positions": [
-              "-411.4684,-514.4808,0",
-              "411.4684,-514.4808,0",
-              "411.4684,514.4808,0",
-              "-411.4684,514.4808,0",
-              "411.4684,-514.4808,-176.746",
-              "-411.4684,-514.4808,-176.746",
-              "-411.4684,-514.4808,-176.746",
-              "-411.4684,514.4808,-176.746",
-              "-411.4684,514.4808,-176.746",
-              "411.4684,514.4808,-176.746",
-              "411.4684,514.4808,-176.746",
-              "411.4684,-514.4808,-176.746"
+              "-460.2945,-454.2674,21.94364",
+              "460.2945,-454.2674,21.94364",
+              "460.2945,454.2674,21.94364",
+              "-460.2945,454.2674,21.94364",
+              "-460.2945,454.2674,-21.94364",
+              "460.2945,454.2674,-21.94364",
+              "460.2945,-454.2674,-21.94364",
+              "-460.2945,-454.2674,-21.94364"
             ],
             "TextureCoord": [
-              "5.214597,5.019382",
-              "-2.182594,0",
-              "5.214597,-3.019382",
-              "-4.467376,0",
-              "-1.214597,-3.019382",
-              "-4.246599,0",
-              "-1.214597,5.019382",
-              "-3.571387,0",
-              "4.246599,1.380828",
-              "0,0",
-              "4.246599,0",
-              "0,0",
-              "-2.182594,1.380828",
-              "0,0",
-              "4.467376,1.380828",
-              "0,0",
-              "4.467376,0",
-              "0,0",
-              "-3.571387,1.380828",
-              "0,0",
-              "2.182594,1.380828",
-              "0,0",
-              "2.182594,0",
-              "0,0",
-              "-4.246599,1.380828",
-              "0,0",
-              "3.571387,1.380828",
-              "0,0",
-              "3.571387,0",
-              "0,0",
-              "-4.467376,1.380828",
-              "0,0"
+              "3.596051,3.548964",
+              "-3.596051,-0.1714347",
+              "3.596051,-3.548964",
+              "-3.548964,-0.1714347",
+              "-3.596051,-3.548964",
+              "-3.596051,-0.1714347",
+              "-3.596051,3.548964",
+              "-3.548964,-0.1714347",
+              "3.596051,-3.548964",
+              "3.596051,0.1714347",
+              "3.596051,3.548964",
+              "3.548964,0.1714347",
+              "-3.596051,3.548964",
+              "3.596051,0.1714347",
+              "-3.596051,-3.548964",
+              "3.548964,0.1714347",
+              "3.548964,-0.1714347",
+              "-3.596051,0.1714347",
+              "-3.548964,0.1714347",
+              "3.596051,-0.1714347",
+              "-3.548964,0.1714347",
+              "3.596051,-0.1714347",
+              "3.548964,-0.1714347",
+              "-3.596051,0.1714347"
             ],
             "TextureUAxis": [
               "1,0,0",
-              "1,0,0",
+              "1,0,-0",
               "0,-1,0",
+              "0,1,0",
               "-1,0,0",
-              "0,1,0"
+              "1,-0,0"
             ],
             "TextureVAxis": [
               "0,-1,0",
+              "0,-1,0",
               "0,0,-1",
+              "-0,0,-1",
               "0,0,-1",
-              "0,0,-1",
-              "0,0,-1"
+              "-0,0,-1"
             ],
             "TextureScale": [
+              "0.25,0.25",
               "0.25,0.25",
               "0.25,0.25",
               "0.25,0.25",
@@ -379,13 +351,15 @@
               "0.25,0.25"
             ],
             "TextureOffset": [
-              "495.6146,282.6267",
-              "0,0",
-              "0,0",
-              "0,0",
-              "0,0"
+              "225.3206,98.10156",
+              "225.3206,98.10156",
+              "98.10156,397.2345",
+              "413.8984,397.2345",
+              "286.6794,397.2345",
+              "225.3206,397.2345"
             ],
             "MaterialIndex": [
+              0,
               0,
               0,
               0,
@@ -393,14 +367,6 @@
               0
             ],
             "EdgeFlags": [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
               0,
               0,
               0,
@@ -436,33 +402,10 @@
       ]
     },
     {
-      "__guid": "f590cc04-b3bf-4dc6-b04f-f39d5baedcb1",
+      "__guid": "c63cc43e-60b3-4884-a150-f920d9265354",
       "Flags": 0,
-      "Name": "Network",
-      "Position": "291.3525,-6.542938,19.40153",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.NetworkHelper",
-          "__guid": "27751500-651a-44c1-9f2f-369171eb3694",
-          "PlayerPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/player/player.prefab"
-          },
-          "SpawnPoints": [
-            {
-              "_type": "gameobject",
-              "go": "d4e2749b-e330-4cbc-8596-0ab089fa79db"
-            }
-          ],
-          "StartServer": true
-        }
-      ]
-    },
-    {
-      "__guid": "d4e2749b-e330-4cbc-8596-0ab089fa79db",
-      "Flags": 0,
-      "Name": "Spawn",
+      "Name": "Trigger",
+      "Position": "-240.048,-238.342,102.2362",
       "Enabled": true
     }
   ],

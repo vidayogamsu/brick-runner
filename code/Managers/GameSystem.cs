@@ -21,7 +21,7 @@ public enum ChunkStyle
 }
 
 
-public partial class GameSystem : Component
+public partial class GameSystem : Component, Component.INetworkListener
 {
     public static GameSystem Instance { get; set; }
 
@@ -76,6 +76,9 @@ public partial class GameSystem : Component
     [Property, Group( "Chunks" )] public List<GameObject> HardChunks { get; set; } = new();
     [Property, Group( "Chunks" )] public List<GameObject> ExtremeChunks { get; set; } = new();
 
+	[Property] public bool StartServer { get; set; } = false;
+	[Property] public bool SpawnWorld { get; set; } = true;
+
 
     protected override async void OnStart()
     {
@@ -83,12 +86,30 @@ public partial class GameSystem : Component
 
         Instance = this;
 
+		if ( StartServer && !GameNetworkSystem.IsActive )
+		{
+			GameNetworkSystem.CreateLobby();
+		}
+
         await Task.FrameEnd();
 
         //Level = 100;
 
-        RestartLevel();
+		if ( !StartServer )
+        	RestartLevel();
     }
+
+	public void OnActive( Connection connection )
+	{
+		var player = PlayerPrefab.Clone();
+
+		player.NetworkSpawn( connection );
+
+		if ( player.Components.TryGet<PlayerController>( out var playerController ) )
+		{
+			RestartLevel( playerController );
+		}
+	}
 
     protected override void OnUpdate()
     {
@@ -104,7 +125,7 @@ public partial class GameSystem : Component
 
         if ( Input.Pressed( "Score" ) )
             ShowLeaderboard = !ShowLeaderboard;
-    }
+	}
 
     public void RestartGame()
     {
@@ -117,8 +138,19 @@ public partial class GameSystem : Component
         RestartLevel();
     }
 
-    public async void RestartLevel()
+	[ConCmd("br_restart_scene")]
+	public static void RestartScene()
+	{
+		Game.ActiveScene.Load( Game.ActiveScene.Source );
+	}
+
+    public async void RestartLevel( PlayerController player = null )
     {
+		if ( player.IsValid() )
+		{
+			Player = player.GameObject;
+		}
+
         // Turn off camera for an easy black screen.
         CameraController.Instance.Cam.Enabled = false;
 
@@ -137,14 +169,16 @@ public partial class GameSystem : Component
 
         var spawnPoint = Game.ActiveScene.GetAllComponents<SpawnPoint>()?.FirstOrDefault();
 
-        if ( !spawnPoint.IsValid() )
+        if ( !spawnPoint.IsValid() && SpawnWorld )
         {
-            Log.Error( "Couldn't find spawn point for player in first chunk." );
+            Log.Warning( "Couldn't find spawn point for player in first chunk." );
             return;
         }
 
-        spawnPoint.Transform.ClearInterpolation();
-        var spawnPos = spawnPoint.Transform.Position;
+		if ( spawnPoint.IsValid() )
+			spawnPoint.Transform.ClearInterpolation();
+		
+        var spawnPos = spawnPoint?.Transform.Position ?? Vector3.Zero;
 
         // Spawn chunks.
         var maxChunkDist = 3500f + ((Level - 1) * 80f);
@@ -186,7 +220,7 @@ public partial class GameSystem : Component
         }
 
         // Spawn Death Wall
-        if ( DeathWallPrefab.IsValid() )
+        if ( DeathWallPrefab.IsValid() && SpawnWorld )
             DeathWallPrefab.Clone( new Vector3( 0f, -512f, 0f ) );
 
         // Update Scoreboard
@@ -231,6 +265,9 @@ public partial class GameSystem : Component
 
     public void SpawnChunk( ChunkStyle style, bool withHazards = false )
     {
+		if ( !SpawnWorld )
+			return;
+
         var pos = new Vector3( 0f, SpawnPosition, 0f );
 
         GameObject chunk = null;

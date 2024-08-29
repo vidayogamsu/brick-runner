@@ -35,6 +35,6 @@ public partial class CameraController : Component
         if ( !local.IsValid() )
             return;
 
-        Transform.Position = new Vector3( 256f, local.Transform.Position.y, 0f );
+        Transform.Position = new Vector3( Cam.Transform.Position.x, local.Transform.Position.y, 0f );
     }
 }

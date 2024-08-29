@@ -116,6 +116,8 @@ HUD {
             .sb-name {
                 flex-grow: 1;
                 flex-wrap: wrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
 
             .sb-level {

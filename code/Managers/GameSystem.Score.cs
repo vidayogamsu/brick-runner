@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Sandbox;
 using Sandbox.Services;
+using Sandbox.Utility;
 
 namespace Vidya;
 
@@ -13,6 +14,7 @@ public struct Score
     public string Name { get; set; }
     public double Level { get; set; }
     public bool Me { get; set; }
+	public long SteamId { get; set; }
 }
 
 
@@ -22,14 +24,12 @@ public partial class GameSystem : Component
     public static bool ShowLeaderboard { get; set; } = true;
 
     public static List<Score> Scores { get; set; } = new();
-
-    public string LeaderboardID { get; set; } = "lb_v1";
     public string LeaderboardStat { get; set; } = "lb_v1_stat";
 
 
     public async Task GetScores()
     {
-        var board = Leaderboards.Get( LeaderboardID );
+        var board = Leaderboards.GetFromStat( LeaderboardStat );
         board.MaxEntries = 15;
 
         await board.Refresh();
@@ -45,7 +45,8 @@ public partial class GameSystem : Component
                 Rank = e.Rank,
                 Name = e.DisplayName,
                 Level = (float)e.Value,
-                Me = e.Me,
+                Me = e.SteamId == (long)Steam.SteamId,
+				SteamId = e.SteamId
             };
 
             Scores.Add( score );
