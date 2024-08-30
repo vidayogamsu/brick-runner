@@ -18,6 +18,7 @@ public partial class CameraController : Component
 
     protected override void OnStart()
     {
+		Instance = this;
         Cam = Scene.Camera;
     }
 

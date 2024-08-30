@@ -293,7 +293,9 @@ public partial class PlayerController : Component
         GameObject.Enabled = false;
 
         Stats.Increment( "stat_deaths", 1 );
-        GameSystem.Instance.EndGame();
+
+		if ( Networking.IsHost )
+        	GameSystem.Instance.EndGame();
     }
 
     public void UpdateBlink()
