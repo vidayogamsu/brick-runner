@@ -266,6 +266,7 @@ public partial class PlayerController : Component
         }
     }
 
+	[Broadcast]
     public void StartBlinking()
     {
         if ( BlinkDuration > 0 )
@@ -358,8 +359,12 @@ public partial class PlayerController : Component
     /// Use this instead of directly setting the transform's position.
     /// </summary>
     /// <param name="pos"></param>
+	[Broadcast]
     public void SetPosition( Vector3 pos )
     {
+		if ( IsProxy )
+			return;
+
         FloatPos = pos;
     }
 

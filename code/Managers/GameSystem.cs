@@ -76,8 +76,8 @@ public partial class GameSystem : Component, Component.INetworkListener
     [Property, Group( "Chunks" )] public List<GameObject> HardChunks { get; set; } = new();
     [Property, Group( "Chunks" )] public List<GameObject> ExtremeChunks { get; set; } = new();
 
-	[Property] public bool StartServer { get; set; } = false;
-	[Property] public bool SpawnWorld { get; set; } = true;
+    [Property] public bool StartServer { get; set; } = false;
+    [Property] public bool SpawnWorld { get; set; } = true;
 
 
     protected override async void OnStart()
@@ -86,37 +86,37 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         Instance = this;
 
-		if ( StartServer && !GameNetworkSystem.IsActive )
-		{
-			GameNetworkSystem.CreateLobby();
-		}
+        if ( StartServer && !GameNetworkSystem.IsActive )
+        {
+            GameNetworkSystem.CreateLobby();
+        }
 
         await Task.FrameEnd();
 
         //Level = 100;
 
-		if ( !StartServer )
-        	RestartLevel();
+        if ( !StartServer )
+            RestartLevel();
     }
 
-	public void OnActive( Connection connection )
-	{
-		var player = PlayerPrefab.Clone();
+    public void OnActive( Connection connection )
+    {
+        var player = PlayerPrefab.Clone();
 
-		player.NetworkSpawn( connection );
+        player.NetworkSpawn( connection );
 
-		if ( player.Components.TryGet<PlayerController>( out var playerController ) && Networking.IsHost )
-		{
-			RestartLevel( playerController );
-		}
-	}
+        if ( player.Components.TryGet<PlayerController>( out var playerController ) && Networking.IsHost )
+        {
+            RestartLevel( playerController );
+        }
+    }
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
 
-		if ( IsProxy )
-			return;
+        if ( IsProxy )
+            return;
 
         if ( GameOver && Input.Pressed( "Restart" ) )
         {
@@ -128,7 +128,7 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         if ( Input.Pressed( "Score" ) )
             ShowLeaderboard = !ShowLeaderboard;
-	}
+    }
 
     public void RestartGame()
     {
@@ -141,23 +141,23 @@ public partial class GameSystem : Component, Component.INetworkListener
         RestartLevel();
     }
 
-	[ConCmd("br_restart_scene")]
-	public static void RestartScene()
-	{
-		Game.ActiveScene.Load( Game.ActiveScene.Source );
-	}
+    [ConCmd( "br_restart_scene" )]
+    public static void RestartScene()
+    {
+        Game.ActiveScene.Load( Game.ActiveScene.Source );
+    }
 
-	[Broadcast]
+    [Broadcast]
     public async void RestartLevel( PlayerController player = null )
     {
-		if ( player.IsValid() )
-		{
-			Player = player.GameObject;
-		}
+        if ( player.IsValid() )
+        {
+            Player = player.GameObject;
+        }
 
         // Turn off camera for an easy black screen.
-		if ( CameraController.Instance.Cam.IsValid() )
-       		CameraController.Instance.Cam.Enabled = false;
+        if ( CameraController.Instance.Cam.IsValid() )
+            CameraController.Instance.Cam.Enabled = false;
 
         // Destroy previous level objects.
         foreach ( var obj in Game.ActiveScene.GetAllObjects( false ) )
@@ -179,24 +179,27 @@ public partial class GameSystem : Component, Component.INetworkListener
             Log.Warning( "Couldn't find spawn point for player in first chunk." );
         }
 
-		if ( spawnPoint.IsValid() )
-			spawnPoint.Transform.ClearInterpolation();
-		
+        if ( spawnPoint.IsValid() )
+            spawnPoint.Transform.ClearInterpolation();
+
         var spawnPos = spawnPoint?.Transform.Position ?? Vector3.Zero;
 
-        // Spawn chunks.
-        var maxChunkDist = 3500f + ((Level - 1) * 80f);
-
-        for ( var i = 0; i < 1000; i++ )
+        if ( Networking.IsHost )
         {
-            SpawnChunk( RandomDifficulty(), true );
+            // Spawn chunks.
+            var maxChunkDist = 3500f + ((Level - 1) * 80f);
 
-            if ( SpawnPosition > maxChunkDist )
-                break;
+            for ( var i = 0; i < 1000; i++ )
+            {
+                SpawnChunk( RandomDifficulty(), true );
+
+                if ( SpawnPosition > maxChunkDist )
+                    break;
+            }
+
+            // Spawn final chunk.
+            SpawnChunk( ChunkStyle.Final );
         }
-
-        // Spawn final chunk.
-        SpawnChunk( ChunkStyle.Final );
 
         // Wait a second before spawning the player. Prevents instadeath on game startup(???).
         if ( !Player.IsValid() )
@@ -206,38 +209,40 @@ public partial class GameSystem : Component, Component.INetworkListener
             Player = PlayerPrefab.Clone( spawnPos );
         }
 
-		foreach ( var p in Scene.GetAllComponents<PlayerController>() )
-		{
-			 // Restore Health
-            p.Health = p.MaxLives;
+        if ( Networking.IsHost )
+        {
+            foreach ( var p in Scene.GetAllComponents<PlayerController>() )
+            {
+                // Restore Health
+                p.Health = p.MaxLives;
 
-            // Safe Teleport
-            p.Velocity = Vector3.Zero;
-            p.PreviousVelocity = Vector3.Zero;
+                // Safe Teleport
+                p.Velocity = Vector3.Zero;
+                p.PreviousVelocity = Vector3.Zero;
 
-            p.StartBlinking(); // funky collision protection
-            p.SetPosition( spawnPos );
+                p.StartBlinking(); // funky collision protection
+                p.SetPosition( spawnPos );
 
-            // Reactivate Camera
-			if ( CameraController.Instance.Cam.IsValid() )
-            	CameraController.Instance.Cam.Enabled = true;
-		}
+                // Reactivate Camera
+                if ( CameraController.Instance.Cam.IsValid() )
+                    CameraController.Instance.Cam.Enabled = true;
+            }
 
-        // Spawn Death Wall
-        if ( DeathWallPrefab.IsValid() && SpawnWorld && Networking.IsHost )
-		{
-			var clone = DeathWallPrefab.Clone( new Vector3( 0f, -512f, 0f ) );
+            // Spawn Death Wall
+            if ( DeathWallPrefab.IsValid() && SpawnWorld && Networking.IsHost )
+            {
+                var clone = DeathWallPrefab.Clone( new Vector3( 0f, -512f, 0f ) );
 
-			clone.NetworkSpawn( null );
-		}
-            
+                clone.NetworkSpawn( null );
+            }
+        }
 
         // Update Scoreboard
         if ( !Scores.Any() )
             await GetScores();
     }
 
-	[Broadcast]
+    [Broadcast]
     public void EndGame()
     {
         if ( GameOver )
@@ -274,8 +279,8 @@ public partial class GameSystem : Component, Component.INetworkListener
 
     public void SpawnChunk( ChunkStyle style, bool withHazards = false )
     {
-		if ( !SpawnWorld || !Networking.IsHost )
-			return;
+        if ( !SpawnWorld || !Networking.IsHost )
+            return;
 
         var pos = new Vector3( 0f, SpawnPosition, 0f );
 
@@ -331,6 +336,6 @@ public partial class GameSystem : Component, Component.INetworkListener
             }
         }
 
-		chunk.NetworkSpawn( null );
+        chunk.NetworkSpawn( null );
     }
 }
