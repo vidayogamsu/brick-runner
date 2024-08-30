@@ -95,7 +95,7 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         //Level = 100;
 
-        if ( !StartServer )
+        if ( !StartServer && Networking.IsHost )
             RestartLevel();
     }
 
@@ -250,7 +250,8 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         GameOver = true;
 
-        SendScore();
+		if ( !StartServer)
+        	SendScore();
     }
 
 

@@ -1,0 +1,134 @@
+Menu
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	border-radius: 20px;
+    pointer-events: all;
+
+	.title
+	{
+		position: absolute;
+        top: 32px;
+        left: 32px;
+        font-family: Poppins;
+        color: white;
+        font-size: 64px;
+	}
+
+    .buttons
+    {
+        position: absolute;
+        bottom: 32px;
+        left: 32px;
+        width: 25%;
+        height: 25%;
+        gap: 12px;
+        flex-direction: column;
+
+        .button
+        {
+            flex-grow: 1;
+
+            font-family: Poppins;
+            font-size: 42px;
+
+            justify-content: center;
+            align-items: center;
+
+            border-width: 3;
+            background-color: hsl(0, 0%, 8%);
+            border-color: hsl(0, 0%, 11%);
+            color: white;
+            min-height: 20px;
+            cursor: pointer;
+
+            &:hover
+            {
+                background-color: hsl(0, 0%, 11%);
+                sound-in: ui.button.over;
+            }
+
+            &:active
+            {
+                background-color: hsl(0, 0%, 14%);
+                sound-in: ui.button.press;
+            }
+        }
+    }
+
+    .servers
+    {
+        position: absolute;
+        right: 32px;
+        height: 95%;
+        width: 25%;
+        background-color: hsl(0, 0%, 8%);
+        color: white;
+        font-family: Poppins;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+
+        .server-options
+        {
+            width: 100%;
+            gap: 12px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .server
+        {
+            font-size: 32px;
+            border-width: 3;
+            border-color: hsl(0, 0%, 11%);
+            padding: 8px;
+            cursor: pointer;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            
+            min-height: 100px;
+
+
+            .server-name
+            {
+                flex-grow: 1;
+            }
+
+            .server-players
+            {
+                font-size: 24px;
+            }
+
+            &:hover
+            {
+                background-color: hsl(0, 0%, 11%);
+                sound-in: ui.button.over;
+            }
+
+            &:active
+            {
+                background-color: hsl(0, 0%, 14%);
+                sound-in: ui.button.press;
+            }
+        }
+
+        .server-list
+        {
+            height: 85%;
+            width: 100%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            flex-direction: column;
+        }
+    }
+}

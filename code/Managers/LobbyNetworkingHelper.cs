@@ -1,16 +1,18 @@
 using System.Data;
 using Sandbox;
 using Sandbox.Network;
+using System.Threading.Tasks;
 
 public sealed class LobbyNetworkingHelper : Component, Component.INetworkListener
 {
 	[Property] public GameObject PlayerPrefab { get; set; }
 
-	protected override void OnStart()
+	protected override async Task OnLoad()
 	{
 		if ( !GameNetworkSystem.IsActive )
 		{
 			GameNetworkSystem.CreateLobby();
+			await Task.MainThread();
 		}
 	}
 

@@ -37,7 +37,7 @@
         </div>
     }
 
-    @if (GameSystem.ShowLeaderboard && GameSystem.Scores.Any())
+    @if (GameSystem.ShowLeaderboard && GameSystem.Scores.Any() && GameSystem.Instance.IsValid() && !GameSystem.Instance.StartServer)
     {
         <div class="scoreboard">
 

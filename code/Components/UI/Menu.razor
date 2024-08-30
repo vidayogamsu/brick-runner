@@ -1,0 +1,99 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System.Threading.Tasks;
+@using Sandbox.Network;
+@using System;
+@inherits PanelComponent
+
+<root>
+	<div class="title"> Brick Runner </div>
+
+	<div class="buttons">
+		<div class="button" onclick=@( () => Game.ActiveScene.LoadFromFile( "scenes/minimal.scene" ))> Singleplayer </div>
+		<div class="button" onclick=@( () => ChangeState( MenuState.Servers ) )> Multiplayer </div>
+		<div class="button" onclick=@( () => Game.Overlay.ShowBinds )> Settings </div>
+	</div>
+
+	@switch (State)
+	{
+		case MenuState.Servers:
+			<div class="servers">
+
+				<div class="server-list">
+					@if (Fetching)
+					{
+						<div class="server"> Fetching servers... </div>
+					}
+					else if (Lobbies.Count == 0)
+					{
+						<div class="server"> No servers found. </div>
+					}
+					else
+					{
+						@foreach ( var lobby in Lobbies )
+						{
+							<div class="server" onclick=@( () => JoinLobby( lobby ) )>
+								<div class="server-name"> @lobby.Name </div>
+								<div class="server-players"> @lobby.Members / @lobby.MaxMembers </div>
+							</div>
+						}
+					}
+
+				</div>
+
+				<div class="server-options">
+					<div class="server" onclick=@( () => Game.ActiveScene.LoadFromFile( "scenes/networking_lobby.scene" ) )> Create Lobby </div>
+					<div class="server" onclick=@( () => ChangeState( MenuState.None ) )> Exit </div>
+				</div>
+			</div>
+
+			break;
+	}
+
+@code
+{
+	public enum MenuState
+	{
+		None,
+		Servers,
+	}
+
+	public MenuState State { get; set; } = MenuState.None;
+	
+	public List<LobbyInformation> Lobbies { get; set; } = new();
+
+	public bool Fetching { get; set; }
+
+	protected override void OnStart()
+	{
+		FetchLobbies();
+	}
+
+	public async void FetchLobbies()
+	{
+		while ( true )
+		{
+			Fetching = true;
+
+			Lobbies = await Networking.QueryLobbies();
+
+			Fetching = false;
+			await Task.Delay( 1000 );
+		}
+	}
+
+	public void JoinLobby( LobbyInformation lobby )
+	{
+		GameNetworkSystem.Connect( lobby.LobbyId );
+	}
+
+	public void ChangeState( MenuState state )
+	{
+		State = state;
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( State, Lobbies?.Count ?? 0, Fetching );
+	}
+}

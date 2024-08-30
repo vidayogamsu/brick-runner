@@ -1,0 +1,377 @@
+{
+  "__guid": "5c0cf7cb-d54c-4b87-b562-939b3608dfaa",
+  "GameObjects": [
+    {
+      "__guid": "c89a9c40-cf33-4a3c-91ab-8012914417c1",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "-80,96,40",
+      "Rotation": "0,0,-0.1305262,0.9914449",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "27047a7d-c8df-4c4b-baef-c622cdafce94",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
+    },
+    {
+      "__guid": "3674bf22-9b15-4b68-8f93-371460447960",
+      "Flags": 0,
+      "Name": "2D Skybox",
+      "Position": "-193.8855,150.2563,157.7689",
+      "Tags": "skybox",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SkyBox2D",
+          "__guid": "2cddd685-690a-4cd9-a1bc-7f3a796ff387",
+          "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "12ccb2d4-fbcc-4a7c-8cd2-0308a77f6fbf",
+      "Flags": 0,
+      "Name": "Box",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MeshComponent",
+          "__guid": "7b466de4-dc85-430c-a87a-f026374111bd",
+          "Collision": "Mesh",
+          "Color": "1,1,1,1",
+          "HideInGame": false,
+          "IsTrigger": false,
+          "Mesh": {
+            "Topology": "H4sIAAAAAAAACk2MAQoAIAgDrSz7/4drBwoOjmKbczO7Ygg0hYuTHuB1hXgS/so\u002Bqi4vOdnOrb6NT15bJXy63JDz/\u002Bg6SXigAAAA",
+            "Positions": [
+              "-607.9996,-608.0001,0",
+              "608.0001,-607.9996,0",
+              "607.9996,608.0001,0",
+              "-608.0001,607.9996,0"
+            ],
+            "TextureCoord": [
+              "4.750001,4.749997",
+              "0,0",
+              "4.749997,-4.750001",
+              "0,0",
+              "-4.750001,-4.749997",
+              "0,0",
+              "-4.749997,4.750001",
+              "0,0"
+            ],
+            "TextureUAxis": [
+              "1,0,0"
+            ],
+            "TextureVAxis": [
+              "0,-1,0"
+            ],
+            "TextureScale": [
+              "0.25,0.25"
+            ],
+            "TextureOffset": [
+              "0,0"
+            ],
+            "MaterialIndex": [
+              0
+            ],
+            "EdgeFlags": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "Materials": [
+              "materials/dev/reflectivity_30.vmat"
+            ]
+          },
+          "SmoothingAngle": 40,
+          "Static": true
+        }
+      ]
+    },
+    {
+      "__guid": "0f92a6aa-8b6e-4274-9709-a993075cc08b",
+      "Flags": 0,
+      "Name": "Sun",
+      "Position": "-964.8219,171.3347,841.5125",
+      "Rotation": "0,0.3826834,0,0.9238796",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.DirectionalLight",
+          "__guid": "0373f66b-22be-495d-8215-3eae34631e00",
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.91373,0.98039,1,1",
+          "Shadows": true,
+          "SkyColor": "0,0,0,0"
+        }
+      ]
+    },
+    {
+      "__guid": "700a08c1-75b5-4fbb-abac-087bb4830ab1",
+      "Flags": 0,
+      "Name": "Model",
+      "Position": "64,0,0",
+      "Rotation": "0,0,-0.9238796,-0.3826833",
+      "Scale": "0.8,0.8,0.8",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Citizen.CitizenAnimationHelper",
+          "__guid": "a80ba022-7789-41c9-85d3-a3f0c609bf72",
+          "BodyWeight": 1,
+          "EyesWeight": 1,
+          "HeadWeight": 1,
+          "Height": 0.4,
+          "LookAtEnabled": false,
+          "Target": {
+            "_type": "component",
+            "component_id": "cf14777d-97a0-4908-9154-5172e670e14e",
+            "go": "700a08c1-75b5-4fbb-abac-087bb4830ab1",
+            "component_type": "SkinnedModelRenderer"
+          }
+        },
+        {
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "cf14777d-97a0-4908-9154-5172e670e14e",
+          "BodyGroups": 65,
+          "CreateBoneObjects": false,
+          "Model": "models/citizen/citizen.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1",
+          "UseAnimGraph": true
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "94af87ee-393f-4dd9-89f2-96230f4f7af6",
+          "Flags": 0,
+          "Name": "Hat",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SkinnedModelRenderer",
+              "__guid": "f8ade668-44c7-48ab-aafd-c96a9eeaa74f",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": {
+                "_type": "component",
+                "component_id": "cf14777d-97a0-4908-9154-5172e670e14e",
+                "go": "700a08c1-75b5-4fbb-abac-087bb4830ab1",
+                "component_type": "SkinnedModelRenderer"
+              },
+              "CreateBoneObjects": false,
+              "Model": "models/citizen_clothes/hat/baseball_cap/model/baseball_cap.vmdl",
+              "RenderType": "On",
+              "Tint": "1,0,0,1",
+              "UseAnimGraph": true
+            }
+          ]
+        },
+        {
+          "__guid": "6720ffd7-5465-4133-a787-5f7517e93f3d",
+          "Flags": 0,
+          "Name": "Shirt",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SkinnedModelRenderer",
+              "__guid": "233d68ce-b6b6-4010-a51a-c1201fa80495",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": {
+                "_type": "component",
+                "component_id": "cf14777d-97a0-4908-9154-5172e670e14e",
+                "go": "700a08c1-75b5-4fbb-abac-087bb4830ab1",
+                "component_type": "SkinnedModelRenderer"
+              },
+              "CreateBoneObjects": false,
+              "Model": "models/citizen_clothes/jumper/loose_jumper/models/loose_jumper.vmdl",
+              "RenderType": "On",
+              "Tint": "1,0,0,1",
+              "UseAnimGraph": true
+            }
+          ]
+        },
+        {
+          "__guid": "c398a0d4-0286-4473-a1b5-5cbce391f7aa",
+          "Flags": 0,
+          "Name": "Pants",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SkinnedModelRenderer",
+              "__guid": "e1033cbe-1e84-477b-b4ed-40b1c349ddc5",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": {
+                "_type": "component",
+                "component_id": "cf14777d-97a0-4908-9154-5172e670e14e",
+                "go": "700a08c1-75b5-4fbb-abac-087bb4830ab1",
+                "component_type": "SkinnedModelRenderer"
+              },
+              "CreateBoneObjects": false,
+              "Model": "models/citizen_clothes/trousers/cargopants/models/cargo_pants.vmdl",
+              "RenderType": "On",
+              "Tint": "0.03721,0.32605,1,1",
+              "UseAnimGraph": true
+            }
+          ]
+        },
+        {
+          "__guid": "24af0cc2-992e-44bf-8459-f7d7fac248d4",
+          "Flags": 0,
+          "Name": "Boots",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SkinnedModelRenderer",
+              "__guid": "83741767-9640-4296-ad23-183032a7b346",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": {
+                "_type": "component",
+                "component_id": "cf14777d-97a0-4908-9154-5172e670e14e",
+                "go": "700a08c1-75b5-4fbb-abac-087bb4830ab1",
+                "component_type": "SkinnedModelRenderer"
+              },
+              "CreateBoneObjects": false,
+              "Model": "models/citizen_clothes/shoes/boots/models/black_boots.vmdl",
+              "RenderType": "On",
+              "Tint": "0.47442,0.18186,0,1",
+              "UseAnimGraph": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "ec764d69-1003-4ddb-b846-ed26b3748582",
+      "Flags": 0,
+      "Name": "Cube",
+      "Position": "120,24,0.000006285328",
+      "Rotation": "0,0,-0.1305262,0.9914448",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "f9745225-9539-425f-9a2d-6ed2050f94c7",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/bomberbrick/bomberbrick.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "014430fb-e42d-4e91-8067-3950500fb88f",
+      "Flags": 0,
+      "Name": "Cube (1)",
+      "Position": "104,-56,0.000006285328",
+      "Rotation": "0,0,0.1305262,0.9914449",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "3cc80e06-d3df-4291-914c-b3f07a971341",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/bomberbrick/bomberbrick.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "4f0aa816-103b-4247-b332-8c2892cf41d3",
+      "Flags": 0,
+      "Name": "Cube (2)",
+      "Position": "144,-24,0.000008456504",
+      "Rotation": "0,0,-0.258819,0.9659258",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "393ff043-044a-46e0-ada5-adfdb459b45c",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/bomberbrick/bomberbrick.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "c2f1979d-4905-4988-835d-ec201e5c25bc",
+      "Flags": 0,
+      "Name": "Screen",
+      "Position": "71.54984,226.1167,-41.81822",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "2e48ddaf-638c-44d3-94e4-f6d5f76bb2b2",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
+          "ZIndex": 100
+        },
+        {
+          "__type": "Menu",
+          "__guid": "35ffcf5b-7f7f-476d-b09f-2b6aa2e2dce8",
+          "MyStringValue": "Hello World!"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "brick_runner_menu",
+  "Description": "",
+  "ResourceVersion": 1,
+  "__references": [
+    "baik.brickblock"
+  ],
+  "__version": 1
+}

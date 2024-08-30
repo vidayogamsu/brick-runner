@@ -15,7 +15,7 @@ public sealed class DeathWallComponent : TemporaryComponent
     {
         base.OnUpdate();
 
-        var plObj = GameSystem.Instance.Player;
+        var plObj = PlayerController.Local?.GameObject;
 
         if ( !plObj.IsValid() )
             return;
