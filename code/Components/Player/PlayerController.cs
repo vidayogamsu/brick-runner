@@ -308,7 +308,12 @@ public partial class PlayerController : Component
             NextBlink = BlinkDuration / BlinkCount;
         }
 
-        Model.Tint = BlinkModel ? Color.White.WithAlpha( 0.3f ) : Color.White;
+		Model.Tint = BlinkModel ? Color.White.WithAlpha( 0.3f ) : Color.White;
+
+		foreach ( var renderer in Model.Components.GetAll<SkinnedModelRenderer>( FindMode.InDescendants ) )
+		{
+			renderer.Tint = BlinkModel ? Color.White.WithAlpha( 0.3f ) : "#FF0000";
+		}
     }
 
 
