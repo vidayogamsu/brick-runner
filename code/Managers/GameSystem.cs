@@ -331,6 +331,6 @@ public partial class GameSystem : Component, Component.INetworkListener
             }
         }
 
-		chunk.NetworkSpawn();
+		chunk.NetworkSpawn( null );
     }
 }
