@@ -113,8 +113,9 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		if ( Dead )
 			return;
 
-		if ( !AbleToMove )
+		if ( !AbleToMove && !IsProxy )
 		{
+			_lastTransform = Transform.World;
 			Transform.World = _lastTransform;
 			Transform.ClearInterpolation();
 			return;
@@ -135,8 +136,6 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		if ( IsProxy )
 			return;
-
-		_lastTransform = Transform.World;
 
 		// Input
 		SideDirection = new Vector3( 0f, MathF.Sign( -Input.AnalogMove.y ), 0f );
