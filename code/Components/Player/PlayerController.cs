@@ -359,11 +359,15 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	/// <summary>
 	/// Tracks fractional movement while clamping actual position to the grid.
 	/// </summary>
+	[Sync]
 	public Vector3 FloatPos
 	{
 		get => _floatPos;
 		set
 		{
+			if ( IsProxy )
+				return;
+
 			// Clamp actual position to grid.
 			Transform.Position = new Vector3( 0f, MathF.Round( value.y ), MathF.Round( value.z ) );
 			Transform.ClearInterpolation();
@@ -496,6 +500,12 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	void IGameEventHandler<PlayerRestart>.OnGameEvent( PlayerRestart eventArgs )
 	{
+		OnPlayerRestart( eventArgs );
+	}
+
+	[Broadcast]
+	public void OnPlayerRestart( PlayerRestart eventArgs )
+	{
 		if ( !IsProxy )
 		{
 			// Restore Health
@@ -506,10 +516,13 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			PreviousVelocity = Vector3.Zero;
 
 			StartBlinking(); // funky collision protection
-			SetPosition( eventArgs.Pos );
 		}
+
+		// Reset Position
+		SetPosition( eventArgs.Pos );
 		
-		Model.Enabled = true;
+		if ( Model.IsValid() )
+			Model.Enabled = true;
 	}
 
 }
