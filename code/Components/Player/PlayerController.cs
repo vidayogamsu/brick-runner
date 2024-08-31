@@ -78,6 +78,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	[Sync] public Vector3 SideDirection { get; set; }
 
+	[Sync] public bool AbleToMove { get; set; } = true;
 
 
 	protected override void OnStart()
@@ -91,15 +92,35 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
                 Outfit.Toggle( wear );
 
         Outfit.Apply( Model );*/
+
+		if ( IsProxy || !GameSystem.Instance.IsValid() )
+			return;
+
+		Task.RunInThreadAsync( async () =>
+		{
+			Log.Info( "PlayerController started." );
+			AbleToMove = false;
+			await Task.DelaySeconds( 1f );
+			Log.Info( "PlayerController ready." );
+			AbleToMove = true;
+		} );
 	}
+
+	private Transform _lastTransform;
 
 	protected override void OnUpdate()
 	{
 		if ( Dead )
 			return;
 
-		UpdateBlink();
+		if ( !AbleToMove )
+		{
+			Transform.World = _lastTransform;
+			Transform.ClearInterpolation();
+			return;
+		}
 
+		UpdateBlink();
 
 		// Citizen Animation
 		CAH.IsGrounded = IsGrounded;
@@ -114,6 +135,8 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		if ( IsProxy )
 			return;
+
+		_lastTransform = Transform.World;
 
 		// Input
 		SideDirection = new Vector3( 0f, MathF.Sign( -Input.AnalogMove.y ), 0f );
@@ -246,7 +269,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	[Broadcast]
 	public void TakeDamage()
 	{
-		if ( Dead || !BlinkingEnd )
+		if ( Dead || !BlinkingEnd || !AbleToMove )
 			return;
 
 		if ( !IsProxy )
@@ -262,18 +285,17 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			Sound.Play( "player.hurt" );
 
 			StartBlinking();
-		}
 
+			if ( GibPrefab.IsValid() )
+			{
+				var blood = GibPrefab.Clone( GameObject.GetBounds().Center );
 
-		if ( GibPrefab.IsValid() )
-		{
-			var blood = GibPrefab.Clone( GameObject.GetBounds().Center );
+				if ( blood.IsValid() && blood.Components.TryGet<GibSplosionComponent>( out var gib ) )
+					gib.GibCount = 3;
 
-			if ( blood.IsValid() && blood.Components.TryGet<GibSplosionComponent>( out var gib ) )
-				gib.GibCount = 3;
-
-			if ( Networking.IsHost )
-				blood.NetworkSpawn();
+				if ( Networking.IsHost )
+					blood.NetworkSpawn();
+			}
 		}
 	}
 
@@ -312,9 +334,10 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		if ( Model.IsValid() )
 			Model.Enabled = false;
 
-		Stats.Increment( "stat_deaths", 1 );
+		if ( !IsProxy )
+			Stats.Increment( "stat_deaths", 1 );
 
-		if ( Networking.IsHost && !IsProxy )
+		if ( 0 >= Scene.GetAllComponents<PlayerController>().Count( x => x.Dead ) && Networking.IsHost )
 			GameSystem.Instance.EndGame();
 	}
 
@@ -500,11 +523,11 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	void IGameEventHandler<PlayerRestart>.OnGameEvent( PlayerRestart eventArgs )
 	{
-		OnPlayerRestart( eventArgs );
+		OnPlayerRestart( eventArgs.Pos );
 	}
 
 	[Broadcast]
-	public void OnPlayerRestart( PlayerRestart eventArgs )
+	public void OnPlayerRestart( Vector3 pos )
 	{
 		if ( !IsProxy )
 		{
@@ -519,8 +542,8 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		}
 
 		// Reset Position
-		SetPosition( eventArgs.Pos );
-		
+		SetPosition( pos );
+
 		if ( Model.IsValid() )
 			Model.Enabled = true;
 	}

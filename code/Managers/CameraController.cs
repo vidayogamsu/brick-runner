@@ -35,9 +35,7 @@ public partial class CameraController : Component, IGameEventHandler<CameraDisab
 	{
 		Cam = Scene.Camera;
 
-		if ( !Cam.IsValid() )
-			return;
-
-		Cam.Enabled = true;		
+		//TODO
+		Cam.Enabled = true;
 	}
 }

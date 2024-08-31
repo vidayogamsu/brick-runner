@@ -82,7 +82,7 @@ public partial class GameSystem : Component, Component.INetworkListener
     [Property, Group( "Chunks" )] public List<GameObject> HardChunks { get; set; } = new();
     [Property, Group( "Chunks" )] public List<GameObject> ExtremeChunks { get; set; } = new();
 
-    [Property] public bool StartServer { get; set; } = false;
+    [Property, Sync] public bool StartServer { get; set; } = false;
     [Property] public bool SpawnWorld { get; set; } = true;
 
 
@@ -101,7 +101,7 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         //Level = 100;
 
-        if ( !StartServer && Networking.IsHost )
+        if ( Networking.IsHost )
             RestartLevel();
     }
 
@@ -117,8 +117,6 @@ public partial class GameSystem : Component, Component.INetworkListener
 
 			if ( camera.IsValid() )
 				playerController.CameraController = camera;
-
-            RestartLevel();
         }
     }
 
@@ -158,7 +156,7 @@ public partial class GameSystem : Component, Component.INetworkListener
         Game.ActiveScene.Load( Game.ActiveScene.Source );
     }
 
-   	[Broadcast( NetPermission.HostOnly )]
+   	[Broadcast]
     public async void RestartLevel()
     {
         // Turn off camera for an easy black screen.
@@ -203,15 +201,13 @@ public partial class GameSystem : Component, Component.INetworkListener
             SpawnChunk( ChunkStyle.Final );
         }
 
-        // Wait a second before spawning the player. Prevents instadeath on game startup(???).
-        if ( !Player.IsValid() && !StartServer )
+        if ( !Player.IsValid() && !StartServer && PlayerPrefab.IsValid() )
         {
-            await Task.DelayRealtimeSeconds( 1.0f );
-
             Player = PlayerPrefab.Clone( spawnPos );
         }
 
-		Scene.Dispatch( new PlayerRestart( spawnPos ) );
+		// Wait a second before spawning the player. Prevents instadeath on game startup(???).
+		await Task.DelayRealtimeSeconds( 1f );
 
         if ( Networking.IsHost )
         {
@@ -223,6 +219,8 @@ public partial class GameSystem : Component, Component.INetworkListener
                 clone.NetworkSpawn( null );
             }
         }
+
+		Scene.Dispatch( new PlayerRestart( spawnPos ) );
 
 		Scene.Dispatch( new CameraDisable( true ) );
 
