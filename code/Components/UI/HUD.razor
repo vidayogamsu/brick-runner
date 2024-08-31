@@ -13,7 +13,7 @@
     }
 
 
-    @if (GameSystem.Instance.GameOver)
+    @if (GameSystem.Instance.GameOver && Networking.IsHost)
     {
         <div class="game-over">
 
@@ -23,6 +23,16 @@
 
         </div>
     }
+	else if (GameSystem.Instance.GameOver && !Networking.IsHost)
+	{
+		  <div class="game-over">
+
+            <p class="big-text"> GAME OVER </p>
+            <p class="you-reached"> You reached level @GameSystem.Instance.Level. </p>
+            <p class="press-restart"> Waiting for host. </p>
+
+        </div>
+	}
     else
     {
         <div class="status">
@@ -54,11 +64,31 @@
 
         </div>
     }
+	
+	@{
+		var local = PlayerController.Local;
+		var gs = GameSystem.Instance;
+	}
+	@if ( local.IsValid() && local.CameraController.SpectateTarget.IsValid() && local.CameraController.Spectating && gs.IsValid() && !gs.GameOver )
+	{
+		<div class="spectating">
+			<div class="spectating-text"> Spectating </div>
+			<div class="spectating-name">
+				<p>@PlayerController.Local.CameraController.SpectateTarget.Network.OwnerConnection.DisplayName</p>
+				<img src="@GetAvatarTexture( PlayerController.Local.CameraController.SpectateTarget.Network.OwnerConnection )" class="avatar" />	 
+			</div>
+		</div>
+	}
 
 </root>
 
 @code
 {
+	public string GetAvatarTexture( Connection connection )
+	{
+		return $"avatar:{connection.SteamId}";
+	}
+
     /// <summary>
     /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>
@@ -69,6 +99,8 @@
     GameSystem.Instance?.GameOver ?? false,
     PlayerController.Local.IsValid(),
     PlayerController.Local?.Health ?? 0,
-    Input.UsingController);
+    Input.UsingController,
+	PlayerController.Local.CameraController?.SpectateTarget,
+	GameSystem.Instance?.GameOver ?? false);
 
 }

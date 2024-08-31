@@ -56,6 +56,9 @@ public partial class GameSystem : Component
 
     public async void SendScore()
     {
+		if ( StartServer )
+			return;
+
         Stats.SetValue( LeaderboardStat, Level );
         await Stats.FlushAndWaitAsync();
         await GetScores();

@@ -47,6 +47,8 @@ public partial class GameSystem : Component, Component.INetworkListener
     [Property, ReadOnly] public bool GameOver { get; set; } = false;
     [Property, ReadOnly] public bool GameStarted { get; set; } = false;
 
+	[Sync] public bool OngoingGame { get; set; } = false;
+
 
     /*
             Level
@@ -117,6 +119,11 @@ public partial class GameSystem : Component, Component.INetworkListener
 
 			if ( camera.IsValid() )
 				playerController.CameraController = camera;
+
+
+			var nextPlayer = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.Dead );
+			if ( OngoingGame && nextPlayer.IsValid() )
+				playerController.SetPosition( nextPlayer.Transform.Position );
         }
     }
 
@@ -147,7 +154,8 @@ public partial class GameSystem : Component, Component.INetworkListener
         Coins = 0;
         Score = 0;
 
-        RestartLevel();
+		if ( Networking.IsHost )
+        	RestartLevel();
     }
 
     [ConCmd( "br_restart_scene" )]
@@ -229,7 +237,7 @@ public partial class GameSystem : Component, Component.INetworkListener
             await GetScores();
     }
 
-    [Broadcast( NetPermission.HostOnly )]
+    [Broadcast]
     public void EndGame()
     {
         if ( GameOver )

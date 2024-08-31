@@ -340,8 +340,7 @@
         },
         {
           "__type": "Menu",
-          "__guid": "35ffcf5b-7f7f-476d-b09f-2b6aa2e2dce8",
-          "MyStringValue": "Hello World!"
+          "__guid": "35ffcf5b-7f7f-476d-b09f-2b6aa2e2dce8"
         }
       ]
     }

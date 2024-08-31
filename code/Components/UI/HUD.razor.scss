@@ -4,7 +4,12 @@ HUD {
     width: 100%;
     height: 100%;
     padding: 20px;
-
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
 
     background-color: hsla(0, 0%, 100%, 0);
@@ -123,6 +128,43 @@ HUD {
             .sb-level {
                 align-self: flex-end;
                 align-content: flex-end;
+            }
+        }
+    }
+
+    .spectating
+    {
+        font-size: 42px;
+        position: absolute;
+        bottom: 32px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        background-color: hsl(0, 0%, 8%);
+        border-color: hsl(0, 0%, 11%);
+        border-width: 3;
+        padding: 16px;
+        
+        >.spectating-text
+        {
+            font-size: 42px;
+            flex-grow: 1;
+        }
+
+        >.spectating-name
+        {
+            font-size: 32px;
+            flex-grow: 1;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            >.avatar
+            {
+                width: 64px;
+                height: 64px;
+                border-radius: 10%;
             }
         }
     }

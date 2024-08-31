@@ -7,7 +7,6 @@ using Sandbox.Services;
 
 namespace Vidya;
 
-
 public partial class PlayerController : Component, IGameEventHandler<PlayerRestart>
 {
 	public static PlayerController Instance { get; set; }
@@ -292,8 +291,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 				if ( blood.IsValid() && blood.Components.TryGet<GibSplosionComponent>( out var gib ) )
 					gib.GibCount = 3;
 
-				if ( Networking.IsHost )
-					blood.NetworkSpawn();
+				blood.NetworkSpawn();
 			}
 		}
 	}
@@ -312,7 +310,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	[Broadcast]
 	public void Die()
 	{
-		if ( Dead )
+		if ( Dead || !AbleToMove )
 			return;
 
 		// Log.Info( "Player died." );
@@ -320,15 +318,13 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			Dead = true;
 
 		Sound.Play( "player.ded" );
-
+		
 		if ( GibPrefab.IsValid() )
 		{
 			var clone = GibPrefab.Clone( GameObject.GetBounds().Center );
 
-			if ( Networking.IsHost )
-				clone.NetworkSpawn();
+			clone.NetworkSpawn();
 		}
-
 
 		if ( Model.IsValid() )
 			Model.Enabled = false;
@@ -336,7 +332,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		if ( !IsProxy )
 			Stats.Increment( "stat_deaths", 1 );
 
-		if ( 0 >= Scene.GetAllComponents<PlayerController>().Count( x => x.Dead ) && Networking.IsHost )
+		if ( Scene.GetAllComponents<PlayerController>().Count( x => !x.Dead ) == 0 )
 			GameSystem.Instance.EndGame();
 	}
 
@@ -522,29 +518,25 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	void IGameEventHandler<PlayerRestart>.OnGameEvent( PlayerRestart eventArgs )
 	{
-		OnPlayerRestart( eventArgs.Pos );
-	}
-
-	[Broadcast]
-	public void OnPlayerRestart( Vector3 pos )
-	{
-		if ( !IsProxy )
-		{
-			// Restore Health
-			Health = MaxLives;
-			Dead = false;
-			// Safe Teleport
-			Velocity = Vector3.Zero;
-			PreviousVelocity = Vector3.Zero;
-
-			StartBlinking(); // funky collision protection
-		}
-
+		AbleToMove = true;
+		// Restore Health
+		Health = MaxLives;
+		Dead = false;
+		// Safe Teleport
+		Velocity = Vector3.Zero;
+		PreviousVelocity = Vector3.Zero;
+		// funky collision protection
+		StartBlinking();
 		// Reset Position
-		SetPosition( pos );
+		SetPosition( eventArgs.Pos );
+
+		if ( CameraController.IsValid() )
+		{
+			CameraController.Spectating = false;
+			CameraController.SpectateTarget = null;
+		}
 
 		if ( Model.IsValid() )
 			Model.Enabled = true;
 	}
-
 }

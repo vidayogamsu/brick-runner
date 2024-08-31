@@ -11,7 +11,8 @@
 	<div class="buttons">
 		<div class="button" onclick=@( () => Game.ActiveScene.LoadFromFile( "scenes/minimal.scene" ))> Singleplayer </div>
 		<div class="button" onclick=@( () => ChangeState( MenuState.Servers ) )> Multiplayer </div>
-		<div class="button" onclick=@( () => Game.Overlay.ShowBinds )> Settings </div>
+		<div class="button" onclick=@( () => Game.Overlay.ShowBinds )> Credits </div>
+		<div class="button" onclick=@( () => ChangeState( MenuState.Credits ) )> Settings </div>
 	</div>
 
 	@switch (State)
@@ -48,6 +49,11 @@
 			</div>
 
 			break;
+
+		case MenuState.Credits:
+			<div class="credits"></div>
+
+			break;
 	}
 
 @code
@@ -56,6 +62,7 @@
 	{
 		None,
 		Servers,
+		Credits,
 	}
 
 	public MenuState State { get; set; } = MenuState.None;
