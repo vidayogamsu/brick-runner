@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 using Sandbox;
+using Sandbox.Events;
 using Sandbox.Network;
 
 namespace Vidya;
@@ -20,6 +21,11 @@ public enum ChunkStyle
     Extreme = 50,
 }
 
+public record PlayerRestart( Vector3 Pos ) : IGameEvent;
+
+public record CameraDisable( bool Enabled ) : IGameEvent;
+
+public record RoundCleanup() : IGameEvent;
 
 public partial class GameSystem : Component, Component.INetworkListener
 {
@@ -107,7 +113,12 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         if ( player.Components.TryGet<PlayerController>( out var playerController ) && Networking.IsHost )
         {
-            RestartLevel( playerController );
+			var camera = Scene.GetAllComponents<CameraController>().FirstOrDefault();
+
+			if ( camera.IsValid() )
+				playerController.CameraController = camera;
+
+            RestartLevel();
         }
     }
 
@@ -147,22 +158,13 @@ public partial class GameSystem : Component, Component.INetworkListener
         Game.ActiveScene.Load( Game.ActiveScene.Source );
     }
 
-    [Broadcast]
-    public async void RestartLevel( PlayerController player = null )
+   	[Broadcast( NetPermission.HostOnly )]
+    public async void RestartLevel()
     {
-        if ( player.IsValid() )
-        {
-            Player = player.GameObject;
-        }
-
         // Turn off camera for an easy black screen.
-        if ( CameraController.Instance.Cam.IsValid() )
-            CameraController.Instance.Cam.Enabled = false;
-
+       	Scene.Dispatch( new CameraDisable( false ) );
         // Destroy previous level objects.
-        foreach ( var obj in Game.ActiveScene.GetAllObjects( false ) )
-            if ( obj.Components.TryGet<TemporaryComponent>( out var _, FindMode.EverythingInSelf ) )
-                obj.Destroy();
+        Scene.Dispatch( new RoundCleanup() );
 
         await Task.Frame();
 
@@ -202,32 +204,17 @@ public partial class GameSystem : Component, Component.INetworkListener
         }
 
         // Wait a second before spawning the player. Prevents instadeath on game startup(???).
-        if ( !Player.IsValid() )
+        if ( !Player.IsValid() && !StartServer )
         {
             await Task.DelayRealtimeSeconds( 1.0f );
 
             Player = PlayerPrefab.Clone( spawnPos );
         }
 
+		Scene.Dispatch( new PlayerRestart( spawnPos ) );
+
         if ( Networking.IsHost )
         {
-            foreach ( var p in Scene.GetAllComponents<PlayerController>() )
-            {
-                // Restore Health
-                p.Health = p.MaxLives;
-
-                // Safe Teleport
-                p.Velocity = Vector3.Zero;
-                p.PreviousVelocity = Vector3.Zero;
-
-                p.StartBlinking(); // funky collision protection
-                p.SetPosition( spawnPos );
-
-                // Reactivate Camera
-                if ( CameraController.Instance.Cam.IsValid() )
-                    CameraController.Instance.Cam.Enabled = true;
-            }
-
             // Spawn Death Wall
             if ( DeathWallPrefab.IsValid() && SpawnWorld && Networking.IsHost )
             {
@@ -237,12 +224,14 @@ public partial class GameSystem : Component, Component.INetworkListener
             }
         }
 
+		Scene.Dispatch( new CameraDisable( true ) );
+
         // Update Scoreboard
         if ( !Scores.Any() )
             await GetScores();
     }
 
-    [Broadcast]
+    [Broadcast( NetPermission.HostOnly )]
     public void EndGame()
     {
         if ( GameOver )

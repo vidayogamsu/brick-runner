@@ -29,9 +29,9 @@
 
             <div class="level-counter"> 🏁 @GameSystem.Instance.Level </div>
 
-            @if (PlayerController.Instance.IsValid())
+            @if (PlayerController.Local.IsValid())
             {
-                <div class="health-points"> ♥ @PlayerController.Instance.Health </div>
+                <div class="health-points"> ♥ @PlayerController.Local.Health </div>
             }
 
         </div>
@@ -67,8 +67,8 @@
     GameSystem.ShowLeaderboard,
     GameSystem.Instance?.Level ?? 0,
     GameSystem.Instance?.GameOver ?? false,
-    PlayerController.Instance.IsValid(),
-    PlayerController.Instance?.Health ?? 0,
+    PlayerController.Local.IsValid(),
+    PlayerController.Local?.Health ?? 0,
     Input.UsingController);
 
 }

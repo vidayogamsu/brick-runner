@@ -1,41 +1,43 @@
 using System;
 using System.Net.Sockets;
 using Sandbox;
+using Sandbox.Events;
 
 namespace Vidya;
 
 
-public partial class CameraController : Component
+public partial class CameraController : Component, IGameEventHandler<CameraDisable>
 {
-    public static CameraController Instance { get; set; }
-
-    public CameraController()
-    {
-        Instance = this;
-    }
 
     public CameraComponent Cam { get; set; }
 
     protected override void OnStart()
     {
-		Instance = this;
         Cam = Scene.Camera;
     }
 
-    protected override async void OnUpdate()
+    protected override void OnUpdate()
     {
-		if ( PlayerController.Local.IsValid() && PlayerController.Local.IsProxy )
+		var local = PlayerController.Local;
+
+		if ( local.IsValid() && local.IsProxy )
 			return;
 
         base.OnUpdate();
 
-        await Task.FrameEnd();
-
-		var local = PlayerController.Local;
-
-        if ( !local.IsValid() )
-            return;
+		if ( !Cam.IsValid() || !local.IsValid() )
+			return;
 
         Transform.Position = new Vector3( Cam.Transform.Position.x, local.Transform.Position.y, 0f );
     }
+
+	void IGameEventHandler<CameraDisable>.OnGameEvent( CameraDisable eventArgs )
+	{
+		Cam = Scene.Camera;
+
+		if ( !Cam.IsValid() )
+			return;
+
+		Cam.Enabled = true;		
+	}
 }
