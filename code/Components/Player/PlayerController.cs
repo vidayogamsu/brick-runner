@@ -113,7 +113,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		if ( Dead )
 			return;
 
-		if ( !AbleToMove && !IsProxy )
+		if ( !AbleToMove )
 		{
 			_lastTransform = Transform.World;
 			Transform.World = _lastTransform;
