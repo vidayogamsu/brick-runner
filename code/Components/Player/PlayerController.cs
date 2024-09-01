@@ -93,11 +93,6 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
                 Outfit.Toggle( wear );
 
         Outfit.Apply( Model );*/
-
-		if ( IsProxy || !GameSystem.Instance.IsValid() )
-			return;
-
-		AbleToMove = false;
 	}
 
 	private Transform _lastTransform;
