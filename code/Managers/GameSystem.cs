@@ -121,8 +121,11 @@ public partial class GameSystem : Component, Component.INetworkListener
 			var nextPlayer = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.Dead );
 
 			if ( OngoingGame && nextPlayer.IsValid() )
+			{
 				playerController.SetPosition( nextPlayer.Transform.Position );
-
+				return;
+			}
+			
 			var spawn = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault();
 
 			if ( spawn.IsValid() )
