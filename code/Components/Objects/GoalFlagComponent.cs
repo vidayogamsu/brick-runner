@@ -29,8 +29,12 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 	[Broadcast]
 	public async void EndLevel()
 	{
+		if ( !GameSystem.Instance.IsValid() )
+			return;
+
 		GameSystem.Instance.Level++;
 		Triggered = true;
+
 		// GameSystem.Instance.Level += 14;
 
 		GameSystem.Instance.SendScore();
@@ -56,7 +60,7 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 
 		if ( Networking.IsHost )
 			GameSystem.Instance.RestartLevel();
-
+		
 		GameSystem.Instance.SpawnPosition = 0;
 	}
 }

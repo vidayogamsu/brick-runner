@@ -1,5 +1,4 @@
 using System;
-using System.Formats.Asn1;
 using Sandbox;
 using Sandbox.Citizen;
 using Sandbox.Events;
@@ -81,6 +80,10 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	[Sync] public Color Tint { get; set; } = "#FF0000";
 
+	[Property, Sync] public List<GameObject> Renderers { get; set; } = new();
+
+	[Property, Sync] public GameObject WorldPanelObject { get; set; }
+
 
 	protected override void OnStart()
 	{
@@ -93,6 +96,15 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
                 Outfit.Toggle( wear );
 
         Outfit.Apply( Model );*/
+		if ( !IsProxy )
+		{
+			foreach ( var renderer in Components.GetAll<SkinnedModelRenderer>() )
+			{
+				Renderers.Add( renderer.GameObject );
+			}
+
+			WorldPanelObject = Components.GetAll<WorldPanel>().FirstOrDefault()?.GameObject;
+		}
 	}
 
 	private Transform _lastTransform;
@@ -308,15 +320,12 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		if ( gs.IsValid() && !gs.OngoingGame )
 			return;
 		
-		/*foreach ( var panel in Components.GetAll<WorldPanel>() )
-		{
-			panel.Enabled = false;
-		}
+		if ( WorldPanelObject.IsValid() )
+			WorldPanelObject.Enabled = false;
 
-		foreach ( var model in Components.GetAll<SkinnedModelRenderer>() )
-		{
-			model.Enabled = false;
-		}*/
+		if ( Renderers is not null )
+			foreach ( var model in Renderers )
+				model.Enabled = false;
 
 		// Log.Info( "Player died." );
 		if ( !IsProxy )
@@ -520,7 +529,6 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	void IGameEventHandler<PlayerRestart>.OnGameEvent( PlayerRestart eventArgs )
 	{
-		AbleToMove = true;
 		// Restore Health
 		Health = MaxLives;
 		Dead = false;
@@ -538,10 +546,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			CameraController.SpectateTarget = null;
 		}
 
-		/*foreach ( var model in Model.Components.GetAll<SkinnedModelRenderer>() )
-		{
-			model.Enabled = true;
-		}*/
+		Log.Info( "Restarted player." );
 
 		if ( Networking.IsHost )
 			Tint = "#FF0000";
@@ -550,9 +555,18 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		AbleToMove = true;
 
-		/*foreach ( var panel in Components.GetAll<WorldPanel>() )
-		{
-			panel.Enabled = true;
-		}*/
+		if ( !IsProxy )
+			BroadcastPlayerRestart();
+	}
+
+	[Broadcast]
+	public void BroadcastPlayerRestart()
+	{
+		if ( Renderers is not null )
+			foreach ( var model in Renderers )
+				model.Enabled = true;
+		
+		if ( WorldPanelObject.IsValid() )
+			WorldPanelObject.Enabled = true;
 	}
 }
