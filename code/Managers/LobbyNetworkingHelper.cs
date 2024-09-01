@@ -25,10 +25,5 @@ public sealed class LobbyNetworkingHelper : Component, Component.INetworkListene
 		var player = PlayerPrefab.Clone( Transform.World );
 
 		player.NetworkSpawn( connection );
-
-		if ( Connection.All.Count() > 1 )
-		{
-			Scene.LoadFromFile( "scenes/networking.scene" );
-		}
 	}
 }

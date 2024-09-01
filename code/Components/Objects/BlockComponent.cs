@@ -16,12 +16,17 @@ public sealed class BlockComponent : Component
 
     public ModelRenderer Model { get; set; }
 
+	[Property] public bool StartGameAfterNudge { get; set; } = false;
+
 
     protected override void OnStart()
     {
         base.OnStart();
 
 		Model = Components.Get<ModelRenderer>( FindMode.EverythingInChildren );
+
+		if ( StartGameAfterNudge && !Networking.IsHost )
+			GameObject.Destroy();
     }
 
     protected override void OnUpdate()
@@ -32,6 +37,9 @@ public sealed class BlockComponent : Component
             {
                 var frac = 1f - NudgeEnd.Fraction;
                 Model.Transform.Position = StartPos.WithZ( StartPos.z + (16f * frac) );
+
+				if ( StartGameAfterNudge && Networking.IsHost )
+					Scene?.LoadFromFile( "scenes/networking.scene" );
             }
             else
             {
@@ -44,8 +52,8 @@ public sealed class BlockComponent : Component
     public void Nudge()
     {
         if ( !AllowNudge || !Model.IsValid() )
-            return;
-
+			return;
+		
         if ( !Nudging )
             StartPos = Model.Transform.Position;
 

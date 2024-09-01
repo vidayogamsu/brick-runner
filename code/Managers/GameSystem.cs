@@ -112,17 +112,22 @@ public partial class GameSystem : Component, Component.INetworkListener
 
     public void OnActive( Connection connection )
     {
+		if ( !StartServer || !PlayerPrefab.IsValid() )
+			return;
+
         var player = PlayerPrefab.Clone();
 
         player.NetworkSpawn( connection );
 
-        if ( player.Components.TryGet<PlayerController>( out var playerController ) && Networking.IsHost )
+        if ( player.Components.TryGet<PlayerController>( out var playerController ) )
         {
-			var nextPlayer = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.Dead );
+			var random = Color.Random;
+			//Log.Info( "Random Color: " + random );
+			//playerController.Tint = connection.IsHost ? "#FF0000" : Color.Random;
 
-			if ( OngoingGame && nextPlayer.IsValid() )
+			if ( OngoingGame )
 			{
-				playerController.SetPosition( nextPlayer.Transform.Position );
+				playerController.Die();
 				return;
 			}
 			
@@ -236,6 +241,10 @@ public partial class GameSystem : Component, Component.INetworkListener
 
                 clone.NetworkSpawn( null );
             }
+
+			var wall = Scene.GetAllComponents<DeathWallComponent>().FirstOrDefault();
+			if ( wall.IsValid() )
+				wall.Moving = true;
         }
 
 		Scene.Dispatch( new FadeScreen( 0f ) );

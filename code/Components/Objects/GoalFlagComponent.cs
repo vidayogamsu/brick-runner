@@ -31,30 +31,26 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 	{
 		if ( !GameSystem.Instance.IsValid() )
 			return;
-
-		GameSystem.Instance.Level++;
+		
 		Triggered = true;
 
 		// GameSystem.Instance.Level += 14;
+		var wall = Scene.GetAllComponents<DeathWallComponent>().FirstOrDefault();
+		if ( wall.IsValid() )
+			wall.Moving = false;
+
+		var hud = HUD.Instance;
+
+		if ( hud.IsValid() )
+			hud.Panel.AddChild( new LevelCompletePanel() );
+
+		await Task.DelaySeconds( 2f );
+		//Fade out the screen
+		Scene.Dispatch( new FadeScreen( 1f ) );
 
 		GameSystem.Instance.SendScore();
-		
-		//Fade out the screen
 
-		foreach ( var player in Scene.GetAllComponents<PlayerController>() )
-		{
-			player.AbleToMove = false;
-			player.Velocity = Vector3.Zero;
-
-			var spawn = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault();
-
-			if ( spawn.IsValid() )
-				player.SetPosition( spawn.Transform.Position );
-			else
-				player.SetPosition( Vector3.Zero );
-		}
-
-		Scene.Dispatch( new FadeScreen( 1f ) );
+		GameSystem.Instance.Level++;
 
 		await Task.DelaySeconds( 2f );
 

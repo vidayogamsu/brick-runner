@@ -4,8 +4,12 @@
 @inherits PanelComponent
 
 <root>
+	@if ( GameSystem.Instance.IsValid() && !GameSystem.Instance.StartServer)
+	{
+		return;
+	}
 	<div class="title">@Name</div>
-    <img src="@GetAvatarTexture(Network.OwnerConnection)" class="avatar" />
+	<img src="@GetAvatarTexture(Network.OwnerConnection)" class="avatar" />
 </root>
 
 @code
@@ -26,6 +30,9 @@
 			GameObject.Destroy();
 			return;
 		}
+
+		if ( Network.OwnerConnection is null )
+			return;
         
 		Name = Network.OwnerConnection.DisplayName;
         SteamId = Network.OwnerConnection.SteamId;
@@ -33,11 +40,14 @@
 
     public string GetAvatarTexture(Connection connection)
     {
-        return $"avatar:{connection.SteamId}";
+		if ( connection is null )
+			return "";
+		
+        return $"avatar:{connection?.SteamId}";
     }
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash() => System.HashCode.Combine( Name, SteamId );
+	protected override int BuildHash() => System.HashCode.Combine( Name, SteamId, GameSystem.Instance.IsValid(), GameSystem.Instance?.StartServer ?? false );
 }

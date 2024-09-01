@@ -10,12 +10,14 @@ public sealed class DeathWallComponent : TemporaryComponent
     public float MaxDist { get; set; } = 400f;
     public float AccelFactor { get; set; } = 0.7f;
 
+	[Sync] public bool Moving { get; set; } = true;
+
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
 
-		if ( !Networking.IsHost )
+		if ( !Networking.IsHost || !Moving )
 			return;
 		
 		if ( Scene.GetAllComponents<PlayerController>().Where( x => !x.Dead ).Count() == 0 )

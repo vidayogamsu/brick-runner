@@ -1,0 +1,28 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Vidya;
+@inherits Panel
+
+<root>
+	@{
+		var gs = GameSystem.Instance;
+	}
+
+	@if ( !gs.IsValid() )
+		return;
+
+	<div>You completed level @gs.Level</div>
+</root>
+
+@code
+{
+	TimeUntil DestroyTime = 5.0f;
+
+	public override void Tick()
+	{
+		if ( DestroyTime )
+		{
+			Delete();
+		}
+	}
+}

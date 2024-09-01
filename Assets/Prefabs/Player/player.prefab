@@ -54,6 +54,7 @@
           "component_type": "SkinnedModelRenderer"
         },
         "NoCollide": "gib",
+        "Renderers": [],
         "RunSpeed": 250,
         "WalkSpeed": 150,
         "Width": 9
@@ -231,7 +232,7 @@
         "__guid": "87d8c1c4-0a44-498e-a3ab-cceac8d97adb",
         "Flags": 0,
         "Name": "Name Tag",
-        "Position": "0,0,50",
+        "Position": "50,0,50",
         "Enabled": true,
         "Components": [
           {

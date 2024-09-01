@@ -12,6 +12,7 @@
 		<div class="button" onclick=@( () => Game.ActiveScene.LoadFromFile( "scenes/minimal.scene" ))> Singleplayer </div>
 		<div class="button" onclick=@( () => ChangeState( MenuState.Servers ) )> Multiplayer </div>
 		<div class="button" onclick=@( () => Game.Overlay.ShowBinds )> Settings </div>
+		<div class="button" onclick=@Game.Close> Exit </div>
 	</div>
 
 	@switch (State)
@@ -66,6 +67,7 @@
 
 	protected override void OnStart()
 	{
+		Scene.TimeScale = 1.0f;
 		FetchLobbies();
 	}
 
@@ -89,8 +91,6 @@
 
 	public void ChangeState( MenuState state )
 	{
-		Log.Info( state == State );
-
 		if ( state == State )
 		{
 			State = MenuState.None;

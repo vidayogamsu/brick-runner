@@ -84,6 +84,8 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	[Property, Sync] public GameObject WorldPanelObject { get; set; }
 
+	[Sync] public bool Paused { get; set; } = false;
+
 
 	protected override void OnStart()
 	{
@@ -104,6 +106,8 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			}
 
 			WorldPanelObject = Components.GetAll<WorldPanel>().FirstOrDefault()?.GameObject;
+
+			Scene.TimeScale = 1.0f;
 		}
 	}
 
@@ -111,6 +115,22 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	protected override void OnUpdate()
 	{
+		if ( !IsProxy )
+		{
+			if ( Scene.TimeScale == 0f && Connection.All.Count > 1 )
+			Scene.TimeScale = 1f;
+
+			if ( Input.EscapePressed && !Paused )
+			{
+				Paused = true;
+
+				if ( Connection.All.Count <= 1 )
+					Scene.TimeScale = 0f;
+
+				Input.EscapePressed = false;
+			}
+		}
+
 		if ( Dead )
 			return;
 
@@ -361,7 +381,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		Model.Tint = BlinkModel ? Color.White.WithAlpha( 0.3f ) : Color.White;
 
-		foreach ( var renderer in Model.Components.GetAll<SkinnedModelRenderer>( FindMode.InDescendants ) )
+		foreach ( var renderer in Model.Components.GetAll<ModelRenderer>( FindMode.InDescendants ) )
 		{
 			renderer.Tint = BlinkModel ? Color.White.WithAlpha( 0.3f ) : Tint;
 		}
@@ -545,13 +565,6 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			CameraController.Spectating = false;
 			CameraController.SpectateTarget = null;
 		}
-
-		Log.Info( "Restarted player." );
-
-		if ( Networking.IsHost )
-			Tint = "#FF0000";
-		else
-			Tint = Color.Random;
 
 		AbleToMove = true;
 

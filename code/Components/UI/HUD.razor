@@ -1,117 +1,152 @@
 @using Sandbox;
 @using Sandbox.UI;
+@using Sandbox.Network;
 @using Sandbox.Services;
 @using Vidya;
 @inherits PanelComponent
 
 
 <root>
+    @{
+        var local = PlayerController.Local;
+        var gs = GameSystem.Instance;
+    }
 
-	@if (!GameSystem.Instance.IsValid())
-	{
-		return;
-	}
+    @if (GameSystem.Instance.IsValid())
+    {
+        @if (GameSystem.Instance.GameOver && Networking.IsHost)
+        {
+            <div class="game-over">
 
+                <p class="big-text"> GAME OVER </p>
+                <p class="you-reached"> You reached level @GameSystem.Instance.Level. </p>
+                <p class="press-restart"> Press @(Input.GetButtonOrigin("Restart")?.ToUpper() ?? "???") to Restart. </p>
 
-	@if (GameSystem.Instance.GameOver && Networking.IsHost)
-	{
-		<div class="game-over">
+            </div>
+        }
+        else if (GameSystem.Instance.GameOver && !Networking.IsHost)
+        {
+            <div class="game-over">
 
-			<p class="big-text"> GAME OVER </p>
-			<p class="you-reached"> You reached level @GameSystem.Instance.Level. </p>
-			<p class="press-restart"> Press @(Input.GetButtonOrigin("Restart")?.ToUpper() ?? "???") to Restart. </p>
+                <p class="big-text"> GAME OVER </p>
+                <p class="you-reached"> You reached level @GameSystem.Instance.Level. </p>
+                <p class="press-restart"> Waiting for host. </p>
 
-		</div>
-	}
-	else if (GameSystem.Instance.GameOver && !Networking.IsHost)
-	{
-		<div class="game-over">
+            </div>
+        }
+        else
+        {
+            <div class="status">
 
-			<p class="big-text"> GAME OVER </p>
-			<p class="you-reached"> You reached level @GameSystem.Instance.Level. </p>
-			<p class="press-restart"> Waiting for host. </p>
+                <div class="level-counter"> 🏁 @GameSystem.Instance.Level </div>
 
-		</div>
-	}
-	else
-	{
-		<div class="status">
+                @if (PlayerController.Local.IsValid())
+                {
+                    <div class="health-points"> ♥ @PlayerController.Local.Health </div>
+                }
 
-			<div class="level-counter"> 🏁 @GameSystem.Instance.Level </div>
+            </div>
+        }
 
-			@if (PlayerController.Local.IsValid())
-			{
-				<div class="health-points"> ♥ @PlayerController.Local.Health </div>
-			}
+        @if (GameSystem.ShowLeaderboard && GameSystem.Scores.Any() && GameSystem.Instance.IsValid() &&
+       !GameSystem.Instance.StartServer)
+        {
+            <div class="scoreboard">
 
-		</div>
-	}
+                <p class="sb-title"> Leaderboard </p>
 
-	@if (GameSystem.ShowLeaderboard && GameSystem.Scores.Any() && GameSystem.Instance.IsValid() &&
-			!GameSystem.Instance.StartServer)
-	{
-		<div class="scoreboard">
+                @foreach (var score in GameSystem.Scores)
+                {
+                    <div class="sb-line">
+                        <p class="sb-rank"> @score.Rank. </p>
+                        <p class="sb-name"> @score.Name </p>
+                        <p class="sb-level"> @score.Level </p>
+                    </div>
+                }
 
-			<p class="sb-title"> Leaderboard </p>
+            </div>
+        }
 
-			@foreach (var score in GameSystem.Scores)
-			{
-				<div class="sb-line">
-					<p class="sb-rank"> @score.Rank. </p>
-					<p class="sb-name"> @score.Name </p>
-					<p class="sb-level"> @score.Level </p>
-				</div>
-			}
+        @if (local.IsValid() && local.CameraController.IsValid() && local.CameraController.SpectateTarget.IsValid() &&
+       local.CameraController.Spectating && gs.IsValid() && !gs.GameOver)
+        {
+            <div class="spectating">
+                <div class="spectating-text"> Spectating </div>
+                <div class="spectating-name">
+                    <p>@local.CameraController.SpectateTarget.Network.OwnerConnection.DisplayName</p>
+                    <img src="@GetAvatarTexture( local.CameraController.SpectateTarget.Network.OwnerConnection )"
+                        class="avatar" />
+                </div>
+            </div>
+        }
+    }
 
-		</div>
-	}
+    @if (local.IsValid() && local.Paused)
+    {
+        <div class="pause-menu">
+            <div class="header"> PAUSED </div>
 
-	@{
-		var local = PlayerController.Local;
-		var gs = GameSystem.Instance;
-	}
-	@if ( local.IsValid() && local.CameraController.IsValid() && local.CameraController.SpectateTarget.IsValid() &&
-			local.CameraController.Spectating && gs.IsValid() && !gs.GameOver )
-	{
-		<div class="spectating">
-			<div class="spectating-text"> Spectating </div>
-			<div class="spectating-name">
-				<p>@local.CameraController.SpectateTarget.Network.OwnerConnection.DisplayName</p>
-				<img src="@GetAvatarTexture( local.CameraController.SpectateTarget.Network.OwnerConnection )"
-					class="avatar" />
-			</div>
-		</div>
-	}
+            <div class="buttons">
+                <div class="button" onclick=@Resume>Resume</div>
+				<div class="button" onclick=@( () => Game.Overlay.ShowServerList( new Sandbox.Modals.ServerListConfig(Game.Ident)))>Servers</div>
+				<div class="button" onclick=@( () => Game.Overlay.ShowReviewModal( Package.Fetch( Game.Ident, false )?.Result ) )>Review</div>
+				<div class="button" onclick=@BackToMenu>Back to menu</div>
+				<div class="button" onclick=@Game.Close>Exit</div>
+            </div>
+        </div>
+    }
 
 </root>
 
 @code
 {
-	public string GetAvatarTexture(Connection connection)
+    public string GetAvatarTexture(Connection connection)
+    {
+        return $"avatar:{connection.SteamId}";
+    }
+
+	protected override void OnStart()
 	{
-		return $"avatar:{connection.SteamId}";
+		Instance = this;
 	}
 
-	/// <summary>
-	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
-	/// </summary>
-	protected override int BuildHash()
-	{
-		int hash = 0;
+    public void Resume()
+    {
+        Scene.TimeScale = 1.0f;
 
-		hash += System.HashCode.Combine(
-			GameSystem.ShowLeaderboard,
-		GameSystem.Instance?.Level ?? 0,
-		GameSystem.Instance?.GameOver ?? false,
-		PlayerController.Local.IsValid(),
-		PlayerController.Local?.Health ?? 0,
-		Input.UsingController,
-		PlayerController.Local?.CameraController?.SpectateTarget,
-		GameSystem.Instance?.GameOver ?? false
-		);
+        PlayerController.Local.Paused = false;
+    }
 
-		hash += System.HashCode.Combine(PlayerController.Local?.CameraController?.Spectating ?? false);
+	public static HUD Instance { get; set; }
 
-		return hash;
-	}
+    public void BackToMenu()
+    {
+		GameNetworkSystem.Disconnect();
+		
+        Scene.LoadFromFile("scenes/brick_runner_menu.scene");
+    }
+
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash()
+    {
+        int hash = 0;
+
+        hash += System.HashCode.Combine(
+        GameSystem.ShowLeaderboard,
+        GameSystem.Instance?.Level ?? 0,
+        GameSystem.Instance?.GameOver ?? false,
+        PlayerController.Local.IsValid(),
+        PlayerController.Local?.Health ?? 0,
+        Input.UsingController,
+        PlayerController.Local?.CameraController?.SpectateTarget,
+        GameSystem.Instance?.GameOver ?? false
+        );
+
+        hash += System.HashCode.Combine(PlayerController.Local?.CameraController?.Spectating ?? false,
+        PlayerController.Local?.Paused ?? false, GameSystem.Instance.IsValid());
+
+        return hash;
+    }
 }
