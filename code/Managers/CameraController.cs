@@ -6,7 +6,7 @@ using Sandbox.Events;
 namespace Vidya;
 
 
-public partial class CameraController : Component, IGameEventHandler<CameraDisable>
+public partial class CameraController : Component
 {
 
 	[Sync] public bool Spectating { get; set; } = false;
@@ -39,10 +39,4 @@ public partial class CameraController : Component, IGameEventHandler<CameraDisab
 			Cam.Transform.Position = new Vector3( Cam.Transform.Position.x, player.Transform.Position.y, 0f );
 		}
     }
-
-	void IGameEventHandler<CameraDisable>.OnGameEvent( CameraDisable eventArgs )
-	{
-		//if ( Scene.Camera.IsValid() )
-			//Scene.Camera.Enabled = eventArgs.Enabled;
-	}
 }

@@ -181,6 +181,11 @@
             {
               "__type": "HUD",
               "__guid": "366ee735-7a01-4fd7-8cbc-f3c6c18cb56e"
+            },
+            {
+              "__type": "BlackoutPanel",
+              "__guid": "cc9634d2-f0dc-43f2-87c1-994723f2027e",
+              "Opacity": 1
             }
           ]
         }

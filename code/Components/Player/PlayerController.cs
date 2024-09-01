@@ -97,14 +97,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		if ( IsProxy || !GameSystem.Instance.IsValid() )
 			return;
 
-		Task.RunInThreadAsync( async () =>
-		{
-			Log.Info( "PlayerController started." );
-			AbleToMove = false;
-			await Task.DelaySeconds( 1f );
-			Log.Info( "PlayerController ready." );
-			AbleToMove = true;
-		} );
+		AbleToMove = false;
 	}
 
 	private Transform _lastTransform;
@@ -113,14 +106,6 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	{
 		if ( Dead )
 			return;
-
-		if ( !AbleToMove )
-		{
-			_lastTransform = Transform.World;
-			Transform.World = _lastTransform;
-			Transform.ClearInterpolation();
-			return;
-		}
 
 		UpdateBlink();
 
@@ -137,6 +122,15 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		if ( IsProxy )
 			return;
+
+		if ( !AbleToMove )
+		{
+			_lastTransform = Transform.World;
+			Transform.World = _lastTransform;
+			Transform.ClearInterpolation();
+			Velocity = Vector3.Zero;
+			return;
+		}
 
 		// Input
 		SideDirection = new Vector3( 0f, MathF.Sign( -Input.AnalogMove.y ), 0f );

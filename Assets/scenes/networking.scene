@@ -169,7 +169,6 @@
           "Position": "1104.384,0.00004476048,215.2109",
           "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
-          "NetworkMode": 1,
           "Components": [
             {
               "__type": "Sandbox.ScreenPanel",
@@ -183,6 +182,23 @@
             {
               "__type": "HUD",
               "__guid": "43d8b8d1-9428-448a-82e4-07711a5c3ef3"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "974f165d-10b3-4a64-97f7-5ec1060fd800",
+              "Flags": 0,
+              "Name": "Blackout Panel",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "NetworkMode": 1,
+              "Components": [
+                {
+                  "__type": "BlackoutPanel",
+                  "__guid": "34ca6ea1-8047-41aa-b70c-e95413513f5c",
+                  "Opacity": 1
+                }
+              ]
             }
           ]
         }

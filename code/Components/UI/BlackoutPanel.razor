@@ -1,0 +1,26 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Vidya;
+@using Sandbox.Events;
+@implements IGameEventHandler<FadeScreen>
+@inherits PanelComponent
+
+<root style="opacity: @Opacity;">
+
+</root>
+
+@code
+{
+	[Property, Sync] public float Opacity { get; set; } = 1;
+
+	void IGameEventHandler<FadeScreen>.OnGameEvent( FadeScreen eventArgs )
+	{
+		Opacity = eventArgs.opacity;
+	}
+	
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine( Opacity );
+}

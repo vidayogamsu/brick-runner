@@ -23,7 +23,7 @@ public enum ChunkStyle
 
 public record PlayerRestart( Vector3 Pos ) : IGameEvent;
 
-public record CameraDisable( bool Enabled ) : IGameEvent;
+public record FadeScreen( float opacity ) : IGameEvent;
 
 public record RoundCleanup() : IGameEvent;
 
@@ -178,8 +178,6 @@ public partial class GameSystem : Component, Component.INetworkListener
             Player = PlayerPrefab.Clone();
         }
 
-        // Turn off camera for an easy black screen.
-		Scene.Dispatch( new CameraDisable( false ) );
         // Destroy previous level objects.
         Scene.Dispatch( new RoundCleanup() );
 
@@ -237,7 +235,7 @@ public partial class GameSystem : Component, Component.INetworkListener
             }
         }
 
-		Scene.Dispatch( new CameraDisable( true ) );
+		Scene.Dispatch( new FadeScreen( 0f ) );
 
 		Scene.Dispatch( new PlayerRestart( spawnPos ) );
 

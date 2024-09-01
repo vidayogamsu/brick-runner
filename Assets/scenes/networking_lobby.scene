@@ -40,10 +40,6 @@
               "Scale": 1,
               "ScaleStrategy": "ConsistentHeight",
               "ZIndex": 100
-            },
-            {
-              "__type": "HUD",
-              "__guid": "43d8b8d1-9428-448a-82e4-07711a5c3ef3"
             }
           ]
         }
