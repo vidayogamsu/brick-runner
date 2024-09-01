@@ -89,6 +89,14 @@
 
 	public void ChangeState( MenuState state )
 	{
+		Log.Info( state == State );
+
+		if ( state == State )
+		{
+			State = MenuState.None;
+			return;
+		}
+		
 		State = state;
 	}
 
