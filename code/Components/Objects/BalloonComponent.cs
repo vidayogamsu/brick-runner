@@ -34,6 +34,9 @@ public sealed class BalloonComponent : Component, Component.ITriggerListener
 
         if ( other.Components.TryGet<PlayerController>( out var p, FindMode.EverythingInSelfAndAncestors ) )
         {
+			if ( p.IsProxy )
+				return;
+			
             var up = Transform.Rotation.Up;
             p.Velocity = p.Velocity.SubtractDirection( -up );
             p.Velocity += up * BounceForce;
