@@ -240,7 +240,7 @@
             "HorizontalAlign": "Center",
             "InteractionRange": 1000,
             "LookAtCamera": true,
-            "PanelSize": "1500,1000",
+            "PanelSize": "5000,1000",
             "RenderScale": 1,
             "VerticalAlign": "Center"
           },

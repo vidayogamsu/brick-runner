@@ -308,7 +308,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		if ( gs.IsValid() && !gs.OngoingGame )
 			return;
 		
-		foreach ( var panel in Components.GetAll<WorldPanel>() )
+		/*foreach ( var panel in Components.GetAll<WorldPanel>() )
 		{
 			panel.Enabled = false;
 		}
@@ -316,7 +316,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		foreach ( var model in Components.GetAll<SkinnedModelRenderer>() )
 		{
 			model.Enabled = false;
-		}
+		}*/
 
 		// Log.Info( "Player died." );
 		if ( !IsProxy )
@@ -538,10 +538,10 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			CameraController.SpectateTarget = null;
 		}
 
-		foreach ( var model in Model.Components.GetAll<SkinnedModelRenderer>() )
+		/*foreach ( var model in Model.Components.GetAll<SkinnedModelRenderer>() )
 		{
 			model.Enabled = true;
-		}
+		}*/
 
 		if ( Networking.IsHost )
 			Tint = "#FF0000";
@@ -550,9 +550,9 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		AbleToMove = true;
 
-		foreach ( var panel in Components.GetAll<WorldPanel>() )
+		/*foreach ( var panel in Components.GetAll<WorldPanel>() )
 		{
 			panel.Enabled = true;
-		}
+		}*/
 	}
 }
