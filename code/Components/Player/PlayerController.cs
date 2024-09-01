@@ -264,7 +264,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	[Property] public float BlinkDuration { get; set; } = 1.5f;
 	public float BlinkCount { get; set; } = 12f;
 
-	public CameraController CameraController { get; set; }
+	[Property] public CameraController CameraController { get; set; }
 
 	[Broadcast]
 	public void TakeDamage()

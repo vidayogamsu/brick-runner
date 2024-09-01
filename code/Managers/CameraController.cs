@@ -31,7 +31,7 @@ public partial class CameraController : Component, IGameEventHandler<CameraDisab
 			Spectating = true;
 
 			var player = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.Dead );
-			
+
 			if ( !player.IsValid() )
 				return;
 

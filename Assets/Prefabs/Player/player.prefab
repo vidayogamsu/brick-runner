@@ -29,6 +29,12 @@
           "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
           "component_type": "CitizenAnimationHelper"
         },
+        "CameraController": {
+          "_type": "component",
+          "component_id": "fa7aa5aa-b0b9-40bd-bcae-06a90ed52756",
+          "go": "a5f91ff7-ed93-40e2-8baa-dbf88d84cf5b",
+          "component_type": "CameraController"
+        },
         "CoyoteTime": 0.08,
         "Friction": 10,
         "GibPrefab": {

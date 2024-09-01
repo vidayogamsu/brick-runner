@@ -87,6 +87,9 @@ public partial class GameSystem : Component, Component.INetworkListener
     [Property, Sync] public bool StartServer { get; set; } = false;
     [Property] public bool SpawnWorld { get; set; } = true;
 
+	[ConVar( Name = "br_players_min", Saved = true )]
+	public static int PlayersMin { get; set; } = 1;
+
 
     protected override async void OnStart()
     {
@@ -115,12 +118,6 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         if ( player.Components.TryGet<PlayerController>( out var playerController ) && Networking.IsHost )
         {
-			var camera = Scene.GetAllComponents<CameraController>().FirstOrDefault();
-
-			if ( camera.IsValid() )
-				playerController.CameraController = camera;
-
-
 			var nextPlayer = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.Dead );
 
 			if ( OngoingGame && nextPlayer.IsValid() )
