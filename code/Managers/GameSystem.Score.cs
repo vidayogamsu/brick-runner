@@ -24,12 +24,19 @@ public partial class GameSystem : Component
     public static bool ShowLeaderboard { get; set; } = true;
 
     public static List<Score> Scores { get; set; } = new();
-    public string LeaderboardStat { get; set; } = "lb_v1_stat";
+
+	public string GetLeaderboardStat()
+	{
+		if ( StartServer )
+			return "lb_v1_stat_coop";
+		
+		return "lb_v1_stat";
+	}
 
 
     public async Task GetScores()
     {
-        var board = Leaderboards.GetFromStat( LeaderboardStat );
+        var board = Leaderboards.GetFromStat( GetLeaderboardStat() );
 		board.CenterOnMe();
         board.MaxEntries = 15;
 
@@ -56,10 +63,12 @@ public partial class GameSystem : Component
 
     public async void SendScore()
     {
-		if ( StartServer )
+		var local = PlayerController.Local;
+
+		if ( local.IsValid() && local.IsProxy )
 			return;
 
-        Stats.SetValue( LeaderboardStat, Level );
+        Stats.SetValue( GetLeaderboardStat(), Level );
         await Stats.FlushAndWaitAsync();
         await GetScores();
     }
