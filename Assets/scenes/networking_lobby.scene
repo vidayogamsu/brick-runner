@@ -700,7 +700,7 @@
           "__guid": "e4984a93-f26c-4c69-b5b3-016eb8703bf8",
           "Flags": 0,
           "Name": "Text",
-          "Position": "0.00000623071,15.99985,32",
+          "Position": "0.00000623071,0,32",
           "Rotation": "0,0,0.9999999,0.0000001947072",
           "Enabled": true,
           "Components": [
@@ -716,6 +716,34 @@
               "TextAlignment": "Center"
             }
           ]
+        }
+      ]
+    },
+    {
+      "__guid": "d7b23041-5dc7-4232-bea1-bb2dbf7f030e",
+      "Flags": 0,
+      "Name": "Envmap Probe",
+      "Position": "0,0,384",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.EnvmapProbe",
+          "__guid": "b8cc5c35-0f23-4023-bc29-3c6c0ff7a92d",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "Bounds": {
+            "Mins": "-1000,-1000,-1000",
+            "Maxs": "1000,1000,1000"
+          },
+          "DelayBetweenUpdates": 0.1,
+          "Feathering": 0.02,
+          "FrameInterval": 5,
+          "MaxDistance": 512,
+          "Projection": "Box",
+          "RenderDynamically": true,
+          "TintColor": "1,1,1,1",
+          "UpdateStrategy": "OnEnabled",
+          "ZFar": 4096,
+          "ZNear": 16
         }
       ]
     }
