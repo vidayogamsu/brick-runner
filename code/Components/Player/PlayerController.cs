@@ -304,6 +304,11 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		if ( Dead || !AbleToMove )
 			return;
 
+		var gs = GameSystem.Instance;
+
+		if ( gs.IsValid() && !gs.OngoingGame )
+			return;
+
 		// Log.Info( "Player died." );
 		if ( !IsProxy )
 			Dead = true;
