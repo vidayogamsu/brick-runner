@@ -1,0 +1,35 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Vidya;
+@inherits PanelComponent
+
+<root>
+	<div class="title">@Name</div>
+</root>
+
+@code
+{
+
+	[Sync] public string Name { get; set; }
+
+    protected override void OnStart()
+    {
+		if ( GameObject.Root.IsProxy )
+			return;
+		
+        var gs = GameSystem.Instance;
+
+        if ( gs.IsValid() && !gs.StartServer)
+		{
+			GameObject.Destroy();
+			return;
+		}
+        
+		Name = Network.OwnerConnection.DisplayName;
+    }
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine( Name );
+}

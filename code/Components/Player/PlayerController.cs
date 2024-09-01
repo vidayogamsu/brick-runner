@@ -219,7 +219,6 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		WasGrounded = IsGrounded;
 	}
 
-
 	public void Jump( bool playSound = true )
 	{
 		// Prevent further coyote time jumps.
@@ -308,6 +307,16 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		if ( gs.IsValid() && !gs.OngoingGame )
 			return;
+		
+		foreach ( var panel in Components.GetAll<WorldPanel>() )
+		{
+			panel.Enabled = false;
+		}
+
+		foreach ( var model in Components.GetAll<SkinnedModelRenderer>() )
+		{
+			model.Enabled = false;
+		}
 
 		// Log.Info( "Player died." );
 		if ( !IsProxy )
@@ -320,11 +329,6 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			var clone = GibPrefab.Clone( GameObject.GetBounds().Center );
 
 			clone.NetworkSpawn();
-		}
-
-		foreach ( var model in Model.Components.GetAll<SkinnedModelRenderer>( FindMode.EnabledInSelfAndDescendants ) )
-		{
-			model.Enabled = true;
 		}
 
 		if ( !IsProxy )
@@ -534,7 +538,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			CameraController.SpectateTarget = null;
 		}
 
-		foreach ( var model in Model.Components.GetAll<SkinnedModelRenderer>( FindMode.EnabledInSelfAndDescendants ) )
+		foreach ( var model in Model.Components.GetAll<SkinnedModelRenderer>() )
 		{
 			model.Enabled = true;
 		}
@@ -545,5 +549,10 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			Tint = Color.Random;
 
 		AbleToMove = true;
+
+		foreach ( var panel in Components.GetAll<WorldPanel>() )
+		{
+			panel.Enabled = true;
+		}
 	}
 }

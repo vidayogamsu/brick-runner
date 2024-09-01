@@ -226,6 +226,29 @@
             "__guid": "eda761fa-e294-4fbc-aa28-0ae88ab533a5"
           }
         ]
+      },
+      {
+        "__guid": "87d8c1c4-0a44-498e-a3ab-cceac8d97adb",
+        "Flags": 0,
+        "Name": "Name Tag",
+        "Position": "0,0,50",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.WorldPanel",
+            "__guid": "68faf72f-373f-4ba6-8608-7aa8f1af9384",
+            "HorizontalAlign": "Center",
+            "InteractionRange": 1000,
+            "LookAtCamera": true,
+            "PanelSize": "1500,1000",
+            "RenderScale": 1,
+            "VerticalAlign": "Center"
+          },
+          {
+            "__type": "NameTag",
+            "__guid": "40b47d89-fc70-4eb1-962c-8263e6cf53b4"
+          }
+        ]
       }
     ],
     "__variables": []

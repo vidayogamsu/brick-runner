@@ -21,7 +21,7 @@ public sealed class BlockComponent : Component
     {
         base.OnStart();
 
-        Model = Components.Get<ModelRenderer>( FindMode.EverythingInChildren );
+		Model = Components.Get<ModelRenderer>( FindMode.EverythingInChildren );
     }
 
     protected override void OnUpdate()
