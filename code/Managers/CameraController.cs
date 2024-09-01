@@ -9,29 +9,14 @@ namespace Vidya;
 public partial class CameraController : Component, IGameEventHandler<CameraDisable>
 {
 
-    public CameraComponent Cam { get; set; }
-
-	public bool Spectating { get; set; } = false;
-	public PlayerController SpectateTarget { get; set; }
-
-    protected override void OnStart()
-    {
-        Cam = Scene.GetAllComponents<CameraComponent>().FirstOrDefault();
-
-		var local = PlayerController.Local;
-
-		if ( local.IsValid() && !local.IsProxy )
-			local.CameraController = this;
-    }
+	[Sync] public bool Spectating { get; set; } = false;
+	[Sync] public PlayerController SpectateTarget { get; set; }
 
     protected override void OnUpdate()
     {
 		var local = PlayerController.Local;
 
-		if ( local.IsValid() && local.IsProxy )
-			return;
-
-        base.OnUpdate();
+		var Cam = Scene?.Camera;
 
 		if ( !Cam.IsValid() || !local.IsValid() )
 			return;
@@ -39,7 +24,7 @@ public partial class CameraController : Component, IGameEventHandler<CameraDisab
 		if ( !local.Dead )
 		{
 			Spectating = false;
-			Transform.Position = new Vector3( Cam.Transform.Position.x, local.Transform.Position.y, 0f );
+			Cam.Transform.Position = new Vector3( Cam.Transform.Position.x, local.Transform.Position.y, 0f );
 		}
 		else
 		{
@@ -51,13 +36,13 @@ public partial class CameraController : Component, IGameEventHandler<CameraDisab
 				return;
 
 			SpectateTarget = player;
-			Transform.Position = new Vector3( Cam.Transform.Position.x, player.Transform.Position.y, 0f );
+			Cam.Transform.Position = new Vector3( Cam.Transform.Position.x, player.Transform.Position.y, 0f );
 		}
     }
 
 	void IGameEventHandler<CameraDisable>.OnGameEvent( CameraDisable eventArgs )
 	{
-		if ( Cam.IsValid() )
-			Cam.Enabled = true;
+		//if ( Scene.Camera.IsValid() )
+			//Scene.Camera.Enabled = eventArgs.Enabled;
 	}
 }

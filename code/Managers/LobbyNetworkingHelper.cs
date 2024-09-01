@@ -2,6 +2,7 @@ using System.Data;
 using Sandbox;
 using Sandbox.Network;
 using System.Threading.Tasks;
+using Vidya;
 
 public sealed class LobbyNetworkingHelper : Component, Component.INetworkListener
 {

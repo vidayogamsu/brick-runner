@@ -54,10 +54,10 @@ public partial class GameSystem : Component, Component.INetworkListener
             Level
     */
 
-    [Property, ReadOnly] public float Level { get; set; } = 1;
-    [Property, ReadOnly] public int Coins { get; set; } = 0;
+    [Property, ReadOnly, Sync] public float Level { get; set; } = 1;
+    [Property, ReadOnly, Sync] public int Coins { get; set; } = 0;
 
-    [Property, ReadOnly] public double Score { get; set; } = 0;
+    [Property, ReadOnly, Sync] public double Score { get; set; } = 0;
     public static double HighScore { get; set; }
 
     /// <summary>
@@ -122,8 +122,14 @@ public partial class GameSystem : Component, Component.INetworkListener
 
 
 			var nextPlayer = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.Dead );
+
 			if ( OngoingGame && nextPlayer.IsValid() )
 				playerController.SetPosition( nextPlayer.Transform.Position );
+
+			var spawn = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault();
+
+			if ( spawn.IsValid() )
+				playerController.SetPosition( spawn.Transform.Position );
         }
     }
 
@@ -167,12 +173,18 @@ public partial class GameSystem : Component, Component.INetworkListener
    	[Broadcast]
     public async void RestartLevel()
     {
+		OngoingGame = false;
+		Log.Info( "Restarting Level" );
+
+		if ( !Player.IsValid() && !StartServer && PlayerPrefab.IsValid() )
+        {
+            Player = PlayerPrefab.Clone();
+        }
+
         // Turn off camera for an easy black screen.
-       	Scene.Dispatch( new CameraDisable( false ) );
+		Scene.Dispatch( new CameraDisable( false ) );
         // Destroy previous level objects.
         Scene.Dispatch( new RoundCleanup() );
-
-        await Task.Frame();
 
         // Reset where chunks spawn to the origin.
         SpawnPosition = 0;
@@ -192,6 +204,11 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         var spawnPos = spawnPoint?.Transform.Position ?? Vector3.Zero;
 
+		if ( Player.IsValid() && !StartServer && Player.Components.TryGet<PlayerController>( out var playerController ) )
+		{
+			playerController.SetPosition( spawnPos );
+		}
+
         if ( Networking.IsHost )
         {
             // Spawn chunks.
@@ -209,11 +226,6 @@ public partial class GameSystem : Component, Component.INetworkListener
             SpawnChunk( ChunkStyle.Final );
         }
 
-        if ( !Player.IsValid() && !StartServer && PlayerPrefab.IsValid() )
-        {
-            Player = PlayerPrefab.Clone( spawnPos );
-        }
-
 		// Wait a second before spawning the player. Prevents instadeath on game startup(???).
 		await Task.DelayRealtimeSeconds( 1f );
 
@@ -228,13 +240,15 @@ public partial class GameSystem : Component, Component.INetworkListener
             }
         }
 
-		Scene.Dispatch( new PlayerRestart( spawnPos ) );
-
 		Scene.Dispatch( new CameraDisable( true ) );
+
+		Scene.Dispatch( new PlayerRestart( spawnPos ) );
 
         // Update Scoreboard
         if ( !Scores.Any() )
             await GetScores();
+
+		OngoingGame = true;
     }
 
     [Broadcast]
@@ -285,26 +299,26 @@ public partial class GameSystem : Component, Component.INetworkListener
         switch ( style )
         {
             case ChunkStyle.Start:
-                chunk = Random.Shared.FromList( StartChunks )?.Clone( pos );
+                chunk = Game.Random.FromList( StartChunks )?.Clone( pos );
                 break;
             case ChunkStyle.Final:
-                chunk = Random.Shared.FromList( FinalChunks )?.Clone( pos );
+                chunk = Game.Random.FromList( FinalChunks )?.Clone( pos );
                 break;
 
             case ChunkStyle.Easy:
-                chunk = Random.Shared.FromList( EasyChunks )?.Clone( pos );
+                chunk = Game.Random.FromList( EasyChunks )?.Clone( pos );
                 break;
             case ChunkStyle.Normal:
-                chunk = Random.Shared.FromList( NormalChunks )?.Clone( pos );
+                chunk = Game.Random.FromList( NormalChunks )?.Clone( pos );
                 break;
             case ChunkStyle.Medium:
-                chunk = Random.Shared.FromList( MediumChunks )?.Clone( pos );
+                chunk = Game.Random.FromList( MediumChunks )?.Clone( pos );
                 break;
             case ChunkStyle.Hard:
-                chunk = Random.Shared.FromList( HardChunks )?.Clone( pos );
+                chunk = Game.Random.FromList( HardChunks )?.Clone( pos );
                 break;
             case ChunkStyle.Extreme:
-                chunk = Random.Shared.FromList( ExtremeChunks )?.Clone( pos );
+                chunk = Game.Random.FromList( ExtremeChunks )?.Clone( pos );
                 break;
         }
 

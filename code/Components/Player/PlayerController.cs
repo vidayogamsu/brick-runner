@@ -79,6 +79,8 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	[Sync] public bool AbleToMove { get; set; } = true;
 
+	[Sync] public Color Tint { get; set; } = "#FF0000";
+
 
 	protected override void OnStart()
 	{
@@ -326,8 +328,10 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			clone.NetworkSpawn();
 		}
 
-		if ( Model.IsValid() )
-			Model.Enabled = false;
+		foreach ( var model in Model.Components.GetAll<SkinnedModelRenderer>( FindMode.EnabledInSelfAndDescendants ) )
+		{
+			model.Enabled = true;
+		}
 
 		if ( !IsProxy )
 			Stats.Increment( "stat_deaths", 1 );
@@ -352,7 +356,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		foreach ( var renderer in Model.Components.GetAll<SkinnedModelRenderer>( FindMode.InDescendants ) )
 		{
-			renderer.Tint = BlinkModel ? Color.White.WithAlpha( 0.3f ) : "#FF0000";
+			renderer.Tint = BlinkModel ? Color.White.WithAlpha( 0.3f ) : Tint;
 		}
 	}
 
@@ -536,7 +540,16 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			CameraController.SpectateTarget = null;
 		}
 
-		if ( Model.IsValid() )
-			Model.Enabled = true;
+		foreach ( var model in Model.Components.GetAll<SkinnedModelRenderer>( FindMode.EnabledInSelfAndDescendants ) )
+		{
+			model.Enabled = true;
+		}
+
+		if ( Networking.IsHost )
+			Tint = "#FF0000";
+		else
+			Tint = Color.Random;
+
+		AbleToMove = true;
 	}
 }

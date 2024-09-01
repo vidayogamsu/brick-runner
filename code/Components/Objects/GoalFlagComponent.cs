@@ -1,26 +1,25 @@
 using Sandbox;
+using Sandbox.Events;
 
 namespace Vidya;
 
 
-public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerListener
+public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerListener, IGameEventHandler<RoundCleanup>
 {
-	protected override void OnStart()
+	[Property, Sync] public bool Triggered { get; set; } = false;
+
+	void IGameEventHandler<RoundCleanup>.OnGameEvent( RoundCleanup eventArgs )
 	{
-		if ( Networking.IsHost )
-			GameObject.NetworkSpawn();
+		Triggered = false;
 	}
 
     public void OnTriggerEnter( Collider other )
     {
-        if ( !other.IsValid() )
+        if ( !other.IsValid() || Triggered )
             return;
 
         if ( other.Components.TryGet<PlayerController>( out var p, FindMode.EverythingInSelfAndAncestors ) )
         {
-			if ( !p.AbleToMove )
-				return;
-
             GameSystem.Instance.Level++;
             // GameSystem.Instance.Level += 14;
 		
@@ -29,9 +28,19 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 			if ( Networking.IsHost )
             	GameSystem.Instance.RestartLevel();
 
-			p.AbleToMove = false;
+			GameSystem.Instance.SpawnPosition = 0;
 
-			GameObject.Destroy();
+			foreach ( var player in Scene.GetAllComponents<PlayerController>() )
+			{
+				var spawn = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault();
+	
+				if ( spawn.IsValid() )
+					player.SetPosition( spawn.Transform.Position );
+				else
+					player.SetPosition( Vector3.Zero );
+			}
+			
+			Triggered = true;
         }
     }
 }

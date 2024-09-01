@@ -165,32 +165,12 @@
         {
           "__guid": "64ed4ef3-b0ab-4cea-91c3-9ad6f97eb7e0",
           "Flags": 0,
-          "Name": "Camera Controller",
+          "Name": "Screen",
           "Position": "1104.384,0.00004476048,215.2109",
           "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
+          "NetworkMode": 1,
           "Components": [
-            {
-              "__type": "Sandbox.CameraComponent",
-              "__guid": "271d73fd-5aba-4486-90d1-7a06ed065a47",
-              "BackgroundColor": "0.33333,0.46275,0.52157,1",
-              "ClearFlags": "All",
-              "FieldOfView": 60,
-              "IsMainCamera": true,
-              "Orthographic": true,
-              "OrthographicHeight": 480,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": "",
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 10000,
-              "ZNear": 10
-            },
-            {
-              "__type": "Vidya.CameraController",
-              "__guid": "c5b2c5df-95a7-43a9-ac67-a78a11c3d63b"
-            },
             {
               "__type": "Sandbox.ScreenPanel",
               "__guid": "0bd5e9b0-dfae-4926-a236-bffe9fd98a93",
@@ -274,6 +254,34 @@
       "Flags": 0,
       "Name": "Spawn",
       "Enabled": true
+    },
+    {
+      "__guid": "f6f5664e-fbb7-4278-8896-88f6e90350c1",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "1104.384,0.00004476048,215.2109",
+      "Rotation": "0,0,1,-0.00000004371139",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "2087219b-edb2-465a-a08e-022396485c1e",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": true,
+          "OrthographicHeight": 480,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
     }
   ],
   "SceneProperties": {

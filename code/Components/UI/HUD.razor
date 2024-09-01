@@ -69,7 +69,7 @@
 		var local = PlayerController.Local;
 		var gs = GameSystem.Instance;
 	}
-	@if ( local.IsValid() && local.CameraController.SpectateTarget.IsValid() && local.CameraController.Spectating && gs.IsValid() && !gs.GameOver )
+	@if ( local.IsValid() && local.CameraController.IsValid() && local.CameraController.SpectateTarget.IsValid() && local.CameraController.Spectating && gs.IsValid() && !gs.GameOver )
 	{
 		<div class="spectating">
 			<div class="spectating-text"> Spectating </div>
@@ -100,7 +100,7 @@
     PlayerController.Local.IsValid(),
     PlayerController.Local?.Health ?? 0,
     Input.UsingController,
-	PlayerController.Local.CameraController?.SpectateTarget,
+	PlayerController.Local?.CameraController?.SpectateTarget,
 	GameSystem.Instance?.GameOver ?? false);
 
 }

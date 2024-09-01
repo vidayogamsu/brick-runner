@@ -56,6 +56,10 @@
         "__type": "Sandbox.AudioListener",
         "__guid": "6f32bc24-cf46-44dd-ac8b-45d0c28c2dc8",
         "UseCameraDirection": true
+      },
+      {
+        "__type": "Vidya.CameraController",
+        "__guid": "fa7aa5aa-b0b9-40bd-bcae-06a90ed52756"
       }
     ],
     "Children": [

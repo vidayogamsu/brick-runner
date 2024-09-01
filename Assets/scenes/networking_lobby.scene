@@ -33,10 +33,6 @@
               "ZNear": 10
             },
             {
-              "__type": "Vidya.CameraController",
-              "__guid": "c5b2c5df-95a7-43a9-ac67-a78a11c3d63b"
-            },
-            {
               "__type": "Sandbox.ScreenPanel",
               "__guid": "0bd5e9b0-dfae-4926-a236-bffe9fd98a93",
               "AutoScreenScale": true,
