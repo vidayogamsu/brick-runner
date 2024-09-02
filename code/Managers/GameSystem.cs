@@ -260,6 +260,11 @@ public partial class GameSystem : Component, Component.INetworkListener
 			if ( wall.IsValid() )
 				wall.Moving = true;
         }
+	
+		if ( hud.IsValid() )
+		{
+			hud.Panel.Children.FirstOrDefault( x => x is LoadingPanel )?.Delete();
+		}
 
 		Scene.Dispatch( new FadeScreen( 0f ) );
 
@@ -269,11 +274,6 @@ public partial class GameSystem : Component, Component.INetworkListener
         await GetScores();
 
 		OngoingGame = true;
-
-		if ( hud.IsValid() )
-		{
-			hud.Panel.Children.FirstOrDefault( x => x is LoadingPanel )?.Delete();
-		}
     }
 
     [Broadcast]
