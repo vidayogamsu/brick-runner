@@ -108,11 +108,9 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         if ( Networking.IsHost )
 		{
+			BroadcastLoadingPanel();
 			RestartLevel();
 		}
-
-		if ( Networking.IsHost )
-			BroadcastLoadingPanel();
     }
 
 	[Broadcast]
@@ -268,8 +266,7 @@ public partial class GameSystem : Component, Component.INetworkListener
 		Scene.Dispatch( new PlayerRestart( spawnPos ) );
 
         // Update Scoreboard
-        if ( !Scores.Any() )
-            await GetScores();
+        await GetScores();
 
 		OngoingGame = true;
 
