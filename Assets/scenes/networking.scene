@@ -205,46 +205,28 @@
       ]
     },
     {
-      "__guid": "07045520-b30f-47ae-b184-ce28e43b225a",
+      "__guid": "7b585bfa-0f3d-4ba3-9b43-0174972bbe99",
       "Flags": 0,
       "Name": "Environment",
       "Enabled": true,
       "Children": [
         {
-          "__guid": "ed48e1b1-f0fe-48c7-90b8-41543084c095",
-          "Flags": 0,
-          "Name": "Sun",
-          "Rotation": "-0.3655419,-0.0546307,0.9189841,-0.1373432",
-          "Tags": "light_directional,light",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.DirectionalLight",
-              "__guid": "a8f9635b-9639-4faa-8fcf-3fd37acf28e8",
-              "FogMode": "Disabled",
-              "FogStrength": 1,
-              "LightColor": "0.94419,0.97767,1,1",
-              "Shadows": false,
-              "SkyColor": "0.2532,0.32006,0.35349,1"
-            }
-          ]
-        },
-        {
-          "__guid": "642c7ea0-3dff-44d5-b45a-13bd39046e38",
+          "__guid": "74ba4a48-1381-47a0-9a02-f14df1e0471a",
           "Flags": 0,
           "Name": "2D Skybox",
+          "Position": "192,0,0",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.SkyBox2D",
-              "__guid": "1f1cb3f4-7899-4669-826d-00e253760f49",
+              "__guid": "3ad5fd61-3cfe-4aa1-98fd-b753312013b1",
               "SkyMaterial": "materials/sky/sky_005.vmat",
               "Tint": "1,1,1,1"
             },
             {
               "__type": "Sandbox.EnvmapProbe",
-              "__guid": "ecd95a56-47e7-499b-8154-2a0c7d8f506a",
+              "__guid": "81eb3f10-f186-47ba-b932-38e6a243263a",
               "Texture": "textures/cubemaps/default2.vtex",
               "Bounds": {
                 "Mins": "-512,-512,-512",
@@ -260,6 +242,38 @@
               "UpdateStrategy": "OnEnabled",
               "ZFar": 4096,
               "ZNear": 16
+            }
+          ]
+        },
+        {
+          "__guid": "0e503ad0-a4e0-4cd0-acb6-8ac387b31725",
+          "Flags": 0,
+          "Name": "Light",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.AmbientLight",
+              "__guid": "91f0ed37-5cf8-4bd9-a1de-943440858a7c",
+              "Color": "0.5,0.5,0.5,1"
+            }
+          ]
+        },
+        {
+          "__guid": "422dbe2f-fa23-4a05-abb6-ce5f43fe3cdc",
+          "Flags": 0,
+          "Name": "Sun",
+          "Rotation": "0,0.9659258,0,0.2588192",
+          "Tags": "light_directional,light",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.DirectionalLight",
+              "__guid": "ae1921c4-aa91-420c-8bfd-0fa2dea9863c",
+              "FogMode": "Enabled",
+              "FogStrength": 1,
+              "LightColor": "0.91373,0.98039,1,1",
+              "Shadows": true,
+              "SkyColor": "0,0,0,0"
             }
           ]
         }

@@ -56,26 +56,6 @@
       "Enabled": true,
       "Children": [
         {
-          "__guid": "cc6424d3-024a-4a42-b0ed-84d5cfe56e53",
-          "Flags": 0,
-          "Name": "Sun",
-          "Position": "192,0,0",
-          "Rotation": "-0.3655419,-0.0546307,0.9189841,-0.1373432",
-          "Tags": "light_directional,light",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.DirectionalLight",
-              "__guid": "579f6c8c-960a-4303-a994-b811b6e2879a",
-              "FogMode": "Disabled",
-              "FogStrength": 1,
-              "LightColor": "0.94419,0.97767,1,1",
-              "Shadows": false,
-              "SkyColor": "0.2532,0.32006,0.35349,1"
-            }
-          ]
-        },
-        {
           "__guid": "f72ee431-0084-4d9a-a5d4-0f82e439f730",
           "Flags": 0,
           "Name": "2D Skybox",
@@ -107,6 +87,38 @@
               "UpdateStrategy": "OnEnabled",
               "ZFar": 4096,
               "ZNear": 16
+            }
+          ]
+        },
+        {
+          "__guid": "7031adf7-ede8-468e-807d-2c1ae859310e",
+          "Flags": 0,
+          "Name": "Light",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.AmbientLight",
+              "__guid": "279f03d9-853b-4f2e-9536-5308dabd1ef2",
+              "Color": "0.5,0.5,0.5,1"
+            }
+          ]
+        },
+        {
+          "__guid": "3c35b742-3005-4902-aa73-7458f771ee3a",
+          "Flags": 0,
+          "Name": "Sun",
+          "Rotation": "0,0.9659258,0,0.2588192",
+          "Tags": "light_directional,light",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.DirectionalLight",
+              "__guid": "671d8c62-fc15-4ce0-a9e2-45047dca82a8",
+              "FogMode": "Enabled",
+              "FogStrength": 1,
+              "LightColor": "0.91373,0.98039,1,1",
+              "Shadows": true,
+              "SkyColor": "0,0,0,0"
             }
           ]
         }
