@@ -30,7 +30,7 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 	[Broadcast]
 	public async void EndLevel()
 	{
-		if ( !GameSystem.Instance.IsValid() )
+		if ( !GameSystem.Instance.IsValid() || !AdventureGamemode.Instance.IsValid() )
 			return;
 		
 		Triggered = true;
@@ -71,8 +71,8 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 		await Task.DelaySeconds( 2f );
 
 		if ( Networking.IsHost )
-			GameSystem.Instance.RestartLevel();
+			AdventureGamemode.Instance.RestartLevel();
 		
-		GameSystem.Instance.SpawnPosition = 0;
+		AdventureGamemode.Instance.SpawnPosition = 0;
 	}
 }

@@ -18,6 +18,7 @@ public sealed class DestructibleComponent : TemporaryComponent
         if ( !DestroyEffect.IsValid() )
             return;
 
-        DestroyEffect.Clone( GameObject.GetBounds().Center );
+        var effect = DestroyEffect.Clone( GameObject.GetBounds().Center );
+		effect.NetworkSpawn( null );
     }
 }

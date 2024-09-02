@@ -244,7 +244,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 				{
 					if ( tr.GameObject.Components.TryGet<BlockComponent>( out var block, FindMode.EverythingInSelfAndAncestors ) )
 					{
-						block.Nudge();
+						block.StartNudge();
 
 						var hitPos = Transform.Position + (Vector3.Up * Height * 0.9f);
 						Sound.Play( "brick.hit", hitPos );
@@ -368,8 +368,14 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		Stats.Increment( "stat_deaths", 1 );
 
-		if ( Scene.GetAllComponents<PlayerController>().Count( x => !x.Dead ) == 0 )
-			GameSystem.Instance.EndGame();
+		BroadcastEndGame();
+	}
+
+	[Broadcast]
+	public void BroadcastEndGame()
+	{
+		if ( Scene.GetAllComponents<PlayerController>().Count( x => !x.Dead ) == 0 && Networking.IsHost )
+			Scene.Dispatch( new GameEndEvent() );
 	}
 
 	[Broadcast]

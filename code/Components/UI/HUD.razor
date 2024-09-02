@@ -14,7 +14,7 @@
 
     @if (GameSystem.Instance.IsValid())
     {
-        @if (GameSystem.Instance.GameOver && Networking.IsHost)
+        @if (gs.GameOver && Networking.IsHost)
         {
             <div class="game-over">
 
@@ -24,7 +24,7 @@
 
             </div>
         }
-        else if (GameSystem.Instance.GameOver && !Networking.IsHost)
+        else if (gs.GameOver && !Networking.IsHost)
         {
             <div class="game-over">
 
@@ -136,7 +136,6 @@
         hash += System.HashCode.Combine(
         GameSystem.ShowLeaderboard,
         GameSystem.Instance?.Level ?? 0,
-        GameSystem.Instance?.GameOver ?? false,
         PlayerController.Local.IsValid(),
         PlayerController.Local?.Health ?? 0,
         Input.UsingController,

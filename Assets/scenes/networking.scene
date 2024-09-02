@@ -11,147 +11,15 @@
         {
           "__type": "Vidya.GameSystem",
           "__guid": "47e95705-72c4-49dc-811a-cc1180bca077",
+          "AdventureModePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/gamemodes/adventure.prefab"
+          },
           "Coins": 0,
-          "DeathWallPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/hazards/death_wall.prefab"
-          },
-          "EasyChunks": [
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_easy/chunk_easy1.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_easy/chunk_easy2.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_easy/chunk_easy3.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_easy/chunk_easy4.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_easy/chunk_easy5.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_easy/chunk_easy6.prefab"
-            }
-          ],
-          "ExtremeChunks": [
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/6_extreme/chunk_extreme1.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/6_extreme/chunk_extreme2.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/6_extreme/chunk_extreme3.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/6_extreme/chunk_extreme4.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/6_extreme/chunk_extreme5.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/5_hard/chunk_hard4.prefab"
-            }
-          ],
-          "FinalChunks": [
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/2_final/chunk_final1.prefab"
-            }
-          ],
-          "GameOver": false,
+          "GameModeOverride": "gamemodes/adventure.mode",
           "GameStarted": false,
-          "HardChunks": [
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/5_hard/chunk_hard1.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/5_hard/chunk_hard2.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/5_hard/chunk_hard3.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/5_hard/chunk_hard4.prefab"
-            }
-          ],
           "Level": 1,
-          "MediumChunks": [
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/4_medium/chunk_medium1.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/4_medium/chunk_medium2.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/4_medium/chunk_medium3.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/4_medium/chunk_medium4.prefab"
-            }
-          ],
-          "NormalChunks": [
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_normal/chunk_normal1.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_normal/chunk_normal2.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_normal/chunk_normal3.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_normal/chunk_normal4.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_normal/chunk_normal5.prefab"
-            },
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/3_normal/chunk_normal6.prefab"
-            }
-          ],
-          "PlayerPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/player/player.prefab"
-          },
           "Score": 0,
-          "SpawnPosition": 0,
-          "SpawnWorld": true,
-          "StartChunks": [
-            {
-              "_type": "gameobject",
-              "prefab": "prefabs/chunks/1_start/chunk_start1.prefab"
-            }
-          ],
           "StartServer": true
         }
       ]

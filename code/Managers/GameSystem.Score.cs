@@ -20,7 +20,6 @@ public struct Score
 
 public partial class GameSystem : Component
 {
-
     public static bool ShowLeaderboard { get; set; } = true;
 
     public static List<Score> Scores { get; set; } = new();
