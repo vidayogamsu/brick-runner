@@ -87,10 +87,6 @@ public partial class GameSystem : Component, Component.INetworkListener
     [Property, Sync] public bool StartServer { get; set; } = false;
     [Property] public bool SpawnWorld { get; set; } = true;
 
-	[ConVar( Name = "br_players_min", Saved = true )]
-	public static int PlayersMin { get; set; } = 1;
-
-
     protected override async void OnStart()
     {
         base.OnStart();
