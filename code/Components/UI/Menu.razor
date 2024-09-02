@@ -12,7 +12,7 @@
 		<div class="button" onclick=@( () => Game.ActiveScene.LoadFromFile( "scenes/minimal.scene" ))> Singleplayer </div>
 		<div class="button" onclick=@( () => ChangeState( MenuState.Servers ) )> Multiplayer </div>
 		<div class="button" onclick=@( () => Game.Overlay.ShowReviewModal( Package.Fetch( Game.Ident, false )?.Result ) )>Review</div>
-		<div class="button" onclick=@( () => Game.Overlay.ShowBinds )> Settings </div>
+		<div class="button" onclick=@( () => Game.Overlay.ShowBinds )> Controls </div>
 		<div class="button" onclick=@Game.Close> Exit </div>
 	</div>
 
