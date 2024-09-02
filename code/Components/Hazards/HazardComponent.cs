@@ -1,4 +1,5 @@
 using Sandbox;
+using Sandbox.Events;
 
 namespace Vidya;
 
@@ -15,7 +16,7 @@ public class HazardComponent : TemporaryComponent, Component.ITriggerListener
 
         if ( other.Components.TryGet<PlayerController>( out var p, FindMode.EverythingInSelfAndAncestors ) )
         {
-            p.TakeDamage();
+            p.GameObject.Dispatch( new DamageEvent( 1 ) );
         }
     }
 

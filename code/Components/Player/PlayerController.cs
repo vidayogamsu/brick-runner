@@ -6,7 +6,10 @@ using Sandbox.Services;
 
 namespace Vidya;
 
-public partial class PlayerController : Component, IGameEventHandler<PlayerRestart>
+public record DamageEvent( int damage ) : IGameEvent;
+
+
+public partial class PlayerController : Component, IGameEventHandler<PlayerRestart>, IGameEventHandler<DamageEvent>
 {
 	public static PlayerController Instance { get; set; }
 
@@ -303,7 +306,12 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	[Property] public CameraController CameraController { get; set; }
 
 	[Broadcast]
-	public void TakeDamage()
+	public static void PlaySound( string soundName )
+	{
+		Sound.Play( soundName );
+	}
+	
+	void IGameEventHandler<DamageEvent>.OnGameEvent( DamageEvent eventArgs )
 	{
 		if ( Dead || !BlinkingEnd || !AbleToMove || !AbleToDie )
 			return;
@@ -318,7 +326,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 				return;
 			}
 
-			Sound.Play( "player.hurt" );
+			PlaySound( "player.hurt" );
 
 			StartBlinking();
 
@@ -334,6 +342,47 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		}
 	}
 
+	public void Die()
+	{
+		if ( Dead || !AbleToMove || !AbleToDie || IsProxy )
+			return;
+
+		var gs = GameSystem.Instance;
+
+		if ( gs.IsValid() && !gs.OngoingGame )
+			return;
+		
+		DisableObjects();
+
+		// Log.Info( "Player died." );
+		Dead = true;
+
+		PlaySound( "player.ded" );
+		
+		if ( GibPrefab.IsValid() )
+		{
+			var clone = GibPrefab.Clone( GameObject.GetBounds().Center );
+
+			clone.NetworkSpawn();
+		}
+
+		Stats.Increment( "stat_deaths", 1 );
+
+		if ( Scene.GetAllComponents<PlayerController>().Count( x => !x.Dead ) == 0 )
+			GameSystem.Instance.EndGame();
+	}
+
+	[Broadcast]
+	public void DisableObjects()
+	{
+		if ( WorldPanelObject.IsValid() )
+			WorldPanelObject.Enabled = false;
+
+		if ( Renderers is not null )
+			foreach ( var model in Renderers )
+				model.Enabled = false;
+	}
+
 	[Broadcast]
 	public void StartBlinking()
 	{
@@ -343,44 +392,6 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			BlinkingEnd = BlinkDuration;
 			NextBlink = BlinkDuration / BlinkCount;
 		}
-	}
-
-	[Broadcast]
-	public void Die()
-	{
-		if ( Dead || !AbleToMove || !AbleToDie )
-			return;
-
-		var gs = GameSystem.Instance;
-
-		if ( gs.IsValid() && !gs.OngoingGame )
-			return;
-		
-		if ( WorldPanelObject.IsValid() )
-			WorldPanelObject.Enabled = false;
-
-		if ( Renderers is not null )
-			foreach ( var model in Renderers )
-				model.Enabled = false;
-
-		// Log.Info( "Player died." );
-		if ( !IsProxy )
-			Dead = true;
-
-		Sound.Play( "player.ded" );
-		
-		if ( GibPrefab.IsValid() )
-		{
-			var clone = GibPrefab.Clone( GameObject.GetBounds().Center );
-
-			clone.NetworkSpawn();
-		}
-
-		if ( !IsProxy )
-			Stats.Increment( "stat_deaths", 1 );
-
-		if ( Scene.GetAllComponents<PlayerController>().Count( x => !x.Dead ) == 0 )
-			GameSystem.Instance.EndGame();
 	}
 
 	public void UpdateBlink()

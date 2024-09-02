@@ -129,10 +129,6 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         if ( player.Components.TryGet<PlayerController>( out var playerController ) )
         {
-			var random = Color.Random;
-			//Log.Info( "Random Color: " + random );
-			//playerController.Tint = connection.IsHost ? "#FF0000" : Color.Random;
-
 			if ( OngoingGame )
 			{
 				playerController.Die();
