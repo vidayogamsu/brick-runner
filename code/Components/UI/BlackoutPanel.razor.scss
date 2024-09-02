@@ -9,5 +9,6 @@ BlackoutPanel
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
+    z-index: -50000;
     transition: opacity 0.1s;
 }

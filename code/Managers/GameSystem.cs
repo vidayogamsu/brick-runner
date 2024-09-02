@@ -107,8 +107,22 @@ public partial class GameSystem : Component, Component.INetworkListener
         //Level = 100;
 
         if ( Networking.IsHost )
-            RestartLevel();
+		{
+			RestartLevel();
+		}
+
+		if ( Networking.IsHost )
+			BroadcastLoadingPanel();
     }
+
+	[Broadcast]
+	public static void BroadcastLoadingPanel()
+	{
+		var hud = HUD.Instance;
+
+		if ( hud.IsValid() )
+			HUD.Instance.Panel.AddChild( new LoadingPanel() );
+	}
 
     public void OnActive( Connection connection )
     {
@@ -186,6 +200,8 @@ public partial class GameSystem : Component, Component.INetworkListener
             Player = PlayerPrefab.Clone();
         }
 
+		var hud = HUD.Instance;
+
         // Destroy previous level objects.
         Scene.Dispatch( new RoundCleanup() );
 
@@ -256,6 +272,11 @@ public partial class GameSystem : Component, Component.INetworkListener
             await GetScores();
 
 		OngoingGame = true;
+
+		if ( hud.IsValid() )
+		{
+			hud.Panel.Children.FirstOrDefault( x => x is LoadingPanel )?.Delete();
+		}
     }
 
     [Broadcast]

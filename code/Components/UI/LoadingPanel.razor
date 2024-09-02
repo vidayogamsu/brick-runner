@@ -1,0 +1,20 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using Vidya;
+@inherits Panel
+
+<root>
+	@{
+		var gs = GameSystem.Instance;
+	}
+
+	@if ( !gs.IsValid() )
+		return;
+
+	<div>Loading...</div>
+</root>
+
+@code
+{
+	
+}

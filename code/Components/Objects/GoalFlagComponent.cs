@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Sandbox;
 using Sandbox.Events;
+using Sandbox.ModelEditor;
 
 namespace Vidya;
 
@@ -19,7 +20,7 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 		if ( !other.IsValid() || Triggered )
 			return;
 
-		if ( other.Components.TryGet<PlayerController>( out var p, FindMode.EverythingInSelfAndAncestors ) )
+		if ( other.Components.TryGet<PlayerController>( out var p, FindMode.EverythingInSelfAndAncestors ) && p.AbleToDie )
 		{
 			if ( Networking.IsHost )
 				EndLevel();
@@ -43,18 +44,28 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 
 		// GameSystem.Instance.Level += 14;
 		var wall = Scene.GetAllComponents<DeathWallComponent>().FirstOrDefault();
+
 		if ( wall.IsValid() )
 			wall.Moving = false;
 
 		var hud = HUD.Instance;
 
 		if ( hud.IsValid() )
+		{
+			hud.Panel.Children.FirstOrDefault( x => x is LoadingPanel )?.Delete();
 			hud.Panel.AddChild( new LevelCompletePanel() );
+		}
 
 		await Task.DelaySeconds( 1f );
 		//Fade out the screen
 		Scene.Dispatch( new FadeScreen( 1f ) );
 
+		if ( hud.IsValid() )
+		{
+			hud.Panel.Children.FirstOrDefault( x => x is LevelCompletePanel )?.Delete();
+			hud.Panel.AddChild( new LoadingPanel() );
+		}
+		
 		GameSystem.Instance.Level++;
 
 		await Task.DelaySeconds( 2f );

@@ -10,7 +10,7 @@ public sealed class LobbyNetworkingHelper : Component, Component.INetworkListene
 
 	protected override async Task OnLoad()
 	{
-		if ( !GameNetworkSystem.IsActive )
+		if ( !GameNetworkSystem.IsActive && !Scene.IsEditor )
 		{
 			GameNetworkSystem.CreateLobby();
 			await Task.MainThread();

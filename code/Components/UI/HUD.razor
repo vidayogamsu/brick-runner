@@ -48,8 +48,7 @@
             </div>
         }
 
-        @if (GameSystem.ShowLeaderboard && GameSystem.Scores.Any() && GameSystem.Instance.IsValid() &&
-       !GameSystem.Instance.StartServer)
+        @if (GameSystem.ShowLeaderboard && GameSystem.Scores.Any() && GameSystem.Instance.IsValid())
         {
             <div class="scoreboard">
 
@@ -106,7 +105,7 @@
         return $"avatar:{connection.SteamId}";
     }
 
-	protected override void OnStart()
+	protected override void OnAwake()
 	{
 		Instance = this;
 	}
