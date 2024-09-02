@@ -1,3 +1,4 @@
+using System;
 using Sandbox;
 
 namespace Vidya;
@@ -17,6 +18,10 @@ public sealed class BlockComponent : Component
     public ModelRenderer Model { get; set; }
 
 	[Property] public bool StartGameAfterNudge { get; set; } = false;
+
+	[Property] public bool IsBreakable { get; set; } = false;
+
+	[Property] public Action OnBreak { get; set; }
 
 
     protected override void OnStart()
@@ -38,6 +43,11 @@ public sealed class BlockComponent : Component
                 var frac = 1f - NudgeEnd.Fraction;
                 Model.Transform.Position = StartPos.WithZ( StartPos.z + (16f * frac) );
 
+				if ( Components.TryGet<DestructibleComponent>( out var destructibleComponent ) && !destructibleComponent.Invulnerable && IsBreakable )
+				{
+					Break( destructibleComponent );
+				}
+
 				if ( StartGameAfterNudge && Networking.IsHost )
 					Scene?.LoadFromFile( "scenes/networking.scene" );
             }
@@ -48,6 +58,13 @@ public sealed class BlockComponent : Component
             }
         }
     }
+
+	public void Break( DestructibleComponent destructibleComponent )
+	{
+		destructibleComponent.DoEffect();
+		OnBreak?.Invoke();
+		destructibleComponent.GameObject.Destroy();
+	}
 
     public void Nudge()
     {

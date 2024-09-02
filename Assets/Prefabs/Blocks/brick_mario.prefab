@@ -17,7 +17,9 @@
       {
         "__type": "Vidya.BlockComponent",
         "__guid": "428d8569-8025-48fd-87d4-5a1ef7e37ed6",
-        "AllowNudge": true
+        "AllowNudge": true,
+        "IsBreakable": false,
+        "StartGameAfterNudge": false
       }
     ],
     "Children": [
@@ -47,7 +49,18 @@
         ]
       }
     ],
-    "__variables": []
+    "__variables": [
+      {
+        "Id": "Is Breakable",
+        "Title": "Is Breakable",
+        "Targets": [
+          {
+            "Id": "428d8569-8025-48fd-87d4-5a1ef7e37ed6",
+            "Property": "IsBreakable"
+          }
+        ]
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
