@@ -36,6 +36,11 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 
 		GameSystem.Instance.SendScore();
 
+		foreach ( var player in Scene.GetAllComponents<PlayerController>() )
+		{
+			player.AbleToDie = false;
+		}
+
 		// GameSystem.Instance.Level += 14;
 		var wall = Scene.GetAllComponents<DeathWallComponent>().FirstOrDefault();
 		if ( wall.IsValid() )
@@ -46,7 +51,7 @@ public sealed class GoalFlagComponent : TemporaryComponent, Component.ITriggerLi
 		if ( hud.IsValid() )
 			hud.Panel.AddChild( new LevelCompletePanel() );
 
-		await Task.DelaySeconds( 2f );
+		await Task.DelaySeconds( 1f );
 		//Fade out the screen
 		Scene.Dispatch( new FadeScreen( 1f ) );
 

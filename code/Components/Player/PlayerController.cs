@@ -86,6 +86,17 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 	[Sync] public bool Paused { get; set; } = false;
 
+	[Sync] public bool AbleToDie { get; set; } = true;
+
+	public List<Color> RandomColors { get; set; } = new()
+	{
+		Color.Blue,
+		Color.Green,
+		Color.Yellow,
+		Color.Orange,
+		Color.Cyan,
+		Color.White
+	};
 
 	protected override void OnStart()
 	{
@@ -100,6 +111,11 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
         Outfit.Apply( Model );*/
 		if ( !IsProxy )
 		{
+			if ( Networking.IsHost )
+				Tint = Color.Red;
+			else
+				Tint = Game.Random.FromList( RandomColors );
+
 			foreach ( var renderer in Components.GetAll<SkinnedModelRenderer>() )
 			{
 				Renderers.Add( renderer.GameObject );
@@ -289,7 +305,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	[Broadcast]
 	public void TakeDamage()
 	{
-		if ( Dead || !BlinkingEnd || !AbleToMove )
+		if ( Dead || !BlinkingEnd || !AbleToMove || !AbleToDie )
 			return;
 
 		if ( !IsProxy )
@@ -332,7 +348,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	[Broadcast]
 	public void Die()
 	{
-		if ( Dead || !AbleToMove )
+		if ( Dead || !AbleToMove || !AbleToDie )
 			return;
 
 		var gs = GameSystem.Instance;
@@ -567,6 +583,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		}
 
 		AbleToMove = true;
+		AbleToDie = true;
 
 		if ( !IsProxy )
 			BroadcastPlayerRestart();
