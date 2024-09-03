@@ -879,86 +879,16 @@
       "Flags": 0,
       "Name": "Bomb",
       "Position": "-0.0006428907,599.3022,17.67382",
+      "Enabled": true,
       "NetworkMode": 1,
-      "Components": [
-        {
-          "__type": "Vidya.Bomb",
-          "__guid": "c9e958ac-71de-4ce1-a43f-08dcb6700225",
-          "BlinkCount": 5,
-          "BlinkModel": false,
-          "ExplodeEffect": {
-            "_type": "gameobject",
-            "prefab": "prefabs/effects/explosion.prefab"
-          },
-          "FuseTime": 3,
-          "Model": {
-            "_type": "component",
-            "component_id": "f0aada89-f5f4-469c-9eee-f657f4e52345",
-            "go": "4f54d78d-500f-4de5-a8b9-eab5278391c6",
-            "component_type": "ModelRenderer"
-          },
-          "Radius": 64
-        },
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "f0aada89-f5f4-469c-9eee-f657f4e52345",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/bomb/bomb.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Sandbox.ModelCollider",
-          "__guid": "42e4fac3-a9ca-45d9-9dcd-3ae7a51dc4ed",
-          "IsTrigger": false,
-          "Model": "models/bomb/bomb.vmdl",
-          "Static": false
-        },
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "82d0bc2b-81ef-41e1-96c7-5c4631c3a3e7",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {
-            "Pitch": true,
-            "Yaw": true,
-            "Roll": true
-          },
-          "MassCenterOverride": "0,0,0",
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "OverrideMassCenter": false,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        }
-      ],
-      "Children": [
-        {
-          "__guid": "409917bf-02f4-4371-ba44-b89ba4bba9e6",
-          "Flags": 0,
-          "Name": "Flame",
-          "Position": "-0.6221006,4.01358,34.70795",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.SpriteRenderer",
-              "__guid": "dee7dbfa-c954-4407-96ae-5297a606a808",
-              "Additive": false,
-              "CastShadows": false,
-              "Color": "1,1,1,1",
-              "DepthFeather": 10,
-              "FlipHorizontal": false,
-              "FlipVertical": false,
-              "FogStrength": 1,
-              "Lighting": false,
-              "Opaque": false,
-              "Size": "25,25",
-              "Texture": "particles/fire/flame001_side.vtex"
-            }
-          ]
-        }
-      ]
+      "__Prefab": "prefabs/hazards/bomb.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "948d9b80-bac1-4acf-a001-1ad1d0562fa4",
+      "Flags": 0,
+      "Name": "GameObject",
+      "Enabled": true
     }
   ],
   "SceneProperties": {
@@ -986,10 +916,8 @@
   "Description": "",
   "ResourceVersion": 1,
   "__references": [
-    "baik.bomb",
     "baik.brickblock",
-    "caro.sky_001",
-    "facepunch.flame001_side"
+    "caro.sky_001"
   ],
   "__version": 1
 }

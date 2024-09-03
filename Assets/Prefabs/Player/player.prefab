@@ -13,10 +13,10 @@
         "Bounciness": 0.1,
         "GroundAngle": 45,
         "Height": 28,
-        "IgnoreLayers": "gib",
+        "IgnoreLayers": "gib,player,carrying,bomb",
         "Radius": 8,
         "StepHeight": 18,
-        "UseCollisionRules": false
+        "UseCollisionRules": true
       },
       {
         "__type": "Vidya.PlayerController",
@@ -53,7 +53,7 @@
           "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
           "component_type": "SkinnedModelRenderer"
         },
-        "NoCollide": "gib",
+        "NoCollide": "gib,bomb,carrying",
         "Renderers": [],
         "RunSpeed": 250,
         "WalkSpeed": 150,
@@ -103,6 +103,13 @@
             "RenderType": "On",
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
+          },
+          {
+            "__type": "Sandbox.ModelCollider",
+            "__guid": "0aa27df5-1c04-4477-a543-2719450e106c",
+            "IsTrigger": true,
+            "Model": "models/citizen/citizen.vmdl",
+            "Static": false
           }
         ],
         "Children": [
@@ -240,7 +247,7 @@
             "__guid": "68faf72f-373f-4ba6-8608-7aa8f1af9384",
             "HorizontalAlign": "Center",
             "InteractionRange": 1000,
-            "LookAtCamera": true,
+            "LookAtCamera": false,
             "PanelSize": "5000,1000",
             "RenderScale": 1,
             "VerticalAlign": "Center"

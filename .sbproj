@@ -187,6 +187,12 @@
           "KeyboardCode": "enter",
           "GamepadCode": "None",
           "GroupName": "Other"
+        },
+        {
+          "Name": "Use",
+          "KeyboardCode": "e",
+          "GamepadCode": "Y",
+          "GroupName": "Other"
         }
       ],
       "__guid": "21978dc0-3517-474d-a7dc-1a6404572873"

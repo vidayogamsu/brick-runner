@@ -11,10 +11,10 @@
 	@if ( !gs.IsValid() )
 		return;
 
-	<div>Loading...</div>
+	<div>@Text</div>
 </root>
 
 @code
 {
-	
+	public string Text { get; set; } = "Loading...";
 }

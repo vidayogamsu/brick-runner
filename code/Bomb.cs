@@ -1,4 +1,5 @@
 using Sandbox;
+using Sandbox.Citizen;
 using Sandbox.Events;
 namespace Vidya;
 
@@ -20,6 +21,8 @@ public sealed class Bomb : Component
 	public TimeUntil BlinkingEnd { get; set; } = -1;
 
 	[Property] public float Radius { get; set; } = 128f;
+	
+	[Sync] public bool IsCarried { get; set; } = false;
 
 	protected override void OnStart()
 	{
@@ -63,19 +66,16 @@ public sealed class Bomb : Component
 	{
 		var tr = Scene.Trace.Sphere( Radius, Transform.Position, Transform.Position )
 		.IgnoreGameObjectHierarchy( GameObject )
+		.HitTriggers()
 		.RunAll();
 
 		if ( !tr.Any() )
 			return;
-
-		Log.Info( "Bomb exploded!" );
 		
 		foreach ( var t in tr )
 		{
 			if ( !t.Hit || !t.GameObject.IsValid() )
 				return;
-			
-			Log.Info( $"Bomb hit {t.GameObject.Name}" );
 
 			var gb = t.GameObject;
 
@@ -84,7 +84,7 @@ public sealed class Bomb : Component
 				b.Break( d );
 			}
 
-			if ( t.GameObject.Components.TryGet<PlayerController>( out var p ) )
+			if ( t.GameObject.Components.TryGet<PlayerController>( out var p, FindMode.EverythingInSelfAndParent ) )
 			{
 				p.GameObject.Dispatch( new DamageEvent( 1 ) );
 			}

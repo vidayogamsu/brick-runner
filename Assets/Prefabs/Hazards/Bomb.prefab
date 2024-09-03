@@ -1,0 +1,130 @@
+{
+  "RootObject": {
+    "__guid": "4f54d78d-500f-4de5-a8b9-eab5278391c6",
+    "Flags": 0,
+    "Name": "bomb",
+    "Tags": "bomb",
+    "Enabled": true,
+    "NetworkMode": 1,
+    "OwnerTransfer": 0,
+    "Components": [
+      {
+        "__type": "Vidya.Bomb",
+        "__guid": "c9e958ac-71de-4ce1-a43f-08dcb6700225",
+        "BlinkCount": 5,
+        "BlinkModel": false,
+        "ExplodeEffect": {
+          "_type": "gameobject",
+          "prefab": "prefabs/effects/explosion.prefab"
+        },
+        "FuseTime": 5,
+        "Model": {
+          "_type": "component",
+          "component_id": "f0aada89-f5f4-469c-9eee-f657f4e52345",
+          "go": "4f54d78d-500f-4de5-a8b9-eab5278391c6",
+          "component_type": "ModelRenderer"
+        },
+        "Radius": 64
+      },
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "f0aada89-f5f4-469c-9eee-f657f4e52345",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/bomb/bomb.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.ModelCollider",
+        "__guid": "707dde57-c4a1-493a-8cb8-63d445367986",
+        "IsTrigger": false,
+        "Model": "models/bomb/bomb.vmdl",
+        "Static": false
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "82d0bc2b-81ef-41e1-96c7-5c4631c3a3e7",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "Pitch": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassCenterOverride": "0,0,0",
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "OverrideMassCenter": false,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "409917bf-02f4-4371-ba44-b89ba4bba9e6",
+        "Flags": 0,
+        "Name": "Flame",
+        "Position": "0.420589,6.152699,35.45455",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SpriteRenderer",
+            "__guid": "dee7dbfa-c954-4407-96ae-5297a606a808",
+            "Additive": false,
+            "CastShadows": false,
+            "Color": "1,1,1,1",
+            "DepthFeather": 10,
+            "FlipHorizontal": false,
+            "FlipVertical": false,
+            "FogStrength": 1,
+            "Lighting": false,
+            "Opaque": false,
+            "Size": "25,25",
+            "Texture": "particles/fire/flame001_side.vtex"
+          }
+        ]
+      },
+      {
+        "__guid": "6deef959-ae61-4932-a9c9-759638cb52cd",
+        "Flags": 0,
+        "Name": "Trigger",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SphereCollider",
+            "__guid": "6a676771-d9d0-40fb-aa99-7b95c31c934e",
+            "Center": "0,0,13.29998",
+            "IsTrigger": true,
+            "Radius": 64,
+            "Static": false
+          }
+        ]
+      },
+      {
+        "__guid": "46cbe528-08b4-4cb6-adc1-6cc020fcfa06",
+        "Flags": 0,
+        "Name": "IK1",
+        "Position": "0.00005147895,13.10307,12.76013",
+        "Enabled": true
+      },
+      {
+        "__guid": "86af5aa9-b0c7-48a4-9110-f05567e6e2c9",
+        "Flags": 0,
+        "Name": "IK2",
+        "Position": "0.000006726658,-12.4997,12.84256",
+        "Enabled": true
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [
+    "baik.bomb",
+    "facepunch.flame001_side"
+  ],
+  "__version": 1
+}

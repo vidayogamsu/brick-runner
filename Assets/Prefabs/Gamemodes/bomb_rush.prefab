@@ -1,0 +1,30 @@
+{
+  "RootObject": {
+    "__guid": "cffa70c5-1de9-4a2e-9f46-e371df82263b",
+    "Flags": 0,
+    "Name": "bomb_rush",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Vidya.BombRushGamemode",
+        "__guid": "09c23178-f85f-423f-832b-f1690ea3b57f",
+        "BombPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/hazards/bomb.prefab"
+        },
+        "PlayerPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/player/player.prefab"
+        }
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

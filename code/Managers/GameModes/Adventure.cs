@@ -31,10 +31,13 @@ public sealed class AdventureGamemode : Component, IGameEventHandler<GameModeSta
 	[Property, Group( "Chunks" )] public List<GameObject> ExtremeChunks { get; set; } = new();
 	[Property] public bool SpawnWorld { get; set; } = true;
 
-	void IGameEventHandler<GameModeStartEvent>.OnGameEvent( GameModeStartEvent eventArgs )
+	protected override void OnStart()
 	{
 		Instance = this;
+	}
 
+	void IGameEventHandler<GameModeStartEvent>.OnGameEvent( GameModeStartEvent eventArgs )
+	{
 		if ( Networking.IsHost )
 		{
 			BroadcastLoadingPanel();

@@ -3,6 +3,7 @@
     "__guid": "eb60b506-2317-45bd-8572-b492639b3c3b",
     "Flags": 0,
     "Name": "adventure",
+    "Position": "0,0,-1.083064",
     "Enabled": true,
     "Components": [
       {

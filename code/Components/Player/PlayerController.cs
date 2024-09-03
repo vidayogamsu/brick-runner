@@ -7,6 +7,7 @@ using Sandbox.Services;
 namespace Vidya;
 
 public record DamageEvent( int damage ) : IGameEvent;
+public record OnPlayerDeath( PlayerController player ) : IGameEvent;
 
 
 public partial class PlayerController : Component, IGameEventHandler<PlayerRestart>, IGameEventHandler<DamageEvent>
@@ -90,6 +91,8 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	[Sync] public bool Paused { get; set; } = false;
 
 	[Sync] public bool AbleToDie { get; set; } = true;
+
+	[Property] public Collider InteractCollider { get; set; }
 
 	public List<Color> RandomColors { get; set; } = new()
 	{
@@ -368,12 +371,14 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
 		Stats.Increment( "stat_deaths", 1 );
 
-		BroadcastEndGame();
+		BroadcastPlayerDeath();
 	}
 
 	[Broadcast]
-	public void BroadcastEndGame()
+	public void BroadcastPlayerDeath()
 	{
+		Scene.Dispatch( new OnPlayerDeath( this ) );
+
 		if ( Scene.GetAllComponents<PlayerController>().Count( x => !x.Dead ) == 0 && Networking.IsHost )
 			Scene.Dispatch( new GameEndEvent() );
 	}
