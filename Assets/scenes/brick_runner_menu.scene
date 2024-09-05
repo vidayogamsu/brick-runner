@@ -343,6 +343,13 @@
           "__guid": "35ffcf5b-7f7f-476d-b09f-2b6aa2e2dce8"
         }
       ]
+    },
+    {
+      "__guid": "1a60c4d9-540f-40d2-9a62-d71adb1a4bf1",
+      "Flags": 0,
+      "Name": "Envmap Probe",
+      "Position": "149.1848,35.50137,20.46161",
+      "Enabled": true
     }
   ],
   "SceneProperties": {
