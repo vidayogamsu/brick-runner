@@ -75,8 +75,7 @@ public partial class GameSystem : Component, Component.INetworkListener
     {
         base.OnStart();
 
-		if ( GameModeOverride is not null && Networking.IsHost )
-			LoadGameMode( GameModeOverride.ResourceName );
+		LoadGameMode( "adventure" );
 
         Instance = this;
 
@@ -98,9 +97,18 @@ public partial class GameSystem : Component, Component.INetworkListener
 	public static void LoadGameMode( string name )
 	{
 		if ( GameModes is null )
-			return;
+		{
+            Log.Warning( "GameModes is null" );
+            return;
+        }
 
 		GameModes.TryGetValue( name, out var resource );
+
+        if ( resource is null )
+        {
+            Log.Warning( $"GameMode {name} not found" );
+            return;
+        }
 
 		var mode = resource.Prefab.Clone();
 		mode.NetworkSpawn(null);
