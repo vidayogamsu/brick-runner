@@ -81,6 +81,7 @@
               "Feathering": 0.02,
               "FrameInterval": 5,
               "MaxDistance": 512,
+              "MultiBounce": false,
               "Projection": "Sphere",
               "RenderDynamically": true,
               "TintColor": "1,1,1,1",
@@ -471,31 +472,6 @@
       }
     },
     {
-      "__guid": "f5e4f8c5-f64e-43f7-86c8-0341fb69e845",
-      "Flags": 0,
-      "Name": "brick_mario (47)",
-      "Position": "15.99989,-15.99997,112",
-      "Rotation": "0,0,0.7071068,0.7071068",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "__Prefab": "prefabs/blocks/brick_mario.prefab",
-      "__PrefabVariables": {
-        "Is Breakable": true
-      }
-    },
-    {
-      "__guid": "8635a9d7-4ac8-48d0-bbaa-7bafc5a90a2b",
-      "Flags": 0,
-      "Name": "brick_mario (50)",
-      "Position": "15.99989,132.3772,112",
-      "Rotation": "0,0,0.7071068,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/blocks/brick_mario.prefab",
-      "__PrefabVariables": {
-        "Is Breakable": false
-      }
-    },
-    {
       "__guid": "8f0e2eaa-3409-4a18-9ad3-d4739227d726",
       "Flags": 0,
       "Name": "brick_mario (21)",
@@ -568,31 +544,6 @@
       }
     },
     {
-      "__guid": "cb7b153e-7372-4414-a204-36f62a070916",
-      "Flags": 0,
-      "Name": "brick_mario (49)",
-      "Position": "15.99989,-47.99997,112",
-      "Rotation": "0,0,0.7071068,0.7071068",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "__Prefab": "prefabs/blocks/brick_mario.prefab",
-      "__PrefabVariables": {
-        "Is Breakable": true
-      }
-    },
-    {
-      "__guid": "2a8651e2-0a63-4bc9-8037-4676034f6666",
-      "Flags": 0,
-      "Name": "brick_mario (51)",
-      "Position": "15.99989,100.3772,112",
-      "Rotation": "0,0,0.7071068,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/blocks/brick_mario.prefab",
-      "__PrefabVariables": {
-        "Is Breakable": false
-      }
-    },
-    {
       "__guid": "ccb11e11-49ff-4a69-abdc-a9a43012970e",
       "Flags": 0,
       "Name": "brick_mario (25)",
@@ -657,31 +608,6 @@
       "Flags": 0,
       "Name": "brick_mario (17)",
       "Position": "15.99989,-79.99997,0",
-      "Rotation": "0,0,0.7071068,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/blocks/brick_mario.prefab",
-      "__PrefabVariables": {
-        "Is Breakable": false
-      }
-    },
-    {
-      "__guid": "5aa7a45a-d26e-4418-9f61-1a04375e7678",
-      "Flags": 0,
-      "Name": "brick_mario (48)",
-      "Position": "15.99989,-79.99997,112",
-      "Rotation": "0,0,0.7071068,0.7071068",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "__Prefab": "prefabs/blocks/brick_mario.prefab",
-      "__PrefabVariables": {
-        "Is Breakable": true
-      }
-    },
-    {
-      "__guid": "dd3f5e2f-1703-44b2-8bff-97566c3a446d",
-      "Flags": 0,
-      "Name": "brick_mario (52)",
-      "Position": "15.99989,68.37717,112",
       "Rotation": "0,0,0.7071068,0.7071068",
       "Enabled": true,
       "__Prefab": "prefabs/blocks/brick_mario.prefab",
@@ -865,6 +791,7 @@
           "Feathering": 0.02,
           "FrameInterval": 5,
           "MaxDistance": 512,
+          "MultiBounce": false,
           "Projection": "Box",
           "RenderDynamically": true,
           "TintColor": "1,1,1,1",
@@ -873,16 +800,6 @@
           "ZNear": 16
         }
       ]
-    },
-    {
-      "__guid": "4f54d78d-500f-4de5-a8b9-eab5278391c6",
-      "Flags": 0,
-      "Name": "Bomb",
-      "Position": "-0.0006428907,599.3022,17.67382",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "__Prefab": "prefabs/hazards/bomb.prefab",
-      "__PrefabVariables": {}
     },
     {
       "__guid": "948d9b80-bac1-4acf-a001-1ad1d0562fa4",

@@ -4,6 +4,7 @@
     "prefab": "prefabs/gamemodes/bomb_rush.prefab"
   },
   "Hidden": false,
+  "LeaderboardStat": "",
   "__references": [],
   "__version": 0
 }

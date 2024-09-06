@@ -7,6 +7,7 @@ public sealed class BombRushGamemode : Component, IGameEventHandler<GameModeStar
 {
 	[Property] public GameObject PlayerPrefab { get; set; }
 	[Property] public GameObject BombPrefab { get; set; }
+    [Property] public GameObject WorldPrefab { get; set; }
 
 
 	void IGameEventHandler<GameModeStartEvent>.OnGameEvent( GameModeStartEvent eventArgs )
@@ -15,6 +16,8 @@ public sealed class BombRushGamemode : Component, IGameEventHandler<GameModeStar
 
 		if ( !gs.IsValid() )
 			return;
+
+        Scene.Dispatch( new FadeScreen( 0f ) );
 
 		gs.OngoingGame = true;
 	}

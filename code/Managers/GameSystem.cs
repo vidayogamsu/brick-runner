@@ -77,7 +77,12 @@ public partial class GameSystem : Component, Component.INetworkListener
     {
         base.OnStart();
 
-		LoadGameMode( "adventure" );
+        if ( GameModeOverride is not null )
+        {
+            LoadGameMode( GameModeOverride.ResourceName );
+        }
+        else
+		    LoadGameMode( "Adventure" );
 
         Instance = this;
 
@@ -98,17 +103,19 @@ public partial class GameSystem : Component, Component.INetworkListener
 
 	public static void LoadGameMode( string name )
 	{
+        var lower = name.ToLower();
+
 		if ( GameModes is null )
 		{
             Log.Warning( "GameModes is null" );
             return;
         }
 
-		GameModes.TryGetValue( name, out var resource );
+		GameModes.TryGetValue( lower, out var resource );
 
         if ( resource is null )
         {
-            Log.Warning( $"GameMode {name} not found" );
+            Log.Warning( $"GameMode {lower} not found" );
             return;
         }
 
@@ -116,7 +123,6 @@ public partial class GameSystem : Component, Component.INetworkListener
 
 		var mode = resource.Prefab.Clone();
 		mode.NetworkSpawn(null);
-
 	}
 
     public void OnActive( Connection connection )
@@ -145,9 +151,9 @@ public class GameModeResource : GameResource
 		if ( Hidden )
 			return;
 
-		if ( !GameSystem.GameModes.ContainsKey(ResourceName) )
+		if ( !GameSystem.GameModes.ContainsKey( ResourceName ) )
 		{
-			GameSystem.GameModes.Add( ResourceName, this );
+			GameSystem.GameModes.Add( ResourceName.ToLower(), this );
 		}
 	}
 }

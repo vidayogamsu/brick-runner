@@ -29,6 +29,9 @@ public partial class GameSystem : Component
         if ( CurrentGameMode is null )
             return "lb_v1_stat";
 
+        if ( CurrentGameMode.LeaderboardStat is null )
+            return "";
+
         var stat = CurrentGameMode.LeaderboardStat;
 
 		if ( StartServer )

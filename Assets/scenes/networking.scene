@@ -11,10 +11,6 @@
         {
           "__type": "Vidya.GameSystem",
           "__guid": "47e95705-72c4-49dc-811a-cc1180bca077",
-          "AdventureModePrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/gamemodes/adventure.prefab"
-          },
           "Coins": 0,
           "GameModeOverride": "gamemodes/adventure.mode",
           "GameStarted": false,
@@ -104,6 +100,7 @@
               "Feathering": 0.02,
               "FrameInterval": 5,
               "MaxDistance": 512,
+              "MultiBounce": false,
               "Projection": "Sphere",
               "RenderDynamically": true,
               "TintColor": "1,1,1,1",
