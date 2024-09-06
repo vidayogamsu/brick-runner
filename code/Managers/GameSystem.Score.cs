@@ -26,10 +26,15 @@ public partial class GameSystem : Component
 
 	public string GetLeaderboardStat()
 	{
+        if ( CurrentGameMode is null )
+            return "lb_v1_stat";
+
+        var stat = CurrentGameMode.LeaderboardStat;
+
 		if ( StartServer )
-			return "lb_v1_stat_coop";
+			return stat + "_coop";
 		
-		return "lb_v1_stat";
+		return stat;
 	}
 
 

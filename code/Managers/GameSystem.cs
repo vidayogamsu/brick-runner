@@ -71,6 +71,8 @@ public partial class GameSystem : Component, Component.INetworkListener
 
 	public static Dictionary<string, GameModeResource> GameModes { get; set; } = new();
 
+    public static GameModeResource CurrentGameMode { get; set; }
+
     protected override async void OnStart()
     {
         base.OnStart();
@@ -110,6 +112,8 @@ public partial class GameSystem : Component, Component.INetworkListener
             return;
         }
 
+        CurrentGameMode = resource;
+
 		var mode = resource.Prefab.Clone();
 		mode.NetworkSpawn(null);
 
@@ -132,6 +136,7 @@ public class GameModeResource : GameResource
 {
 	public GameObject Prefab { get; set; }
 	public bool Hidden { get; set; }
+    public string LeaderboardStat { get; set; } = "lb_v1_stat";
 
 	protected override void PostLoad()
 	{
