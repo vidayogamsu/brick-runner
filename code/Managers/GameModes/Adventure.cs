@@ -89,6 +89,9 @@ public sealed class AdventureGamemode : Component, IGameEventHandler<GameModeSta
 
 		var gs = GameSystem.Instance;
 
+        if ( Input.Pressed( "Score" ) )
+			GameSystem.ShowLeaderboard = !GameSystem.ShowLeaderboard;
+
 		if ( IsProxy || !gs.IsValid() )
 			return;
 
@@ -99,9 +102,6 @@ public sealed class AdventureGamemode : Component, IGameEventHandler<GameModeSta
 
 			return;
 		}
-
-		if ( Input.Pressed( "Score" ) )
-			GameSystem.ShowLeaderboard = !GameSystem.ShowLeaderboard;
 	}
 
 	public void RestartGame()
@@ -215,7 +215,7 @@ public sealed class AdventureGamemode : Component, IGameEventHandler<GameModeSta
 		gs.OngoingGame = true;
 	}
 
-	[Broadcast( NetPermission.HostOnly )]
+	[Broadcast]
 	private void EndGame()
 	{
 		var gs = GameSystem.Instance;

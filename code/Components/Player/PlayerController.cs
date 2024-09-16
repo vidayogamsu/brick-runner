@@ -369,7 +369,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 			clone.NetworkSpawn();
 		}
 
-		Stats.Increment( "stat_deaths", 1 );
+		Stats.Increment( "stat_death", 1 );
 
 		BroadcastPlayerDeath();
 	}
@@ -379,7 +379,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	{
 		Scene.Dispatch( new OnPlayerDeath( this ) );
 
-		if ( Scene.GetAllComponents<PlayerController>().Count( x => !x.Dead ) == 0 && Networking.IsHost )
+		if ( Scene.GetAllComponents<PlayerController>().All( x => x.Dead ) )
 			Scene.Dispatch( new GameEndEvent() );
 	}
 

@@ -145,7 +145,7 @@
         );
 
         hash += System.HashCode.Combine(PlayerController.Local?.CameraController?.Spectating ?? false,
-        PlayerController.Local?.Paused ?? false, GameSystem.Instance.IsValid(), GameSystem.Scores.Count());
+        PlayerController.Local?.Paused ?? false, GameSystem.Instance.IsValid(), GameSystem.Scores.Count(), Networking.IsHost);
 
         return hash;
     }

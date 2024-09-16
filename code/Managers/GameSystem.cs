@@ -77,11 +77,11 @@ public partial class GameSystem : Component, Component.INetworkListener
     {
         base.OnStart();
 
-        if ( GameModeOverride is not null )
+        if ( GameModeOverride is not null && Networking.IsHost )
         {
             LoadGameMode( GameModeOverride.ResourceName );
         }
-        else
+        else if ( Networking.IsHost )
 		    LoadGameMode( "Adventure" );
 
         Instance = this;
