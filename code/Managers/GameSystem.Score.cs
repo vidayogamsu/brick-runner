@@ -44,6 +44,8 @@ public partial class GameSystem : Component
     public async Task GetScores()
     {
         var board = Leaderboards.GetFromStat( GetLeaderboardStat() );
+        board.SetSortDescending();
+        board.SetAggregationMax();
 		board.CenterOnMe();
         board.MaxEntries = 15;
 
