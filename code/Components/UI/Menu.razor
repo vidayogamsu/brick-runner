@@ -7,13 +7,18 @@
 @inherits PanelComponent
 
 <root>
+    @{
+        if ( GameSystem.GameModes is null )
+            return;
+    }
+
 	<div class="title"> Brick Runner </div>
 
 	<div class="buttons">
 		<div class="button" onclick=@( () => Game.ActiveScene.LoadFromFile( "scenes/minimal.scene" ))> Singleplayer </div>
 		<div class="button" onclick=@( () => ChangeState( MenuState.Servers ) )> Multiplayer </div>
-		<div class="button" onclick=@( () => Game.Overlay.ShowReviewModal( Package.Fetch( Game.Ident, false )?.Result ) )> Review </div>
-		<div class="button" onclick=@( () => Game.Overlay.ShowBinds )> Controls </div>
+        <div class="button" onclick=@( () => ChangeState( MenuState.Leaderboards ) )> Leaderboards </div>
+		<div class="button" onclick=@( () => Game.Overlay.ShowSettingsModal )> Settings </div>
 		<div class="button" onclick=@Game.Close> Exit </div>
 	</div>
 
@@ -51,6 +56,32 @@
 			</div>
 
 			break;
+
+        case MenuState.Leaderboards:
+
+        <div class="leaderboard">
+            <div class="leaderboard-holder">
+            @foreach ( var mode in GameSystem.GameModes.Values )
+            {
+                if ( mode.Hidden )
+                    continue;
+
+                var board = Leaderboards[mode.ResourceName];
+
+                if ( board is null )
+                    continue;
+
+                @foreach ( var entry in board.Entries )
+                {
+                    <div class="entry @( entry.SteamId == (long)Sandbox.Utility.Steam.SteamId ? "me" : "")">
+                        <div class="name">@entry.Rank: @entry.DisplayName </div>
+                        <div class="value"> @entry.Value </div>
+                    </div>
+                }
+            }
+            </div>
+        </div>
+        break;
 	}
 
 @code
@@ -59,6 +90,7 @@
 	{
 		None,
 		Servers,
+        Leaderboards
 	}
 
 	public MenuState State { get; set; } = MenuState.None;
@@ -66,12 +98,38 @@
 	public List<LobbyInformation> Lobbies { get; set; } = new();
 
 	public bool Fetching { get; set; }
+    
+    [Property] public Dictionary<string, Sandbox.Services.Leaderboards.Board2> Leaderboards { get; set; } = new();
 
 	protected override void OnStart()
 	{
 		Scene.TimeScale = 1.0f;
 		FetchLobbies();
+        FetchLeaderboards();
 	}
+
+    public async void FetchLeaderboards()
+    {
+        if ( GameSystem.GameModes is null )
+            return;
+
+        foreach ( var mode in GameSystem.GameModes.Values )
+        {
+            if ( mode.Hidden )
+                continue;
+
+            var board = Sandbox.Services.Leaderboards.GetFromStat( mode.LeaderboardStat );
+
+            board.SetSortDescending();
+            board.SetAggregationMax();
+		    board.CenterOnMe();
+            board.MaxEntries = 50;
+
+            await board.Refresh();
+
+            Leaderboards[mode.ResourceName] = board;
+        }
+    }
 
 	public async void FetchLobbies()
 	{
@@ -104,6 +162,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( State, Lobbies?.Count ?? 0, Fetching );
+		return HashCode.Combine( State, Lobbies?.Count ?? 0, Fetching, Leaderboards.Count() );
 	}
 }

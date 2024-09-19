@@ -3,7 +3,7 @@
     "_type": "gameobject",
     "prefab": "prefabs/gamemodes/bomb_rush.prefab"
   },
-  "Hidden": false,
+  "Hidden": true,
   "LeaderboardStat": "",
   "__references": [],
   "__version": 0
