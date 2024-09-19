@@ -9,7 +9,7 @@
 		return;
 	}
 	<div class="title">@Name</div>
-	<img src="@GetAvatarTexture(Network.OwnerConnection)" class="avatar" />
+	<img src="@GetAvatarTexture(Network.Owner)" class="avatar" />
 </root>
 
 @code
@@ -31,11 +31,11 @@
 			return;
 		}
 
-		if ( Network.OwnerConnection is null )
+		if ( Network.Owner is null )
 			return;
         
-		Name = Network.OwnerConnection.DisplayName;
-        SteamId = Network.OwnerConnection.SteamId;
+		Name = Network.Owner.DisplayName;
+        SteamId = Network.Owner.SteamId;
     }
 
     public string GetAvatarTexture(Connection connection)

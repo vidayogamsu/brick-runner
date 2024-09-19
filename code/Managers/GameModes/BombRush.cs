@@ -55,7 +55,7 @@ public sealed class BombRushGamemode : Component, IGameEventHandler<GameModeStar
 		if ( hud.IsValid() && lastPlayer.IsValid() )
 		{
 			var loadingPanel = new LoadingPanel();
-			loadingPanel.Text = $"{lastPlayer.Network.OwnerConnection.DisplayName} wins!";
+			loadingPanel.Text = $"{lastPlayer.Network.Owner.DisplayName} wins!";
 
 			hud.Panel.AddChild( loadingPanel );
 
