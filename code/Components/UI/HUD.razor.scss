@@ -80,6 +80,8 @@ HUD {
         left: 0;
         bottom: 0;
 
+        transition: opacity 0.1s;
+
         width: 420px;
         height: auto;
 
@@ -143,7 +145,7 @@ HUD {
         flex-direction: column;
         background-color: hsl(0, 0%, 8%);
         border-color: hsl(0, 0%, 11%);
-        border-width: 3;
+        border-width: 4;
         padding: 16px;
         
         >.spectating-text
@@ -209,7 +211,7 @@ HUD {
             justify-content: center;
             align-items: center;
 
-            border-width: 3;
+            border-width: 4;
             background-color: hsl(0, 0%, 8%);
             border-color: hsl(0, 0%, 11%);
             color: white;

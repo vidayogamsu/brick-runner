@@ -22,27 +22,27 @@ public partial class GameSystem : Component
 {
     public static bool ShowLeaderboard { get; set; } = true;
 
-    public static List<Score> Scores { get; set; } = new();
+    [Sync] public static List<Score> Scores { get; set; } = new();
+
+    [Sync] public string LeaderboardStat { get; set; } = "lb_v1_stat";
 
 	public string GetLeaderboardStat()
 	{
-        if ( CurrentGameMode is null )
-            return "lb_v1_stat";
-
-        if ( string.IsNullOrEmpty( CurrentGameMode.LeaderboardStat ) )
+        if ( string.IsNullOrEmpty( LeaderboardStat ) )
             return "";
 
-        var stat = CurrentGameMode.LeaderboardStat;
+        var stat = LeaderboardStat;
 
 		if ( StartServer )
 			return stat + "_coop";
 		
 		return stat;
 	}
-
-
+    
     public async Task GetScores()
     {
+        Log.Info( GetLeaderboardStat() );
+
         var board = Leaderboards.GetFromStat( GetLeaderboardStat() );
         board.SetSortDescending();
         board.SetAggregationMax();

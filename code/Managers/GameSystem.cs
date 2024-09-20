@@ -121,6 +121,13 @@ public partial class GameSystem : Component, Component.INetworkListener
 
         CurrentGameMode = resource;
 
+        var instance = Instance;
+
+        if ( instance.IsValid() )
+        {
+            instance.LeaderboardStat = resource.LeaderboardStat;
+        }
+
 		var mode = resource.Prefab.Clone();
 		mode.NetworkSpawn(null);
 	}
