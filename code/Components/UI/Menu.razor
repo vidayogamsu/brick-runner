@@ -63,12 +63,9 @@
             <div class="header">Levels Completed</div>
 
             <div class="leaderboard-holder">
-            @foreach ( var mode in GameSystem.GameModes.Values )
+            @foreach ( var mode in GameSystem.GameModes.Values.Where( x => !x.Hidden ) )
             {
-                if ( mode.Hidden )
-                    continue;
-
-                var board = Leaderboards[mode.ResourceName];
+                var board = Leaderboards[mode.LeaderboardStat];
 
                 if ( board is null )
                     continue;
@@ -110,6 +107,16 @@
         FetchLeaderboards();
 	}
 
+    private async Task SetupLeaderboard( Sandbox.Services.Leaderboards.Board2 board, int maxEntries = 50 )
+    {
+        board.SetSortDescending();
+        board.SetAggregationMax();
+        board.CenterOnMe();
+        board.MaxEntries = maxEntries;
+
+        await board.Refresh();
+    }
+
     public async void FetchLeaderboards()
     {
         if ( GameSystem.GameModes is null )
@@ -120,16 +127,14 @@
             if ( mode.Hidden )
                 continue;
 
-            var board = Sandbox.Services.Leaderboards.GetFromStat( mode.LeaderboardStat );
+            var singlePlayer = Sandbox.Services.Leaderboards.GetFromStat( mode.LeaderboardStat );
+            //var coop = Sandbox.Services.Leaderboards.GetFromStat( mode.LeaderboardStat + "_coop" );
 
-            board.SetSortDescending();
-            board.SetAggregationMax();
-		    board.CenterOnMe();
-            board.MaxEntries = 50;
+            await SetupLeaderboard( singlePlayer );
+            //await SetupLeaderboard( coop );
 
-            await board.Refresh();
-
-            Leaderboards[mode.ResourceName] = board;
+            Leaderboards[mode.LeaderboardStat] = singlePlayer;
+            //Leaderboards[mode.LeaderboardStat + "_coop"] = coop;
         }
     }
 
