@@ -8,6 +8,7 @@ namespace Vidya;
 
 public record DamageEvent( int damage ) : IGameEvent;
 public record OnPlayerDeath( PlayerController player ) : IGameEvent;
+public record OnPlayerDisconnect( PlayerController player ) : IGameEvent;
 
 
 public partial class PlayerController : Component, IGameEventHandler<PlayerRestart>, IGameEventHandler<DamageEvent>
@@ -35,7 +36,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		get
 		{
 			if ( !_localPlayer.IsValid() )
-				_localPlayer = Game.ActiveScene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.IsProxy );
+				_localPlayer = Game.ActiveScene.GetAll<PlayerController>().FirstOrDefault( x => !x.IsProxy );
 
 			return _localPlayer;
 		}
@@ -379,7 +380,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 	{
 		Scene.Dispatch( new OnPlayerDeath( this ) );
 
-		if ( Scene.GetAllComponents<PlayerController>().All( x => x.Dead ) )
+		if ( Scene.GetAll<PlayerController>().All( x => x.Dead ) )
 			Scene.Dispatch( new GameEndEvent() );
 	}
 
@@ -621,4 +622,9 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 		if ( WorldPanelObject.IsValid() )
 			WorldPanelObject.Enabled = true;
 	}
+
+    protected override void OnDestroy()
+    {
+        Scene.Dispatch( new OnPlayerDisconnect( this ) );
+    }
 }

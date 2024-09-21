@@ -2,7 +2,9 @@ using Sandbox.Events;
 
 namespace Vidya;
 
-public sealed class AdventureGamemode : Component, IGameEventHandler<GameModeStartEvent>, IGameEventHandler<PlayerConnectedEvent>, IGameEventHandler<GameEndEvent>
+public sealed class AdventureGamemode : Component, 
+IGameEventHandler<GameModeStartEvent>, IGameEventHandler<PlayerConnectedEvent>, 
+IGameEventHandler<GameEndEvent>, IGameEventHandler<OnPlayerDisconnect>
 {
 	/// <summary>
 	/// The position where next to spawn a chunk.
@@ -67,7 +69,7 @@ public sealed class AdventureGamemode : Component, IGameEventHandler<GameModeSta
 				return;
 			}
 
-			var spawn = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault();
+			var spawn = Scene.GetAll<SpawnPoint>().FirstOrDefault();
 
 			if ( spawn.IsValid() )
 				playerController.SetPosition( spawn.Transform.Position );
@@ -148,7 +150,7 @@ public sealed class AdventureGamemode : Component, IGameEventHandler<GameModeSta
 		// Spawn starting chunk.
 		SpawnChunk( ChunkStyle.Start );
 
-		var spawnPoint = Game.ActiveScene.GetAllComponents<SpawnPoint>()?.FirstOrDefault();
+		var spawnPoint = Game.ActiveScene.GetAll<SpawnPoint>()?.FirstOrDefault();
 
 		if ( !spawnPoint.IsValid() && SpawnWorld )
 		{
@@ -195,7 +197,7 @@ public sealed class AdventureGamemode : Component, IGameEventHandler<GameModeSta
 				clone.NetworkSpawn( null );
 			}
 
-			var wall = Scene.GetAllComponents<DeathWallComponent>().FirstOrDefault();
+			var wall = Scene.GetAll<DeathWallComponent>().FirstOrDefault();
 			if ( wall.IsValid() )
 				wall.Moving = true;
 		}
@@ -235,6 +237,12 @@ public sealed class AdventureGamemode : Component, IGameEventHandler<GameModeSta
 	{
 		EndGame();
 	}
+
+    void IGameEventHandler<OnPlayerDisconnect>.OnGameEvent( OnPlayerDisconnect eventArgs )
+    {
+        if ( Scene.GetAll<PlayerController>().All( x => x.Dead ) )
+			Scene.Dispatch( new GameEndEvent() );
+    }
 
 
 	public ChunkStyle RandomDifficulty()

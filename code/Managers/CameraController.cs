@@ -30,7 +30,7 @@ public partial class CameraController : Component
 		{
 			Spectating = true;
 
-			var player = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.Dead );
+			var player = Scene.GetAll<PlayerController>().FirstOrDefault( x => !x.Dead );
 
 			if ( !player.IsValid() )
 				return;

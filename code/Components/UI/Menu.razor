@@ -1,6 +1,7 @@
 @using Sandbox;
 @using Sandbox.UI;
 @using System.Threading.Tasks;
+@using System.Threading;
 @using Sandbox.Network;
 @using Vidya;
 @using System;
@@ -60,24 +61,40 @@
         case MenuState.Leaderboards:
 
         <div class="leaderboard">
+
             <div class="header">Levels Completed</div>
 
             <div class="leaderboard-holder">
-            @foreach ( var mode in GameSystem.GameModes.Values.Where( x => !x.Hidden ) )
+
+            @if ( RefreshingLeaderboards )
             {
-                var board = Leaderboards[mode.LeaderboardStat];
-
-                if ( board is null )
-                    continue;
-
-                @foreach ( var entry in board.Entries )
+                <div class="entry"> Refreshing... </div>
+            }
+            else
+            {
+                @foreach ( var mode in GameSystem.GameModes.Values.Where( x => !x.Hidden ) )
                 {
-                    <div class="entry @( entry.SteamId == (long)Sandbox.Utility.Steam.SteamId ? "me" : "")">
-                        <div class="name">@entry.Rank: @entry.DisplayName </div>
-                        <div class="value"> @entry.Value </div>
-                    </div>
+                    var board = Multiplayer ? Leaderboards?[mode.LeaderboardStat + "_coop"] : Leaderboards?[mode.LeaderboardStat];
+
+                    if ( board is null )
+                        continue;
+
+                    @foreach ( var entry in board.Entries )
+                    {
+                        <div class="entry @( entry.SteamId == (long)Sandbox.Utility.Steam.SteamId ? "me" : "")">
+                            <div class="name">@entry.Rank: @entry.DisplayName </div>
+                            <div class="value"> @entry.Value </div>
+                        </div>
+                    }
                 }
             }
+            
+
+            </div>
+
+            <div class="sort">
+                <div class="button" onclick=@( () => Multiplayer = !Multiplayer )>@( Multiplayer ? "Multiplayer" : "Singleplayer" )</div>
+                <div class="button" onclick=@ChangeSortBy>@GetSortText()</div>
             </div>
         </div>
         break;
@@ -92,12 +109,27 @@
         Leaderboards
 	}
 
+    public enum LeaderboardSort
+    {
+        Day,
+        Week,
+        Month,
+        Year,
+        AllTime
+    }
+
 	public MenuState State { get; set; } = MenuState.None;
+    [Property, Change( nameof( RefreshLeaderboards ) )] public LeaderboardSort SortBy { get; set; } = LeaderboardSort.AllTime;
+    [Property] public bool Multiplayer { get; set; }
 	
 	public List<LobbyInformation> Lobbies { get; set; } = new();
 
 	public bool Fetching { get; set; }
+
+    public bool RefreshingLeaderboards { get; set; }
     
+    public CancellationToken RefreshLeaderboardsToken { get; set; } = new();
+
     [Property] public Dictionary<string, Sandbox.Services.Leaderboards.Board2> Leaderboards { get; set; } = new();
 
 	protected override void OnStart()
@@ -107,6 +139,8 @@
         FetchLeaderboards();
 	}
 
+
+
     private async Task SetupLeaderboard( Sandbox.Services.Leaderboards.Board2 board, int maxEntries = 50 )
     {
         board.SetSortDescending();
@@ -114,7 +148,7 @@
         board.CenterOnMe();
         board.MaxEntries = maxEntries;
 
-        await board.Refresh();
+        await board.Refresh( RefreshLeaderboardsToken );
     }
 
     public async void FetchLeaderboards()
@@ -122,20 +156,74 @@
         if ( GameSystem.GameModes is null )
             return;
 
+        RefreshingLeaderboards = true;
+
         foreach ( var mode in GameSystem.GameModes.Values )
         {
             if ( mode.Hidden )
                 continue;
 
             var singlePlayer = Sandbox.Services.Leaderboards.GetFromStat( mode.LeaderboardStat );
-            //var coop = Sandbox.Services.Leaderboards.GetFromStat( mode.LeaderboardStat + "_coop" );
+            var coop = Sandbox.Services.Leaderboards.GetFromStat( mode.LeaderboardStat + "_coop" );
 
             await SetupLeaderboard( singlePlayer );
-            //await SetupLeaderboard( coop );
+            await SetupLeaderboard( coop );
 
             Leaderboards[mode.LeaderboardStat] = singlePlayer;
-            //Leaderboards[mode.LeaderboardStat + "_coop"] = coop;
+            Leaderboards[mode.LeaderboardStat + "_coop"] = coop;
         }
+
+        RefreshingLeaderboards = false;
+    }
+
+    //Need to have the arguments match the Change attribute
+    public async void RefreshLeaderboards( LeaderboardSort oldValue = LeaderboardSort.AllTime, LeaderboardSort newValue = LeaderboardSort.AllTime )
+    {
+        RefreshingLeaderboards = true;
+
+        foreach ( var board in Leaderboards.Values )
+        {
+            switch ( SortBy )
+            {
+                case LeaderboardSort.Day:
+                    board.FilterByDay();
+                    break;
+                case LeaderboardSort.Week:
+                    board.FilterByWeek();
+                    break;
+                case LeaderboardSort.Month:
+                    board.FilterByMonth();
+                    break;
+                case LeaderboardSort.Year:
+                    board.FilterByYear();
+                    break;
+                case LeaderboardSort.AllTime:
+                    break;
+            }
+
+            await board.Refresh( RefreshLeaderboardsToken );
+        }
+
+        RefreshingLeaderboards = false;
+    }
+
+    public string GetSortText()
+    {
+        switch ( SortBy )
+        {
+            case LeaderboardSort.Day:
+                return "Day";
+            case LeaderboardSort.Week:
+                return "Week";
+            case LeaderboardSort.Month:
+                return "Month";
+            case LeaderboardSort.Year:
+                return "Year";
+            case LeaderboardSort.AllTime:
+                return "All Time";
+        }
+
+        return "All Time";
     }
 
 	public async void FetchLobbies()
@@ -149,6 +237,16 @@
 			Fetching = false;
 			await Task.Delay( 1000 );
 		}
+	}
+
+    public void ChangeSortBy()
+	{
+        RefreshLeaderboardsToken.ThrowIfCancellationRequested();
+
+    	var sortByValues = Enum.GetValues( typeof( LeaderboardSort ) ).Cast<LeaderboardSort>().ToList();
+    	var currentIndex = sortByValues.IndexOf( SortBy );
+    	var nextIndex = ( currentIndex + 1 ) % sortByValues.Count;
+    	SortBy = sortByValues[nextIndex];
 	}
 
 	public void JoinLobby( LobbyInformation lobby )
@@ -169,6 +267,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( State, Lobbies?.Count ?? 0, Fetching, Leaderboards.Count() );
+		return HashCode.Combine( State, Lobbies?.Count(), Fetching, Leaderboards?.Count(), RefreshingLeaderboards, Multiplayer );
 	}
 }

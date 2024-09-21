@@ -20,10 +20,10 @@ public sealed class DeathWallComponent : TemporaryComponent
 		if ( !Networking.IsHost || !Moving )
 			return;
 		
-		if ( Scene.GetAllComponents<PlayerController>().Where( x => !x.Dead ).Count() == 0 )
+		if ( Scene.GetAll<PlayerController>().Where( x => !x.Dead ).Count() == 0 )
 			return;
 
-        var plObj = Scene.GetAllComponents<PlayerController>().Where( x => !x.Dead ).OrderBy( x => x.Transform.Position.Distance( Transform.Position ) ).FirstOrDefault().GameObject;
+        var plObj = Scene.GetAll<PlayerController>().Where( x => !x.Dead ).OrderBy( x => x.Transform.Position.Distance( Transform.Position ) ).FirstOrDefault().GameObject;
 
         if ( !plObj.IsValid() )
             return;

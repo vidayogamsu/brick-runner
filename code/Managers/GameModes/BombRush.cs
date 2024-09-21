@@ -39,7 +39,7 @@ public sealed class BombRushGamemode : Component, IGameEventHandler<GameModeStar
 
 		player.NetworkSpawn( eventArgs.connection );
 
-		var spawn = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault();
+		var spawn = Scene.GetAll<SpawnPoint>().FirstOrDefault();
 
 		if ( spawn.IsValid() )
 			player.Transform.Position = spawn.Transform.Position;
@@ -50,7 +50,7 @@ public sealed class BombRushGamemode : Component, IGameEventHandler<GameModeStar
 	{
 		var hud = HUD.Instance;
 
-		var lastPlayer = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => !x.Dead );
+		var lastPlayer = Scene.GetAll<PlayerController>().FirstOrDefault( x => !x.Dead );
 
 		if ( hud.IsValid() && lastPlayer.IsValid() )
 		{
@@ -66,7 +66,7 @@ public sealed class BombRushGamemode : Component, IGameEventHandler<GameModeStar
 
 			await Task.DelaySeconds( 2f );
 
-			var spawn = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault();
+			var spawn = Scene.GetAll<SpawnPoint>().FirstOrDefault();
 
 			var spawnPos = spawn.IsValid() ? spawn.Transform.Position : Vector3.Zero;
 
@@ -87,7 +87,7 @@ public sealed class BombRushGamemode : Component, IGameEventHandler<GameModeStar
 		if ( !player.IsValid() )
 			return;
 
-		if ( Scene.GetAllComponents<PlayerController>().Count( x => !x.Dead) == 1 )
+		if ( Scene.GetAll<PlayerController>().Count( x => !x.Dead) == 1 )
 		{
 			EndGame();
 		}
