@@ -44,7 +44,7 @@ Menu
             background-color: hsl(0, 0%, 8%);
             border-color: hsl(0, 0%, 11%);
             color: white;
-            height: 85px;
+            height: 100px;
             cursor: pointer;
 
             &:hover
@@ -195,6 +195,8 @@ Menu
                 justify-content: center;
                 gap: 16px;
                 padding: 12px;
+                cursor: pointer;
+                
 
                 &.me
                 {
@@ -215,14 +217,12 @@ Menu
                 {
                     background-color: hsl(0, 0%, 20%);
                     sound-in: ui.button.over;
-                    cursor: pointer;
                 }
 
                 &:active
                 {
                     background-color: hsl(0, 0%, 15%);
                     sound-in: ui.button.press;
-                    cursor: pointer;
                 }
             }
         }
@@ -248,22 +248,20 @@ Menu
                 background-color: hsl(0, 0%, 8%);
                 border-color: hsl(0, 0%, 11%);
                 color: white;
-                cursor: pointer;
                 align-items: center;
                 justify-content: center;
+                cursor: pointer;
 
                 &:hover
                 {
                     background-color: hsl(0, 0%, 20%);
                     sound-in: ui.button.over;
-                    cursor: pointer;
                 }
 
                 &:active
                 {
                     background-color: hsl(0, 0%, 15%);
                     sound-in: ui.button.press;
-                    cursor: pointer;
                 }
         }
     }
