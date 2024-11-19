@@ -8,7 +8,7 @@
 
 <root>
     @{
-        var local = PlayerController.Local;
+        var local = Vidya.PlayerController.Local;
         var gs = GameSystem.Instance;
         var lbStat = gs?.GetLeaderboardStat();
     }
@@ -41,9 +41,9 @@
 
                 <div class="level-counter"> 🏁 @GameSystem.Instance.Level </div>
 
-                @if (PlayerController.Local.IsValid())
+                @if (Vidya.PlayerController.Local.IsValid())
                 {
-                    <div class="health-points"> ♥ @PlayerController.Local.Health </div>
+                    <div class="health-points"> ♥ @Vidya.PlayerController.Local.Health </div>
                 }
 
             </div>
@@ -115,7 +115,7 @@
     {
         Scene.TimeScale = 1.0f;
 
-        PlayerController.Local.Paused = false;
+        Vidya.PlayerController.Local.Paused = false;
     }
 
 	public static HUD Instance { get; set; }
@@ -137,15 +137,15 @@
         hash += System.HashCode.Combine(
         GameSystem.ShowLeaderboard,
         GameSystem.Instance?.Level ?? 0,
-        PlayerController.Local.IsValid(),
-        PlayerController.Local?.Health ?? 0,
+        Vidya.PlayerController.Local.IsValid(),
+        Vidya.PlayerController.Local?.Health ?? 0,
         Input.UsingController,
-        PlayerController.Local?.CameraController?.SpectateTarget,
+        Vidya.PlayerController.Local?.CameraController?.SpectateTarget,
         GameSystem.Instance?.GameOver ?? false
         );
 
-        hash += System.HashCode.Combine(PlayerController.Local?.CameraController?.Spectating ?? false,
-        PlayerController.Local?.Paused ?? false, GameSystem.Instance.IsValid(), GameSystem.Scores.Count(), Networking.IsHost);
+        hash += System.HashCode.Combine(Vidya.PlayerController.Local?.CameraController?.Spectating ?? false,
+        Vidya.PlayerController.Local?.Paused ?? false, GameSystem.Instance.IsValid(), GameSystem.Scores.Count(), Networking.IsHost);
 
         return hash;
     }
