@@ -22,3 +22,6 @@ code/Properties/*
 *.sln
 
 *idea
+
+# Cloud Assets 
+*.sbox/
