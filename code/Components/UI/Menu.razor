@@ -17,7 +17,7 @@
 
 	<div class="buttons">
 		<div class="button" onclick=@( () => Game.ActiveScene.LoadFromFile( "scenes/minimal.scene" ))> Singleplayer </div>
-		<div class="button" onclick=@( () => ChangeState( MenuState.Servers ) )> Multiplayer </div>
+		@* <div class="button" onclick=@( () => ChangeState( MenuState.Servers ) )> Multiplayer </div> *@
         <div class="button" onclick=@( () => ChangeState( MenuState.Leaderboards ) )> Leaderboards </div>
 		<div class="button" onclick=@( () => Game.Overlay.ShowSettingsModal )> Settings </div>
 		<div class="button" onclick=@Game.Close> Exit </div>
