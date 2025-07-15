@@ -10,6 +10,11 @@ public sealed class BalloonComponent : Component, Component.ITriggerListener
     public bool Faded { get; set; }
     public TimeUntil Unfade { get; set; }
 
+    protected override void OnStart()
+    {
+        Model.Tint = Color.Random;
+    }
+
     protected override void OnUpdate()
     {
         base.OnUpdate();
