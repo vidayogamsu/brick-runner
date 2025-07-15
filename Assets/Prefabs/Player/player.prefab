@@ -1,19 +1,34 @@
 {
   "RootObject": {
     "__guid": "a5f91ff7-ed93-40e2-8baa-dbf88d84cf5b",
+    "__version": 1,
     "Flags": 0,
     "Name": "player",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
     "Tags": "player",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "NetworkOrphaned": 0,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.CharacterController",
         "__guid": "dfe56acc-8213-44ab-91b7-096b6aa3bdd6",
+        "__enabled": true,
         "Acceleration": 10,
         "Bounciness": 0.1,
         "GroundAngle": 45,
         "Height": 28,
         "IgnoreLayers": "gib,player,carrying,bomb",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Radius": 8,
         "StepHeight": 18,
         "UseCollisionRules": true
@@ -21,7 +36,8 @@
       {
         "__type": "Vidya.PlayerController",
         "__guid": "20c0d6db-3a64-417f-a7f7-c489ffc19982",
-        "AirAccel": 7,
+        "__enabled": true,
+        "AirAccel": 2,
         "BlinkDuration": 1.5,
         "CAH": {
           "_type": "component",
@@ -46,6 +62,7 @@
         "GravityHeld": 445,
         "GroundAccel": 10,
         "Height": 24,
+        "InteractCollider": null,
         "JumpSpeed": 300,
         "Model": {
           "_type": "component",
@@ -54,39 +71,79 @@
           "component_type": "SkinnedModelRenderer"
         },
         "NoCollide": "gib,bomb,carrying",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Renderers": [],
         "RunSpeed": 250,
         "WalkSpeed": 150,
-        "Width": 9
+        "Width": 9,
+        "WorldPanelObject": null
       },
       {
         "__type": "Sandbox.AudioListener",
         "__guid": "6f32bc24-cf46-44dd-ac8b-45d0c28c2dc8",
+        "__enabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "UseCameraDirection": true
       },
       {
         "__type": "Vidya.CameraController",
-        "__guid": "fa7aa5aa-b0b9-40bd-bcae-06a90ed52756"
+        "__guid": "fa7aa5aa-b0b9-40bd-bcae-06a90ed52756",
+        "__enabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [
       {
         "__guid": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
+        "__version": 1,
         "Flags": 0,
         "Name": "Model",
         "Position": "0,0,-1",
         "Rotation": "0,0,-0.7071067,0.7071068",
         "Scale": "0.8,0.8,0.8",
+        "Tags": "",
         "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "NetworkOrphaned": 0,
+        "OwnerTransfer": 1,
         "Components": [
           {
             "__type": "Sandbox.Citizen.CitizenAnimationHelper",
             "__guid": "70a427d8-9b44-4595-b783-f1c369583308",
+            "__enabled": true,
             "BodyWeight": 1,
+            "EyeSource": null,
             "EyesWeight": 1,
             "HeadWeight": 1,
             "Height": 0.4,
+            "IkLeftFoot": null,
+            "IkLeftHand": null,
+            "IkRightFoot": null,
+            "IkRightHand": null,
+            "LookAt": null,
             "LookAtEnabled": false,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "Target": {
               "_type": "component",
               "component_id": "b65b7e79-0b16-4b84-bd0a-15032a3b3fb3",
@@ -97,32 +154,91 @@
           {
             "__type": "Sandbox.SkinnedModelRenderer",
             "__guid": "b65b7e79-0b16-4b84-bd0a-15032a3b3fb3",
+            "__enabled": true,
+            "AnimationGraph": null,
             "BodyGroups": 65,
+            "BoneMergeTarget": null,
+            "CreateAttachments": false,
             "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Materials": null,
             "Model": "models/citizen/citizen.vmdl",
+            "Morphs": {},
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "Parameters": {
+              "bools": {},
+              "ints": {},
+              "floats": {},
+              "vectors": {},
+              "rotations": {}
+            },
+            "PlaybackRate": 1,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderType": "On",
+            "Sequence": {
+              "Name": null,
+              "Looping": true,
+              "Blending": false
+            },
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
           },
           {
             "__type": "Sandbox.ModelCollider",
             "__guid": "0aa27df5-1c04-4477-a543-2719450e106c",
+            "__enabled": true,
+            "Elasticity": null,
+            "Friction": null,
             "IsTrigger": true,
             "Model": "models/citizen/citizen.vmdl",
-            "Static": false
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "OnObjectTriggerEnter": null,
+            "OnObjectTriggerExit": null,
+            "OnTriggerEnter": null,
+            "OnTriggerExit": null,
+            "RollingResistance": null,
+            "Static": false,
+            "Surface": null,
+            "SurfaceVelocity": "0,0,0"
           }
         ],
         "Children": [
           {
             "__guid": "2e8ea807-490f-48a8-a32c-6e8c0164ee90",
+            "__version": 1,
             "Flags": 0,
             "Name": "Hat",
             "Position": "0,0,0",
+            "Rotation": "0,0,0,1",
+            "Scale": "1,1,1",
+            "Tags": "",
             "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "NetworkOrphaned": 0,
+            "OwnerTransfer": 1,
             "Components": [
               {
                 "__type": "Sandbox.SkinnedModelRenderer",
                 "__guid": "c3c33c92-ca7e-4faf-8acd-5bc888657a41",
+                "__enabled": true,
+                "AnimationGraph": null,
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
@@ -130,24 +246,65 @@
                   "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
                   "component_type": "SkinnedModelRenderer"
                 },
+                "CreateAttachments": false,
                 "CreateBoneObjects": false,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
+                "Materials": null,
                 "Model": "models/citizen_clothes/hat/baseball_cap/model/baseball_cap.vmdl",
+                "Morphs": {},
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "Parameters": {
+                  "bools": {},
+                  "ints": {},
+                  "floats": {},
+                  "vectors": {},
+                  "rotations": {}
+                },
+                "PlaybackRate": 1,
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
                 "RenderType": "On",
+                "Sequence": {
+                  "Name": null,
+                  "Looping": true,
+                  "Blending": false
+                },
                 "Tint": "1,0,0,1",
                 "UseAnimGraph": true
               }
-            ]
+            ],
+            "Children": []
           },
           {
             "__guid": "d5e00a25-5d2e-4ead-94ac-2c9b998c6f5c",
+            "__version": 1,
             "Flags": 0,
             "Name": "Shirt",
             "Position": "0,0,0",
+            "Rotation": "0,0,0,1",
+            "Scale": "1,1,1",
+            "Tags": "",
             "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "NetworkOrphaned": 0,
+            "OwnerTransfer": 1,
             "Components": [
               {
                 "__type": "Sandbox.SkinnedModelRenderer",
                 "__guid": "22f256b7-81f2-4b75-94fd-0ce5363a7b73",
+                "__enabled": true,
+                "AnimationGraph": null,
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
@@ -155,24 +312,65 @@
                   "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
                   "component_type": "SkinnedModelRenderer"
                 },
+                "CreateAttachments": false,
                 "CreateBoneObjects": false,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
+                "Materials": null,
                 "Model": "models/citizen_clothes/jumper/loose_jumper/models/loose_jumper.vmdl",
+                "Morphs": {},
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "Parameters": {
+                  "bools": {},
+                  "ints": {},
+                  "floats": {},
+                  "vectors": {},
+                  "rotations": {}
+                },
+                "PlaybackRate": 1,
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
                 "RenderType": "On",
+                "Sequence": {
+                  "Name": null,
+                  "Looping": true,
+                  "Blending": false
+                },
                 "Tint": "1,0,0,1",
                 "UseAnimGraph": true
               }
-            ]
+            ],
+            "Children": []
           },
           {
             "__guid": "e9763910-d98a-4436-83dc-87cff9369dd9",
+            "__version": 1,
             "Flags": 0,
             "Name": "Pants",
             "Position": "0,0,0",
+            "Rotation": "0,0,0,1",
+            "Scale": "1,1,1",
+            "Tags": "",
             "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "NetworkOrphaned": 0,
+            "OwnerTransfer": 1,
             "Components": [
               {
                 "__type": "Sandbox.SkinnedModelRenderer",
                 "__guid": "8e9e5252-92cd-4e33-906e-a102887c13f6",
+                "__enabled": true,
+                "AnimationGraph": null,
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
@@ -180,24 +378,65 @@
                   "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
                   "component_type": "SkinnedModelRenderer"
                 },
+                "CreateAttachments": false,
                 "CreateBoneObjects": false,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
+                "Materials": null,
                 "Model": "models/citizen_clothes/trousers/cargopants/models/cargo_pants.vmdl",
+                "Morphs": {},
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "Parameters": {
+                  "bools": {},
+                  "ints": {},
+                  "floats": {},
+                  "vectors": {},
+                  "rotations": {}
+                },
+                "PlaybackRate": 1,
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
                 "RenderType": "On",
+                "Sequence": {
+                  "Name": null,
+                  "Looping": true,
+                  "Blending": false
+                },
                 "Tint": "0.03721,0.32605,1,1",
                 "UseAnimGraph": true
               }
-            ]
+            ],
+            "Children": []
           },
           {
             "__guid": "2d546076-3615-4a72-b645-671e569da8b1",
+            "__version": 1,
             "Flags": 0,
             "Name": "Boots",
             "Position": "0,0,0",
+            "Rotation": "0,0,0,1",
+            "Scale": "1,1,1",
+            "Tags": "",
             "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "NetworkOrphaned": 0,
+            "OwnerTransfer": 1,
             "Components": [
               {
                 "__type": "Sandbox.SkinnedModelRenderer",
                 "__guid": "4d99ff1b-fe9b-4900-99c7-f2994fc15f72",
+                "__enabled": true,
+                "AnimationGraph": null,
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
@@ -205,66 +444,178 @@
                   "go": "d8dbf20f-9537-408e-be64-5eeb102bd34a",
                   "component_type": "SkinnedModelRenderer"
                 },
+                "CreateAttachments": false,
                 "CreateBoneObjects": false,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
+                "Materials": null,
                 "Model": "models/citizen_clothes/shoes/boots/models/black_boots.vmdl",
+                "Morphs": {},
+                "OnComponentDestroy": null,
+                "OnComponentDisabled": null,
+                "OnComponentEnabled": null,
+                "OnComponentFixedUpdate": null,
+                "OnComponentStart": null,
+                "OnComponentUpdate": null,
+                "Parameters": {
+                  "bools": {},
+                  "ints": {},
+                  "floats": {},
+                  "vectors": {},
+                  "rotations": {}
+                },
+                "PlaybackRate": 1,
+                "RenderOptions": {
+                  "GameLayer": true,
+                  "OverlayLayer": false,
+                  "BloomLayer": false,
+                  "AfterUILayer": false
+                },
                 "RenderType": "On",
+                "Sequence": {
+                  "Name": null,
+                  "Looping": true,
+                  "Blending": false
+                },
                 "Tint": "0.47442,0.18186,0,1",
                 "UseAnimGraph": true
               }
-            ]
+            ],
+            "Children": []
           }
         ]
       },
       {
         "__guid": "63f82906-22be-4028-8b86-91b6d0e94581",
+        "__version": 1,
         "Flags": 0,
         "Name": "Trigger",
+        "Position": "0,0,0",
+        "Rotation": "0,0,0,1",
+        "Scale": "1,1,1",
+        "Tags": "",
         "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "NetworkOrphaned": 0,
+        "OwnerTransfer": 1,
         "Components": [
           {
             "__type": "Sandbox.BoxCollider",
             "__guid": "1c304fcf-0df9-47d3-8380-1456dc2184cd",
+            "__enabled": true,
             "Center": "0,0,12",
+            "Elasticity": null,
+            "Friction": null,
             "IsTrigger": true,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "OnObjectTriggerEnter": null,
+            "OnObjectTriggerExit": null,
+            "OnTriggerEnter": null,
+            "OnTriggerExit": null,
+            "RollingResistance": null,
             "Scale": "15,15,24",
-            "Static": false
+            "Static": false,
+            "Surface": null,
+            "SurfaceVelocity": "0,0,0"
           },
           {
             "__type": "Vidya.PlayerTriggerComponent",
-            "__guid": "eda761fa-e294-4fbc-aa28-0ae88ab533a5"
+            "__guid": "eda761fa-e294-4fbc-aa28-0ae88ab533a5",
+            "__enabled": true,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null
           }
-        ]
+        ],
+        "Children": []
       },
       {
         "__guid": "87d8c1c4-0a44-498e-a3ab-cceac8d97adb",
+        "__version": 1,
         "Flags": 0,
         "Name": "Name Tag",
         "Position": "50,0,50",
+        "Rotation": "0,0,0,1",
+        "Scale": "1,1,1",
+        "Tags": "",
         "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "NetworkOrphaned": 0,
+        "OwnerTransfer": 1,
         "Components": [
           {
             "__type": "Sandbox.WorldPanel",
             "__guid": "68faf72f-373f-4ba6-8608-7aa8f1af9384",
+            "__enabled": true,
             "HorizontalAlign": "Center",
             "InteractionRange": 1000,
             "LookAtCamera": false,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "PanelSize": "5000,1000",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderScale": 1,
             "VerticalAlign": "Center"
           },
           {
             "__type": "NameTag",
-            "__guid": "40b47d89-fc70-4eb1-962c-8263e6cf53b4"
+            "__guid": "40b47d89-fc70-4eb1-962c-8263e6cf53b4",
+            "__enabled": true,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null
           }
-        ]
+        ],
+        "Children": []
       }
     ],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    },
     "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
-  "ResourceVersion": 1,
+  "DontBreakAsTemplate": false,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }
