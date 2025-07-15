@@ -232,13 +232,13 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
         if ( IsGrounded && !WasGrounded && PreviousVelocity.z < 0f )
         {
             // Landing Sound
-            Sound.Play( "player.land", Transform.Position );
+            Sound.Play( "player.land", WorldPosition );
         }
 
         // Nudge blocks when jumping.
         if ( vHit < 0f )
         {
-            var trAll = TraceToAll( Transform.Position + Vector3.Up );
+            var trAll = TraceToAll( WorldPosition + Vector3.Up );
 
             // Hit the bricks, pal.
             foreach ( var tr in trAll )
@@ -249,7 +249,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
                     {
                         block.StartNudge();
 
-                        var hitPos = Transform.Position + (Vector3.Up * Height * 0.9f);
+                        var hitPos = WorldPosition + (Vector3.Up * Height * 0.9f);
                         Sound.Play( "brick.hit", hitPos );
                     }
                 }
@@ -257,7 +257,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
         }
 
         // Clamp Position
-        var pos = Transform.Position;
+        var pos = WorldPosition;
 
         if ( pos.z > 300f )
             SetPosition( pos.WithZ( 300f ) );
@@ -288,7 +288,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
         IsGrounded = false;
     }
 
-    [Broadcast]
+    [Rpc.Broadcast]
     void BroadcastJumpAnim()
     {
         CAH.TriggerJump();
@@ -308,7 +308,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
     [Property] public CameraController CameraController { get; set; }
 
-    [Broadcast]
+    [Rpc.Broadcast]
     public static void PlaySound( string soundName )
     {
         Sound.Play( soundName );
@@ -374,7 +374,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
         BroadcastPlayerDeath();
     }
 
-    [Broadcast]
+    [Rpc.Broadcast]
     public void BroadcastPlayerDeath()
     {
         Scene.Dispatch( new OnPlayerDeath( this ) );
@@ -383,7 +383,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
             Scene.Dispatch( new GameEndEvent() );
     }
 
-    [Broadcast]
+    [Rpc.Broadcast]
     public void DisableObjects()
     {
         if ( WorldPanelObject.IsValid() )
@@ -394,7 +394,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
                 model.Enabled = false;
     }
 
-    [Broadcast]
+    [Rpc.Broadcast]
     public void StartBlinking()
     {
         if ( BlinkDuration > 0 )
@@ -456,7 +456,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
                 return;
 
             // Clamp actual position to grid.
-            Transform.Position = new Vector3( 0f, MathF.Round( value.y ), MathF.Round( value.z ) );
+            WorldPosition = new Vector3( 0f, MathF.Round( value.y ), MathF.Round( value.z ) );
             Transform.ClearInterpolation();
 
             // Store the sub-grid value for smooth movement.
@@ -469,7 +469,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
     /// Use this instead of directly setting the transform's position.
     /// </summary>
     /// <param name="pos"></param>
-    [Broadcast]
+    [Rpc.Broadcast]
     public void SetPosition( Vector3 pos )
     {
         if ( IsProxy )
@@ -517,7 +517,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
         var hDest = FloatPos.y + hMove;
         var hDestGrid = MathF.Round( hDest );
 
-        var trH = TraceTo( Transform.Position.WithY( hDestGrid ) );
+        var trH = TraceTo( WorldPosition.WithY( hDestGrid ) );
 
         if ( trH.Hit )
         {
@@ -538,7 +538,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
         var vDest = FloatPos.z + vMove;
         var vDestGrid = MathF.Round( vDest );
 
-        var trV = TraceTo( Transform.Position.WithZ( vDestGrid ) );
+        var trV = TraceTo( WorldPosition.WithZ( vDestGrid ) );
 
         if ( trV.Hit )
         {
@@ -558,7 +558,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
         // Check if we're on the ground.
         if ( Velocity.z <= 0f )
         {
-            var trGround = TraceTo( Transform.Position + (Vector3.Down * 1f) );
+            var trGround = TraceTo( WorldPosition + (Vector3.Down * 1f) );
 
             IsGrounded = trGround.Hit || trGround.StartedSolid;
 
@@ -573,14 +573,14 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
 
     public SceneTraceResult TraceTo( Vector3 to )
     {
-        return Scene.Trace.Box( BoundingBox, Transform.Position, to )
+        return Scene.Trace.Box( BoundingBox, WorldPosition, to )
             .WithoutTags( NoCollide )
             .Run();
     }
 
     public IEnumerable<SceneTraceResult> TraceToAll( Vector3 to )
     {
-        return Scene.Trace.Box( BoundingBox, Transform.Position, to )
+        return Scene.Trace.Box( BoundingBox, WorldPosition, to )
             .WithoutTags( NoCollide )
             .RunAll();
     }
@@ -611,7 +611,7 @@ public partial class PlayerController : Component, IGameEventHandler<PlayerResta
             BroadcastPlayerRestart();
     }
 
-    [Broadcast]
+    [Rpc.Broadcast]
     public void BroadcastPlayerRestart()
     {
         if ( Renderers is not null )
