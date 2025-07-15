@@ -1,5 +1,3 @@
-using Sandbox;
-
 namespace Vidya;
 
 
@@ -34,15 +32,17 @@ public sealed class BalloonComponent : Component, Component.ITriggerListener
 
         if ( other.Components.TryGet<PlayerController>( out var p, FindMode.EverythingInSelfAndAncestors ) )
         {
-			if ( p.IsProxy )
-				return;
-			
-            var up = Transform.Rotation.Up;
+            if ( p.IsProxy )
+                return;
+
+            var up = WorldRotation.Up;
             p.Velocity = p.Velocity.SubtractDirection( -up );
             p.Velocity += up * BounceForce;
 
             Faded = true;
             Unfade = 0.4f;
+
+            Sound.Play( "balloon.pop", WorldPosition );
 
             if ( Model.IsValid() )
                 Model.Tint = Model.Tint.WithAlpha( 0.3f );
